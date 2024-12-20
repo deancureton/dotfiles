@@ -15,6 +15,7 @@ features:
         - [lean.nvim](https://github.com/Julian/lean.nvim)
         - [markview.nvim](https://github.com/OXY2DEV/markview.nvim)
         - [mini.nvim](https://github.com/echasnovski/mini.nvim)
+        - [noice.nvim](https://github.com/folke/noice.nvim)
         - [snacks.nvim](https://github.com/folke/snacks.nvim)
         - [telescope.nvim](https://github.com/nvim-telescope/telescope.nvim)
         - [nvim-web-devicons](https://github.com/nvim-tree/nvim-web-devicons)
