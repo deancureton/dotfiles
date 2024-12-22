@@ -29,6 +29,7 @@ features:
     - [wezterm](https://wezfurlong.org/wezterm/)
         - theme: [gruvbox dark](https://github.com/mbadolato/iTerm2-Color-Schemes)
     - [yabai](https://github.com/koekeishiya/yabai), which integrates with sketchybar
+    - [yazi](https://yazi-rs.github.io/)
     - zsh
         - [oh-my-zsh](https://ohmyz.sh/)
         - [fzf-tab](https://github.com/Aloxaf/fzf-tab)
