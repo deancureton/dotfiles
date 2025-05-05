@@ -336,9 +336,14 @@ snippet `lsup` "lsup" A
 \\limsup_{ ${1:n} \\to ${2:\\infty} } $0
 endsnippet
 
+# context math(context)
+# snippet `(Gal|Aut|Hom)` "verbatim rm" A
+# ``rv = '\\mathrm{' + m[1] + '}'``
+# endsnippet
+
 context math(context)
 snippet `(Gal|Aut|Hom)` "verbatim rm" A
-``rv = '\\mathrm{' + m[1] + '}'``
+``rv = '\\' + m[1]``
 endsnippet
 
 context math(context)
@@ -422,8 +427,13 @@ snippet `([^\\\\])(pm|mp) ` "pm" A
 endsnippet
 
 context math(context)
-snippet `\.\.\.` "ldots" A 
+snippet `\.\.` "ldots" A 
 ``rv = '\\ldots'``
+endsnippet
+
+context math(context)
+snippet `\\ldots\.` "cdots" A 
+``rv = '\\cdots'``
 endsnippet
 
 priority 2
