@@ -154,5 +154,10 @@ alt - 5 : yabai -m space --focus 5
 ctrl - right : yabai -m space --focus next
 ctrl - left : yabai -m space --focus prev
 
+ctrl + alt + cmd - right : yabai -m window --swap east
+ctrl + alt + cmd - left : yabai -m window --swap west
+ctrl + alt + cmd - up : yabai -m window --swap north
+ctrl + alt + cmd - down : yabai -m window --swap south
+
 ctrl + alt - right : yabai -m window --space next; yabai -m space --focus next; yabai -m window --focus last
 ctrl + alt - left : yabai -m window --space prev; yabai -m space --focus prev; yabai -m window --focus last

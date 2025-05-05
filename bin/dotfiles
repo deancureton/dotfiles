@@ -9,12 +9,18 @@ sub_help () {
     echo
     echo "Commands:"
     echo "   help               This help message"
+    echo "   stow [folder]      Stow config folder"
     echo "   edit               Open dotfiles in editor ($EDITOR)"
     echo "   clean              Clean up caches (brew, pip)"
     echo "   update             Update packages and pkg managers (OS, brew, npm, gem, pip)"
     echo "   macos              Apply macOS system defaults"
     echo "   dock               Apply OS X Dock settings"
     echo "   start              Start services"
+    echo "   fix                Fix services"
+}
+
+sub_stow () {
+    stow --dir=$DOTFILES_DIR/config --target=$HOME --verbose=1 --ignore='.DS_Store' $SUB_COMMAND_NAME
 }
 
 sub_dock () {
@@ -53,6 +59,16 @@ sub_start() {
     skhd --start-service
     echo "$ yabai --start-service"
     yabai --start-service
+}
+
+sub_fix() {
+	echo '$ yabai --stop-service'
+	yabai --stop-service
+	echo '$ skhd --stop-service'
+	skhd --stop-service
+	echo 'Executing yabai scripting addition fix'
+	echo "$(whoami) ALL=(root) NOPASSWD: sha256:$(shasum -a 256 $(which yabai) | cut -d " " -f 1) $(which yabai) --load-sa" | sudo tee /private/etc/sudoers.d/yabai
+	dotfiles start
 }
 
 case $COMMAND_NAME in

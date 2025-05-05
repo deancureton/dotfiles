@@ -32,18 +32,25 @@ yabai -m config                                 \
     split_ratio                  0.50           \
     split_type                   auto           \
     auto_balance                 off            \
-    top_padding                  16             \
-    bottom_padding               12             \
-    left_padding                 12             \
-    right_padding                12             \
-    window_gap                   06             \
+    top_padding                  12             \
+    bottom_padding               08             \
+    left_padding                 08             \
+    right_padding                08             \
+    window_gap                   08             \
     layout                       bsp            \
     mouse_modifier               fn             \
     mouse_action1                move           \
     mouse_action2                resize         \
     mouse_drop_action            swap
 
+# no shadow test
+yabai -m config window_shadow off
+
 yabai -m rule --add app="^Messages$" manage=off
 yabai -m rule --add app="^Arc$" title="^$" manage=off
+
+# ghostty fix
+yabai -m signal --add app='^Ghostty$' event=window_created action='yabai -m space --layout bsp'
+yabai -m signal --add app='^Ghostty$' event=window_destroyed action='yabai -m space --layout bsp'
 
 echo "yabai configuration loaded.."

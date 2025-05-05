@@ -2,6 +2,7 @@ tap "FelixKratz/formulae"
 tap "koekeishiya/formulae"
 
 brew "bat"
+brew "btop"
 brew "coreutils"
 brew "dockutil"
 brew "fastfetch"

@@ -1031,4 +1031,11 @@
     "terminal.integrated.defaultProfile.osx": "zsh",
     "terminal.integrated.fontFamily": "JetBrainsMono Nerd Font",
     "terminal.integrated.fontLigatures": true,
+    "chat.commandCenter.enabled": false,
+    "github.copilot.enable": {
+        "*": false,
+        "plaintext": false,
+        "markdown": false,
+        "scminput": false
+    },
 }
