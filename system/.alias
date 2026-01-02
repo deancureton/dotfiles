@@ -1,3 +1,105 @@
+# =============================================================================
+# General Aliases
+# =============================================================================
+
+# Exit
 alias quit="exit"
+alias q="exit"
+
+# Date/Time
 alias week="date +%V"
+alias now="date +'%Y-%m-%d %H:%M:%S'"
+alias today="date +%Y-%m-%d"
+
+# PATH
 alias paths='echo -e ${PATH//:/\\n}'
+
+# Editor shortcuts
+alias v="nvim"
+alias vi="nvim"
+alias vim="nvim"
+alias e="$EDITOR"
+alias edit="$EDITOR"
+
+# Git shortcuts
+alias gg="git"
+alias gs="git status"
+alias ga="git add"
+alias gc="git commit"
+alias gcm="git commit -m"
+alias gp="git push"
+alias gpl="git pull"
+alias gd="git diff"
+alias gl="git log --oneline --graph --decorate"
+alias gb="git branch"
+alias gco="git checkout"
+alias gst="git stash"
+alias gsp="git stash pop"
+
+# List directory (using lsd if available)
+if command -v lsd >/dev/null 2>&1; then
+  alias ls='lsd'
+  alias ll='lsd -l'
+  alias la='lsd -la'
+  alias lt='lsd --tree'
+else
+  alias ll='ls -lh'
+  alias la='ls -lah'
+  alias l='ls -lh'
+fi
+
+# File operations
+alias less="less -R"
+alias grep="grep --color=auto"
+alias fgrep="fgrep --color=auto"
+alias egrep="egrep --color=auto"
+
+# Process management
+alias psg="ps aux | grep"
+
+# Network
+alias ports="lsof -i -P -n | grep LISTEN"
+alias ip="curl -s ifconfig.me"
+
+# History
+alias h="history"
+alias hg="history | grep"
+
+# Compression
+alias untar="tar -xzf"
+alias targz="tar -czf"
+
+# Clear
+alias c="clear"
+alias cl="clear"
+
+# Reload shell
+alias reload="source ~/.zshrc"
+alias refresh="source ~/.zshrc"
+
+# =============================================================================
+# macOS-Specific Aliases
+# =============================================================================
+
+if [[ "$OSTYPE" == "darwin"* ]]; then
+  # Clipboard
+  alias cpwd="pwd | tr -d '\n' | pbcopy"
+
+  # System controls
+  alias afk="open /System/Library/CoreServices/ScreenSaverEngine.app"
+  alias logoff="/System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resources/CGSession -suspend"
+
+  # Cleanup
+  alias rmds="find . -name '.DS_Store' -type f -delete"
+
+  # Reload native apps
+  alias killfinder="killall Finder"
+  alias killdock="killall Dock"
+  alias killmenubar="killall SystemUIServer NotificationCenter"
+  alias killos="killfinder && killdock && killmenubar"
+
+  # System information
+  alias displays="system_profiler SPDisplaysDataType"
+  alias cpu="sysctl -n machdep.cpu.brand_string"
+  alias ram="top -l 1 -s 0 | grep PhysMem"
+fi

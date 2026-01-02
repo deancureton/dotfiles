@@ -43,14 +43,34 @@ yabai -m config                                 \
     mouse_action2                resize         \
     mouse_drop_action            swap
 
+# change padding for non-laptop screen display
+displays=$(yabai -m query --displays | jq -r '.[].id')
+
+for d in $displays; do
+  if [ "$d" -eq 1 ]; then
+    # Laptop
+    yabai -m config --display 1 top_padding 12
+  else
+    # Any external
+    yabai -m config --display "$d" top_padding 50
+  fi
+done
+
 # no shadow test
 yabai -m config window_shadow off
 
 yabai -m rule --add app="^Messages$" manage=off
+yabai -m rule --add app="^System Settings$" manage=off
 yabai -m rule --add app="^Arc$" title="^$" manage=off
+yabai -m rule --add app="^Jomo$" title="^$" manage=off
 
 # ghostty fix
 yabai -m signal --add app='^Ghostty$' event=window_created action='yabai -m space --layout bsp'
 yabai -m signal --add app='^Ghostty$' event=window_destroyed action='yabai -m space --layout bsp'
 
 echo "yabai configuration loaded.."
+
+# displays fix
+yabai -m signal --add event=display_added action="yabai --restart-service"
+yabai -m signal --add event=display_removed action="yabai --restart-service"
+yabai -m signal --add event=display_changed action="yabai --restart-service"

@@ -113,7 +113,6 @@
     // ============================================================================
     "breadcrumbs.enabled": false,
     "problems.decorations.enabled": false,
-    "chat.commandCenter.enabled": false,
     "window.zoomLevel": 1,
 
     // ============================================================================
@@ -1060,26 +1059,16 @@
         }
     ],
 
-    // GitHub Copilot
-    "github.copilot.enable": {
-        "*": false,
-        "plaintext": false,
-        "markdown": false,
-        "scminput": false
-    },
-    "github.copilot.nextEditSuggestions.enabled": true,
-
     // hsnips
     "hsnips.hsnipsPath": "",
 
     // Custom CSS
     "vscode_custom_css.imports": [
         "file://${userHome}/.config/custom-vscode.css"
-        // "file://${userHome}/.config/vscode-script.js"
     ],
 
-    // Makefile
-    "makefile.configureOnOpen": true,
+    // CMake
+    "cmake.showOptionsMovedNotification": false,
 
     // Red Hat XML
     "xml.server.binary.trustedHashes": [

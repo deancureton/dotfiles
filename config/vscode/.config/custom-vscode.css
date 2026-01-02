@@ -111,13 +111,6 @@
     background: transparent !important;
 }
 
-/* Project Title */
-.titlebar-left {
-    justify-content: flex-start !important;
-    flex-grow: 0 !important;
-    width: auto !important;
-}
-
 /* Search Label */
 .search-label {
     font-family: 'Input Mono' !important;

@@ -1,0 +1,51 @@
+# EditorConfig helps maintain consistent coding styles across editors
+# https://editorconfig.org
+
+root = true
+
+# Default settings for all files
+[*]
+charset = utf-8
+end_of_line = lf
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+# Shell scripts and dotfiles
+[*.{sh,zsh,bash}]
+indent_style = space
+indent_size = 2
+
+# Lua (Neovim, Sketchybar)
+[*.lua]
+indent_style = space
+indent_size = 2
+
+# JSON, YAML
+[*.{json,yaml,yml}]
+indent_style = space
+indent_size = 2
+
+# Markdown
+[*.md]
+trim_trailing_whitespace = false
+indent_style = space
+indent_size = 2
+
+# Makefile (must use tabs)
+[Makefile]
+indent_style = tab
+
+# Python
+[*.py]
+indent_style = space
+indent_size = 4
+
+# C/C++
+[*.{c,cpp,h,hpp}]
+indent_style = space
+indent_size = 4
+
+# Lean
+[*.lean]
+indent_style = space
+indent_size = 2

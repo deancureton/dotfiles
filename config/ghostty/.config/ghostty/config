@@ -1,11 +1,13 @@
 font-family = "0xProto Nerd Font"
 font-size = 16
 
-theme = GruvBoxDark
-theme = zenwritten_dark
+theme = Zenwritten Dark
+
+background-blur = macos-glass-regular
+background-opacity = 0.5
 
 window-padding-x = 10
-window-padding-y = 10
+window-padding-y = 0
 
 macos-titlebar-style = tabs
 
@@ -18,5 +20,6 @@ adjust-cell-height = 20%
 
 keybind = global:cmd+opt+t=toggle_quick_terminal
 keybind = cmd+q=close_all_windows
+keybind = shift+enter=text:\n
 
 confirm-close-surface = false

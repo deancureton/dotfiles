@@ -4,7 +4,7 @@
             "complex_modifications": {
                 "rules": [
                     {
-                        "description": "Change caps_lock to left_command if pressed with other keys, change caps_lock to escape if pressed alone.",
+                        "description": "Change caps_lock to left_command if pressed with other keys; change caps_lock to escape if pressed alone.",
                         "manipulators": [
                             {
                                 "from": {
