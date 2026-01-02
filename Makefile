@@ -3,10 +3,10 @@ OS := macos
 HOMEBREW_PREFIX := /opt/homebrew
 PATH := $(HOMEBREW_PREFIX)/bin:$(DOTFILES_DIR)/bin:$(PATH)
 SHELL := env PATH=$(PATH) /bin/zsh
-export XDG_CONFIG_HOME = $(HOME)/.config
-export STOW_DIR = $(DOTFILES_DIR)
+export XDG_CONFIG_HOME=$(HOME)/.config
+export DOTFILES_DIR
 
-all: sudo core omz packages link
+all: sudo core omz packages link bin-permissions macos-defaults
 
 core: brew git npm
 
@@ -21,16 +21,24 @@ omz: git
 	[[ -f ~/.oh-my-zsh/oh-my-zsh.sh ]] || curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh | sh
 	[[ -d ~/.oh-my-zsh/custom/plugins/fzf-tab ]] || git clone https://github.com/Aloxaf/fzf-tab ~/.oh-my-zsh/custom/plugins/fzf-tab
 
-packages: brew-packages cask-apps
+packages: brew-packages cask-apps vscode-extensions
 
 link: stow-mac
-	for FILE in $$(\ls -A config); do \
-		stow --dir=config --target=$(HOME) --verbose=1 --ignore='\.DS_Store' $$FILE; \
+	for FILE in $$(\ls -A $(DOTFILES_DIR)/config); do \
+		stow --dir=$(DOTFILES_DIR)/config --target=$(HOME) --verbose=1 --ignore='\.DS_Store' $$FILE; \
 	done
 
+bin-permissions:
+	chmod +x $(DOTFILES_DIR)/bin/*
+
+macos-defaults: bin-permissions packages
+	@if [ "$$(uname)" = "Darwin" ]; then \
+		dotfiles macos && dotfiles dock; \
+	fi
+
 unlink: stow-mac
-	for FILE in $$(\ls -A config); do \
-		stow --delete --dir=config --target=$(HOME) --verbose=1 $$FILE; \
+	for FILE in $$(\ls -A $(DOTFILES_DIR)/config); do \
+		stow --delete --dir=$(DOTFILES_DIR)/config --target=$(HOME) --verbose=1 $$FILE; \
 	done
 
 brew:

@@ -1,20 +1,26 @@
-# Get named var (usage: get "VAR_NAME")
+# =============================================================================
+# General Functions
+# =============================================================================
 
+# Get named variable (usage: get "VAR_NAME")
 get() {
-  echo "${!1}"
-}
-
-# Calculator
-
-calc() {
-  echo "$*" | bc -l;
+  if [ -z "$1" ]; then
+    echo "Usage: get \"VARIABLE_NAME\"" >&2
+    return 1
+  fi
+  local var_name="$1"
+  eval "echo \${${var_name}}"
 }
 
 # Weather
-
 meteo() {
   local LOCALE=$(echo ${LANG:-en} | cut -c1-2)
   local LOCATION="$*"
   LOCATION="${LOCATION// /%20}"
   curl -s "$LOCALE.wttr.in/${LOCATION:-}"
+}
+
+# Create a new directory and enter it
+mk() {
+  mkdir -p "$@" && cd "$@"
 }

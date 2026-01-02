@@ -1,5 +1,7 @@
 my dotfiles repository
 
+> note: designed for macos - some stuff might work elsewhere but ymmv
+
 features:
 - makefile to automatically set up system
 - installation of homebrew formulae, casks, and vscode extensions through [homebrew-bundle](https://github.com/Homebrew/homebrew-bundle)
@@ -8,28 +10,26 @@ features:
 - automatic symlinking of configuration files using [stow](https://www.gnu.org/software/stow/)
 - configurations for:
     - git
+    - [ghostty](https://ghostty.org/), modern terminal emulator with Zenwritten Dark theme
     - karabiner, to remap caps lock
-    - neovim
-        - [kickstart.nvim](https://github.com/nvim-lua/kickstart.nvim), which comes with [lazy.nvim](https://github.com/folke/lazy.nvim)
-        - [harpoon](https://github.com/ThePrimeagen/harpoon/tree/harpoon2)
-        - [lean.nvim](https://github.com/Julian/lean.nvim)
-        - [markview.nvim](https://github.com/OXY2DEV/markview.nvim)
-        - [mini.nvim](https://github.com/echasnovski/mini.nvim)
-        - [noice.nvim](https://github.com/folke/noice.nvim)
-        - [snacks.nvim](https://github.com/folke/snacks.nvim)
+    - neovim with native vim.pack plugin management
+        - [nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter)
         - [telescope.nvim](https://github.com/nvim-telescope/telescope.nvim)
+        - [nvim-cmp](https://github.com/hrsh7th/nvim-cmp) with LSP, path, and snippet completion
+        - [nvim-lspconfig](https://github.com/neovim/nvim-lspconfig)
+        - [lualine.nvim](https://github.com/nvim-lualine/lualine.nvim)
+        - [neo-tree.nvim](https://github.com/nvim-neo-tree/neo-tree.nvim)
+        - [LuaSnip](https://github.com/L3MON4D3/LuaSnip)
+        - [typst-preview.nvim](https://github.com/chomosuke/typst-preview.nvim)
         - [nvim-web-devicons](https://github.com/nvim-tree/nvim-web-devicons)
-        - theme: [gruvbox-material](https://github.com/sainnhe/gruvbox-material)
+        - theme: [onedark.nvim](https://github.com/navarasu/onedark.nvim)
     - [sketchybar](https://github.com/FelixKratz/SketchyBar), based on feliz kratz's dotfiles configuration
     - [skhd](https://github.com/koekeishiya/skhd)
     - [starship](https://starship.rs)
     - [topgrade](https://github.com/topgrade-rs/topgrade), used in the dotfiles command
     - vscode, including extensive latex support with [latex-workshop](https://github.com/James-Yu/LaTeX-Workshop)/[hypersnips](https://github.com/draivin/hsnips), and lots of other extensions
         - theme: [vitesse dark soft](https://github.com/antfu/vscode-theme-vitesse)
-    - [wezterm](https://wezfurlong.org/wezterm/)
-        - theme: [gruvbox dark](https://github.com/mbadolato/iTerm2-Color-Schemes)
     - [yabai](https://github.com/koekeishiya/yabai), which integrates with sketchybar
-    - [yazi](https://yazi-rs.github.io/)
     - zsh
         - [oh-my-zsh](https://ohmyz.sh/)
         - [fzf-tab](https://github.com/Aloxaf/fzf-tab)
@@ -69,4 +69,3 @@ things i used/was inspired by:
 - https://github.com/alextricity25/nvim_weekly_plugin_configs
 - https://www.youtube.com/watch?v=ud7YxC33Z3w
 - https://www.youtube.com/watch?v=9_I0bySQoCs
-- https://www.reddit.com/r/wezterm/comments/15hfo32/wezterm_natural_text_editing/
