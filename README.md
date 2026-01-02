@@ -4,7 +4,7 @@ my dotfiles repository
 
 features:
 - makefile to automatically set up system
-- installation of homebrew formulae, casks, and vscode extensions through [homebrew-bundle](https://github.com/Homebrew/homebrew-bundle)
+- installation of homebrew formulae, casks, and vscode extensions through [homebrew bundle](https://github.com/Homebrew/brew)
 - some automatic macos system settings configuration and dock setup
 - custom dotfiles command for maintenance
 - automatic symlinking of configuration files using [stow](https://www.gnu.org/software/stow/)
@@ -53,12 +53,15 @@ Usage: dotfiles <command>
 
 Commands:
    help               This help message
-   edit               Open dotfiles in editor (nvim)
+   stow [folder]      Stow config folder
+   edit               Open dotfiles in editor (cursor)
    clean              Clean up caches (brew, pip)
    update             Update packages and pkg managers (OS, brew, npm, gem, pip)
+   dump               Dump current Homebrew packages to Brewfile
    macos              Apply macOS system defaults
    dock               Apply OS X Dock settings
    start              Start services
+   fix                Fix services
 ```
 
 things i used/was inspired by:
