@@ -32,7 +32,7 @@ yabai -m config                                 \
     split_ratio                  0.50           \
     split_type                   auto           \
     auto_balance                 off            \
-    top_padding                  12             \
+    top_padding                  10             \
     bottom_padding               08             \
     left_padding                 08             \
     right_padding                08             \
@@ -49,7 +49,7 @@ displays=$(yabai -m query --displays | jq -r '.[].id')
 for d in $displays; do
   if [ "$d" -eq 1 ]; then
     # Laptop
-    yabai -m config --display 1 top_padding 12
+    yabai -m config --display 1 top_padding 10
   else
     # Any external
     yabai -m config --display "$d" top_padding 50
