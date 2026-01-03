@@ -5,14 +5,41 @@ local settings = require("settings")
 local battery = sbar.add("item", "widgets.battery", {
 	position = "right",
 	icon = {
+		string = icons.battery._100,
+		color = colors.green,
+		padding_left = 8,
+		padding_right = 4,
 		font = {
 			style = settings.font.style_map["Regular"],
-			size = 19.0,
+			size = 17.0,
 		},
 	},
-	label = { font = { family = settings.font.numbers } },
-	update_freq = 180,
+	label = {
+		string = "??%",
+		padding_left = 4,
+		padding_right = 8,
+		font = {
+			family = settings.font.numbers,
+			style = settings.font.style_map["Semibold"],
+			size = 12.5,
+		},
+	},
+	update_freq = 120,
+	background = {
+		color = colors.transparent,
+		border_color = colors.grey_dark,
+		border_width = 1,
+		height = 28,
+		corner_radius = 7,
+	},
+	padding_left = 2,
+	padding_right = 2,
 	popup = { align = "center" },
+})
+
+sbar.add("item", "widgets.battery.padding", {
+	position = "right",
+	width = settings.group_paddings,
 })
 
 local remaining_time = sbar.add("item", {
@@ -84,16 +111,7 @@ battery:subscribe("mouse.clicked", function(env)
 		sbar.exec("pmset -g batt", function(batt_info)
 			local found, _, remaining = batt_info:find(" (%d+:%d+) remaining")
 			local label = found and remaining .. "h" or "No estimate"
-			remaining_time:set({ label = label })
+			remaining_time:set({ label = { string = label } })
 		end)
 	end
 end)
-
-sbar.add("bracket", "widgets.battery.bracket", { battery.name }, {
-	background = { color = colors.bg1 },
-})
-
-sbar.add("item", "widgets.battery.padding", {
-	position = "right",
-	width = settings.group_paddings,
-})

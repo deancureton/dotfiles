@@ -15,7 +15,15 @@ local cpu = sbar.add("graph", "widgets.cpu", 42, {
 		border_color = { alpha = 0 },
 		drawing = true,
 	},
-	icon = { string = icons.cpu },
+	icon = {
+        string = icons.cpu,
+        padding_left = 4,
+        padding_right = 8,
+		font = {
+			style = settings.font.style_map["Regular"],
+			size = 14.0,
+		},
+    },
 	label = {
 		string = "??%",
 		font = {
@@ -32,9 +40,8 @@ local cpu = sbar.add("graph", "widgets.cpu", 42, {
 })
 
 cpu:subscribe("cpu_update", function(env)
-	-- Also available: env.user_load, env.sys_load
 	local load = tonumber(env.total_load)
-	cpu:push({ load / 100. })
+	cpu:push({ load / 100.0 })
 
 	local color = colors.blue
 	if load > 30 then
@@ -57,12 +64,16 @@ cpu:subscribe("mouse.clicked", function(env)
 	sbar.exec("open -a 'Activity Monitor'")
 end)
 
--- Background around the cpu item
 sbar.add("bracket", "widgets.cpu.bracket", { cpu.name }, {
-	background = { color = colors.bg1 },
+	background = {
+		color = colors.transparent,
+		border_color = colors.grey_dark,
+		border_width = 1,
+		height = 28,
+		corner_radius = 7,
+	},
 })
 
--- Background around the cpu item
 sbar.add("item", "widgets.cpu.padding", {
 	position = "right",
 	width = settings.group_paddings,

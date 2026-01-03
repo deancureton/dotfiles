@@ -1,25 +1,48 @@
 return {
-	black = 0xff181819,
-	white = 0xffe2e2e3,
-	red = 0xfffc5d7c,
-	green = 0xff9ed072,
-	blue = 0xff76cce0,
-	yellow = 0xffe7c664,
-	orange = 0xfff39660,
-	magenta = 0xffb39df3,
-	grey = 0xff7f8490,
+	-- Core colors with improved contrast and depth
+	black = 0xff0a0e14,
+	white = 0xfff2f2f7,
+
+	-- Refined accent palette
+	red = 0xffff6b7f,
+	green = 0xff98e6a8,
+	blue = 0xff78c9ff,
+	yellow = 0xffffe066,
+	orange = 0xffffaa66,
+	magenta = 0xffc792ff,
+	cyan = 0xff6be6e6,
+
+	-- Sophisticated greys
+	grey = 0xff8a91a3,
+	grey_dark = 0xff4a5060,
+	grey_light = 0xffa8b0c2,
+
 	transparent = 0x00000000,
 
+	-- Bar styling with subtle depth
 	bar = {
-		bg = 0xa01c1e24,
-		border = 0xff2c2e34,
+		bg = 0xf0151820,        -- Slightly more opaque for depth
+		border = 0x60404859,     -- Subtle border
+		shadow = 0x40000000,     -- Subtle shadow
 	},
+
+	-- Popup styling with glass morphism
 	popup = {
-		bg = 0xc02c2e34,
-		border = 0xff7f8490,
+		bg = 0xf01e222a,         -- Rich, darker background
+		border = 0x80505768,     -- Defined but soft border
+		shadow = 0x60000000,     -- Deeper shadow for elevation
 	},
-	bg1 = 0x00868994,
-	bg2 = 0xff414550,
+
+	-- Background accent colors
+	bg1 = 0x4025293a,           -- Subtle highlight
+	bg2 = 0xff2a2e38,           -- Stronger background accent
+	bg_hover = 0x80353945,      -- Interactive hover state
+
+	-- Gradient support
+	gradient = {
+		top = 0xff1a1e26,
+		bottom = 0xff151920,
+	},
 
 	with_alpha = function(color, alpha)
 		if alpha > 1.0 or alpha < 0.0 then
