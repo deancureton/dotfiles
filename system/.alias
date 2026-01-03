@@ -87,7 +87,7 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
 
   # System controls
   alias afk="open /System/Library/CoreServices/ScreenSaverEngine.app"
-  alias logoff="/System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resources/CGSession -suspend"
+  alias logoff="pmset displaysleepnow"
 
   # Cleanup
   alias rmds="find . -name '.DS_Store' -type f -delete"
