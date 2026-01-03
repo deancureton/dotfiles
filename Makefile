@@ -6,7 +6,7 @@ SHELL := env PATH=$(PATH) /bin/zsh
 export XDG_CONFIG_HOME=$(HOME)/.config
 export DOTFILES_DIR
 
-all: sudo core omz packages link bin-permissions macos-defaults
+all: sudo core omz packages link bin-permissions setup-passwordless-sudo macos-defaults
 
 core: brew git npm
 
@@ -30,6 +30,15 @@ link: stow-mac
 
 bin-permissions:
 	chmod +x $(DOTFILES_DIR)/bin/*
+
+setup-passwordless-sudo: brew-packages
+	@echo "Setting up passwordless sudo for update commands..."
+	@USERNAME=$$(whoami); \
+	echo "$${USERNAME} ALL=(root) NOPASSWD: /Library/TeX/texbin/tlmgr" | sudo tee /private/etc/sudoers.d/dotfiles-updates > /dev/null; \
+	echo "$${USERNAME} ALL=(root) NOPASSWD: /usr/sbin/softwareupdate" | sudo tee -a /private/etc/sudoers.d/dotfiles-updates > /dev/null; \
+	echo "$${USERNAME} ALL=(root) NOPASSWD: /opt/homebrew/bin/n" | sudo tee -a /private/etc/sudoers.d/dotfiles-updates > /dev/null; \
+	sudo chmod 0440 /private/etc/sudoers.d/dotfiles-updates; \
+	echo "✓ Passwordless sudo configured"
 
 macos-defaults: bin-permissions packages
 	@if [ "$$(uname)" = "Darwin" ]; then \
