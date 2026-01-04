@@ -24,3 +24,8 @@ meteo() {
 mk() {
   mkdir -p "$@" && cd "$@"
 }
+
+# Open directory or file in editor
+dev() {
+  ${EDITOR:-cursor} ${1:-.}
+}
