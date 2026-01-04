@@ -52,7 +52,7 @@ for d in $displays; do
     yabai -m config --display 1 top_padding 10
   else
     # Any external
-    yabai -m config --display "$d" top_padding 50
+    yabai -m config --display "$d" top_padding 48
   fi
 done
 
