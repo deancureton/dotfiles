@@ -18,7 +18,6 @@ sudo:
 	while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 
 zsh-plugins: git
-	# Install fzf-tab standalone (no oh-my-zsh needed)
 	mkdir -p $(HOME)/.config/zsh/plugins
 	[[ -d $(HOME)/.config/zsh/plugins/fzf-tab ]] || git clone https://github.com/Aloxaf/fzf-tab $(XDG_CONFIG_HOME)/zsh/plugins/fzf-tab
 
