@@ -19,7 +19,7 @@ sudo:
 
 zsh-plugins: git
 	mkdir -p $(HOME)/.config/zsh/plugins
-	[[ -d $(HOME)/.config/zsh/plugins/fzf-tab ]] || git clone https://github.com/Aloxaf/fzf-tab $(XDG_CONFIG_HOME)/zsh/plugins/fzf-tab
+	[[ -d $(HOME)/.config/zsh/plugins/fzf-tab ]] || git clone https://github.com/Aloxaf/fzf-tab $(HOME)/.config/zsh/plugins/fzf-tab
 
 packages: brew-packages cask-apps vscode-extensions
 
