@@ -38,6 +38,7 @@ alias gsp="git stash pop"
 
 # List directory (using lsd if available)
 if command -v lsd >/dev/null 2>&1; then
+  alias l='lsd -la'
   alias ls='lsd'
   alias ll='lsd -l'
   alias la='lsd -la'

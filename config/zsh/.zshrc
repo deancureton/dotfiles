@@ -31,24 +31,28 @@ export VISUAL="${VISUAL:-$EDITOR}"
 [ -f "$HOME/.local/bin/env" ] && . "$HOME/.local/bin/env"
 
 # =============================================================================
-# Oh My Zsh Configuration
+# Zsh Completion System
 # =============================================================================
 
-export ZSH="$HOME/.oh-my-zsh"
-ZSH_THEME=""
-ENABLE_CORRECTION="true"
+# Add zsh-completions to fpath (installed via Homebrew)
+if [ -n "$BREW_PREFIX" ] && [ -d "$BREW_PREFIX/share/zsh-completions" ]; then
+  fpath=($BREW_PREFIX/share/zsh-completions $fpath)
+fi
 
-plugins=(git fzf-tab)
-fpath+=${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions/src
+# Initialize completion system
+# Only regenerate compdump once per day for faster startup
+autoload -Uz compinit
+setopt EXTENDED_GLOB
+if [[ -n ${ZDOTDIR:-$HOME}/.zcompdump(#qN.mh+20) ]]; then
+  compinit -u
+else
+  compinit -C
+fi
 
-source $ZSH/oh-my-zsh.sh
-
-# =============================================================================
-# Load Aliases (after Oh My Zsh to override its defaults)
-# =============================================================================
-
-# Load aliases after Oh My Zsh so they take precedence
-[ -f "$DOTFILES_DIR/system/.alias" ] && . "$DOTFILES_DIR/system/.alias"
+# Load fzf-tab (must be after compinit but before other plugins)
+if [ -f "$HOME/.config/zsh/plugins/fzf-tab/fzf-tab.plugin.zsh" ]; then
+  source "$HOME/.config/zsh/plugins/fzf-tab/fzf-tab.plugin.zsh"
+fi
 
 # =============================================================================
 # Zsh Options
