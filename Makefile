@@ -6,7 +6,7 @@ SHELL := env PATH=$(PATH) /bin/zsh
 export XDG_CONFIG_HOME=$(HOME)/.config
 export DOTFILES_DIR
 
-all: sudo core omz packages link bin-permissions setup-passwordless-sudo macos-defaults
+all: sudo core zsh-plugins packages link bin-permissions setup-passwordless-sudo macos-defaults
 
 core: brew git npm
 
@@ -17,9 +17,10 @@ sudo:
 	sudo -v
 	while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 
-omz: git
-	[[ -f ~/.oh-my-zsh/oh-my-zsh.sh ]] || curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh | sh
-	[[ -d ~/.oh-my-zsh/custom/plugins/fzf-tab ]] || git clone https://github.com/Aloxaf/fzf-tab ~/.oh-my-zsh/custom/plugins/fzf-tab
+zsh-plugins: git
+	# Install fzf-tab standalone (no oh-my-zsh needed)
+	mkdir -p $(HOME)/.config/zsh/plugins
+	[[ -d $(HOME)/.config/zsh/plugins/fzf-tab ]] || git clone https://github.com/Aloxaf/fzf-tab $(XDG_CONFIG_HOME)/zsh/plugins/fzf-tab
 
 packages: brew-packages cask-apps vscode-extensions
 
