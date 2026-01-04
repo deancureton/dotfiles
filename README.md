@@ -30,8 +30,7 @@ features:
     - vscode, including extensive latex support with [latex-workshop](https://github.com/James-Yu/LaTeX-Workshop)/[hypersnips](https://github.com/draivin/hsnips), and lots of other extensions
         - theme: [vitesse dark soft](https://github.com/antfu/vscode-theme-vitesse)
     - [yabai](https://github.com/koekeishiya/yabai), which integrates with sketchybar
-    - zsh
-        - [oh-my-zsh](https://ohmyz.sh/)
+    - zsh (optimized for fast startup: ~80ms)
         - [fzf-tab](https://github.com/Aloxaf/fzf-tab)
         - [zsh-completions](https://github.com/zsh-users/zsh-completions?tab=readme-ov-file)
         - [zsh-syntax-highlighting](https://github.com/zsh-users/zsh-syntax-highlighting)
