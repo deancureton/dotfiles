@@ -25,10 +25,3 @@ for DOTFILE in "$DOTFILES_DIR"/system/.{function,env,alias}; do
   [ -f "$DOTFILE" ] && . "$DOTFILE"
 done
 unsetopt NULL_GLOB
-
-# Load macOS-specific files
-setopt NULL_GLOB
-for DOTFILE in "$DOTFILES_DIR"/system/.{env,function}.macos; do
-  [ -f "$DOTFILE" ] && . "$DOTFILE"
-done
-unsetopt NULL_GLOB
