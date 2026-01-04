@@ -1,0 +1,47 @@
+# =============================================================================
+# Package Manager - Homebrew
+# =============================================================================
+
+# Initialize Homebrew environment (sets up paths, etc.)
+eval "$(/opt/homebrew/bin/brew shellenv)"
+
+# =============================================================================
+# Node.js - NVM (Lazy Loaded)
+# =============================================================================
+
+# Lazy load NVM for faster shell startup
+# NVM only initializes when you actually use: node, npm, npx, or nvm
+export NVM_DIR="$HOME/.nvm"
+
+_lazy_load_nvm() {
+  unset -f nvm node npm npx
+  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+  [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+}
+
+nvm() {
+  _lazy_load_nvm
+  nvm "$@"
+}
+
+node() {
+  _lazy_load_nvm
+  node "$@"
+}
+
+npm() {
+  _lazy_load_nvm
+  npm "$@"
+}
+
+npx() {
+  _lazy_load_nvm
+  npx "$@"
+}
+
+# =============================================================================
+# Lean 4
+# =============================================================================
+
+# Elan toolchain manager
+export PATH="$HOME/.elan/bin:$PATH"
