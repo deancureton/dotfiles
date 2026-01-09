@@ -28,4 +28,5 @@ mk() {
 # Open directory or file in editor
 dev() {
   ${EDITOR:-cursor} ${1:-.}
+  exit
 }
