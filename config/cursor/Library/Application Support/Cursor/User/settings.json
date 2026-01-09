@@ -64,6 +64,10 @@
     "workbench.sideBar.location": "right",
     "workbench.activityBar.location": "hidden",
     "workbench.statusBar.visible": false,
+    "workbench.editor.customLabels.patterns": {
+        "**/app/**/{page,layout,route,template,loading}.{tsx,ts}": "${dirname}/${filename}.${extname}",
+        "**/main.{tex,pdf}": "${dirname(1)}/${dirname}/main.${extname}"
+    },
 
     // Workbench - Appearance
     "workbench.colorTheme": "Vitesse Dark Soft",
