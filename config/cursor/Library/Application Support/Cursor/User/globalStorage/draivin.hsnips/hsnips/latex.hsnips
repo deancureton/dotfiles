@@ -92,11 +92,6 @@ snippet `([a-zA-Z]+)([0-9]+) ` "Underset" Ai
 endsnippet
 
 context math(context)
-snippet `(alpha|beta|gamma|Gamma|delta|Delta|epsilon|varepsilon|zeta|eta|theta|Theta|iota|kappa|lambda|Lambda|mu|nu|omicron|xi|Xi|pi|Pi|rho|sigma|Sigma|tau|upsilon|Upsilon|varphi|phi|Phi|chi|psi|Psi|omega|Omega|cdot|cdots|sum|prod|cap|cup|iff|ell|mid|subset|supset|notin|sim|hbar|infty|leftrightarrow|mapsto|setminus|bigcap|bigcup|land|lor|subseteq|supseteq|implies|impliedby|exists|forall|equiv|square|neq|geq|leq|gg|ll|simeq|approx|propto|oplus|otimes|times|star|perp|det|adj|exp|ln|log|partial|circ|deg|wedge|langle|rangle|cong|max|min|nabla|Gal|Aut|Hom|im|ker|Im|Re|dim|deg|wedge|langle|rangle|cong|codim|vdots|ddots|oint|iint|iiint|to|pm|mp)` "Greek letter, symbol, or short symbol" Ai
-\\``rv = m[1]``
-endsnippet
-
-context math(context)
 snippet @a "alpha" Ai
 \\alpha
 endsnippet
@@ -1082,7 +1077,7 @@ snippet hel3 "helium" Ai
 endsnippet
 
 context math(context)
-snippet `([^\\])(alpha|beta|gamma|Gamma|delta|Delta|epsilon|varepsilon|zeta|eta|theta|Theta|iota|kappa|lambda|Lambda|mu|nu|omicron|xi|Xi|pi|Pi|rho|sigma|Sigma|tau|upsilon|Upsilon|varphi|phi|Phi|chi|psi|Psi|omega|Omega|cdot|cdots|sum|prod|cap|cup|iff|ell|mid|subset|supset|notin|sim|hbar|infty|leftrightarrow|mapsto|setminus|bigcap|bigcup|land|lor|subseteq|supseteq|implies|impliedby|exists|forall|equiv|square|neq|geq|leq|gg|ll|simeq|approx|propto|oplus|otimes|times|star|perp|det|adj|exp|ln|log|partial|circ|deg|wedge|langle|rangle|cong|max|min|nabla|Gal|Aut|Hom|im|ker|Im|Re|dim|deg|wedge|langle|rangle|cong|codim|vdots|ddots|oint|iint|iiint)` "Add backslash before greek letters and symbols" Ai
+snippet `([^\\])(alpha|beta|gamma|Gamma|delta|Delta|epsilon|varepsilon|zeta|eta|theta|Theta|iota|kappa|lambda|Lambda|mu|nu|omicron|xi|Xi|pi|Pi|rho|sigma|Sigma|tau|upsilon|Upsilon|varphi|phi|Phi|chi|psi|Psi|omega|Omega|cdot|cdots|sum|prod|cap|cup|iff|ell|mid|subset|supset|notin|sim|hbar|infty|leftrightarrow|mapsto|setminus|bigcap|bigcup|land|lor|subseteq|supseteq|implies|impliedby|exists|forall|equiv|square|neq|geq|leq|gg|ll|simeq|approx|propto|oplus|otimes|times|star|perp|det|adj|exp|ln|log|partial|circ|deg|wedge|langle|rangle|cong|max|min|nabla|Gal|Aut|Hom|im|ker|Im|Re|dim|deg|wedge|langle|rangle|cong|codim|vdots|ddots|oint|iint|iiint|to|pm|mp)` "Add backslash before greek letters, symbols, and short symbols" Ai
 ``rv = m[1] + '\\' + m[2]``
 endsnippet
 
