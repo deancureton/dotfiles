@@ -591,6 +591,7 @@ snippet trace "trace" Ai
 \\tr
 endsnippet
 
+priority 2
 context math(context)
 snippet lim "limit" Ai
 \\lim_{ ${1:n} \\to ${2:\\infty} } $3
@@ -611,6 +612,7 @@ snippet o+ "oplus" Ai
 \\oplus
 endsnippet
 
+priority -1
 context math(context)
 snippet ox "otimes" Ai
 \\otimes
@@ -877,6 +879,50 @@ endsnippet
 context math(context)
 snippet pa3 "Third partial derivative" Ai
 \\frac{ \\partial^{3} ${1:y} }{ \\partial ${2:x}^{3} } $3
+endsnippet
+
+context math(context)
+snippet pax "Partial derivative wrt x" i
+\\frac{ \\partial }{ \\partial x } $1
+endsnippet
+
+priority 2
+context math(context)
+snippet pax2 "Second partial derivative wrt x" Ai
+\\frac{ \\partial^2 }{ \\partial x^2 } $1
+endsnippet
+
+context math(context)
+snippet pay "Partial derivative wrt y" i
+\\frac{ \\partial }{ \\partial y } $1
+endsnippet
+
+priority 2
+context math(context)
+snippet pay2 "Second partial derivative wrt y" Ai
+\\frac{ \\partial^2 }{ \\partial y^2 } $1
+endsnippet
+
+context math(context)
+snippet paz "Partial derivative wrt z" i
+\\frac{ \\partial }{ \\partial z } $1
+endsnippet
+
+priority 2
+context math(context)
+snippet paz2 "Second partial derivative wrt z" Ai
+\\frac{ \\partial^2 }{ \\partial z^2 } $1
+endsnippet
+
+context math(context)
+snippet pat "Partial derivative wrt t" i
+\\frac{ \\partial }{ \\partial t } $1
+endsnippet
+
+priority 2
+context math(context)
+snippet pat2 "Second partial derivative wrt t" Ai
+\\frac{ \\partial^2 }{ \\partial t^2 } $1
 endsnippet
 
 context math(context)
