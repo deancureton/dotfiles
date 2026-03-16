@@ -1002,22 +1002,6 @@ x_{n}
 endsnippet
 
 context math(context)
-snippet xii "x_i" Ai
-x_{i}
-endsnippet
-
-priority 2
-context math(context)
-snippet \xii "x_i alternate" Ai
-x_{i}
-endsnippet
-
-context math(context)
-snippet xjj "x_j" Ai
-x_{j}
-endsnippet
-
-context math(context)
 snippet xp1 "x_{n+1}" Ai
 x_{n+1}
 endsnippet
@@ -1028,13 +1012,19 @@ y_{n}
 endsnippet
 
 context math(context)
-snippet yii "y_i" Ai
-y_{i}
+snippet ii "_i" Ai
+_{i}
 endsnippet
 
 context math(context)
-snippet yjj "y_j" Ai
-y_{j}
+snippet jj "_j" Ai
+_{j}
+endsnippet
+
+priority 2
+context math(context)
+snippet \xii "x_i alternate" Ai
+x_{i}
 endsnippet
 
 context math(context)
