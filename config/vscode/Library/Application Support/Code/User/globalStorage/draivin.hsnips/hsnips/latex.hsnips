@@ -871,11 +871,13 @@ snippet par "Partial derivative" i
 \\frac{ \\partial ${1:y} }{ \\partial ${2:x} } $3
 endsnippet
 
+priority 2
 context math(context)
 snippet pa2 "Second partial derivative" Ai
 \\frac{ \\partial^{2} ${1:y} }{ \\partial ${2:x}^{2} } $3
 endsnippet
 
+priority 2
 context math(context)
 snippet pa3 "Third partial derivative" Ai
 \\frac{ \\partial^{3} ${1:y} }{ \\partial ${2:x}^{3} } $3
@@ -964,6 +966,18 @@ endsnippet
 context math(context)
 snippet ddt "Derivative wrt t" Ai
 \\frac{d}{dt}
+endsnippet
+
+priority 2
+context math(context)
+snippet de2 "Second derivative" Ai
+\\frac{ d^{2} ${1:y} }{ d ${2:x}^{2} } $3
+endsnippet
+
+priority 2
+context math(context)
+snippet de3 "Third derivative" Ai
+\\frac{ d^{3} ${1:y} }{ d ${2:x}^{3} } $3
 endsnippet
 
 context math(context)
