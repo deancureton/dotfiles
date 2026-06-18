@@ -8,7 +8,7 @@ export DOTFILES_DIR
 
 all: sudo core zsh-plugins packages link bin-permissions setup-passwordless-sudo macos-defaults
 
-core: brew git npm
+core: brew git node
 
 stow-mac: brew
 	is-executable stow || brew install stow
@@ -36,7 +36,6 @@ setup-passwordless-sudo: brew-packages
 	@USERNAME=$$(whoami); \
 	echo "$${USERNAME} ALL=(root) NOPASSWD: /Library/TeX/texbin/tlmgr" | sudo tee /private/etc/sudoers.d/dotfiles-updates > /dev/null; \
 	echo "$${USERNAME} ALL=(root) NOPASSWD: /usr/sbin/softwareupdate" | sudo tee -a /private/etc/sudoers.d/dotfiles-updates > /dev/null; \
-	echo "$${USERNAME} ALL=(root) NOPASSWD: /opt/homebrew/bin/n" | sudo tee -a /private/etc/sudoers.d/dotfiles-updates > /dev/null; \
 	sudo chmod 0440 /private/etc/sudoers.d/dotfiles-updates; \
 	echo "✓ Passwordless sudo configured"
 
@@ -56,8 +55,11 @@ brew:
 git: brew
 	brew install git
 
-npm: brew-packages
-	sudo n install lts
+node: brew
+	@[[ -s "$(HOME)/.nvm/nvm.sh" ]] || curl -fsSL https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.5/install.sh | PROFILE=/dev/null bash
+	@export NVM_DIR="$(HOME)/.nvm"; \
+		. "$(HOME)/.nvm/nvm.sh"; \
+		nvm install --lts
 
 brew-packages: brew
 	brew bundle --file=$(DOTFILES_DIR)/install/Brewfile || true
