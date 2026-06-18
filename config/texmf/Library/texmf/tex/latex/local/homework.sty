@@ -1,6 +1,6 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{homework}[2020/12/22]
-\newif\if@dchomework\@dchomeworktrue
+\PassOptionsToPackage{dchwmode}{dcbase}
 \DeclareOption*{\PassOptionsToPackage{\CurrentOption}{dcbase}}
 \ProcessOptions\relax
 \RequirePackage{dcbase}
