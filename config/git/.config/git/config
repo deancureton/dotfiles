@@ -9,7 +9,6 @@
 [github]
 	user = deancureton
 [core]
-	excludesfile = ~/.config/git/.gitignore_global
 	editor = nvim
 [init]
 	defaultBranch = main
