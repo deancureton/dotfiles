@@ -49,6 +49,9 @@ else
   alias l='ls -lh'
 fi
 
+# Open in Finder
+alias f='open -a Finder "$(pwd)"'
+
 # File operations
 alias less="less -R"
 alias grep="grep --color=auto"
@@ -77,6 +80,9 @@ alias cl="clear"
 # Reload shell
 alias reload="source ~/.zshrc"
 alias refresh="source ~/.zshrc"
+
+# yt-dlp
+alias yt-wav="yt-dlp -x --audio-format wav"
 
 # =============================================================================
 # macOS-Specific Aliases
