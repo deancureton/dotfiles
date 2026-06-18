@@ -69,9 +69,11 @@ sub_macos() {
 }
 
 sub_start() {
-  echo "Starting sketchybar"
+  echo "Starting sketchybar, rift"
   echo "$ brew services start sketchybar"
   brew services start sketchybar
+  echo "$ brew services start rift"
+  brew services start rift
 }
 
 # =============================================================================

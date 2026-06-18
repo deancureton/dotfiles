@@ -23,6 +23,7 @@ features:
         - [typst-preview.nvim](https://github.com/chomosuke/typst-preview.nvim)
         - [nvim-web-devicons](https://github.com/nvim-tree/nvim-web-devicons)
         - theme: [onedark.nvim](https://github.com/navarasu/onedark.nvim)
+    - [rift](https://github.com/acsandmann/rift), tiling window manager
     - [sketchybar](https://github.com/FelixKratz/SketchyBar), based on feliz kratz's dotfiles configuration
     - [starship](https://starship.rs)
     - [topgrade](https://github.com/topgrade-rs/topgrade), used in the dotfiles command
