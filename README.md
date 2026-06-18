@@ -46,6 +46,9 @@ bash -c "`curl -fsSL https://raw.githubusercontent.com/deancureton/dotfiles/main
 cd ~/.dotfiles
 make
 ```
+
+tip: sign in to the app store first so the `mas` apps install (otherwise they're skipped); run `make extras` afterwards for the optional packages in `Extrabrewfile`/`Extracaskfile`
+
 after running, you have access to the `dotfiles` command:
 ```
 $ dotfiles
