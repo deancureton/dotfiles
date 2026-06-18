@@ -15,7 +15,7 @@ stow-mac: brew
 
 sudo:
 	sudo -v
-	while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
+	@MAKE_PID=$$PPID; (while true; do sudo -n true; sleep 60; kill -0 $$MAKE_PID 2>/dev/null || exit; done) >/dev/null 2>&1 &
 
 zsh-plugins: git
 	mkdir -p $(HOME)/.config/zsh/plugins
@@ -50,7 +50,7 @@ unlink: stow-mac
 	done
 
 brew:
-	is-executable brew || curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh | bash
+	is-executable brew || NONINTERACTIVE=1 /bin/bash -c "$$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
 git: brew
 	brew install git
