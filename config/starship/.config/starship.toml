@@ -257,3 +257,6 @@ format = " jl [$symbol($version )]($style)"
 [memory_usage]
 symbol = "▪▫▪ "
 format = " mem [${ram}( ${swap})]($style)"
+
+[gcloud]
+disabled = true
