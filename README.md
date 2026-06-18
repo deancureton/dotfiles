@@ -53,13 +53,13 @@ Commands:
    help               This help message
    stow [folder]      Stow config folder
    edit               Open dotfiles in editor (cursor)
-   clean              Clean up caches (brew, pip)
-   update             Update packages and pkg managers (OS, brew, npm, gem, pip)
+   clean              Clean up system + caches (mole, brew, pip, uv)
+   update             Update packages and pkg managers (via topgrade)
    dump               Dump current Homebrew packages to Brewfile
    macos              Apply macOS system defaults
    dock               Apply OS X Dock settings
-   start              Start services
-   fix                Fix services
+   start              Start services (sketchybar, rift)
+   restart            Restart services (sketchybar, rift)
 ```
 
 things i used/was inspired by:
