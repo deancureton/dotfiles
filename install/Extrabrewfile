@@ -13,9 +13,6 @@ brew "figlet"
 brew "fortune"
 brew "lolcat"
 
-# alternatives / redundant with essentials (eza, btop)
-brew "htop"
-
 # editors / ai assistants
 brew "helix"
 brew "hermes-agent"
