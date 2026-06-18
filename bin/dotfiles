@@ -25,7 +25,6 @@ sub_help() {
   echo "   macos              Apply macOS system defaults"
   echo "   dock               Apply OS X Dock settings"
   echo "   start              Start services"
-  echo "   fix                Fix services"
 }
 
 sub_stow() {
@@ -70,23 +69,9 @@ sub_macos() {
 }
 
 sub_start() {
-  echo "Starting sketchybar, skhd, yabai"
+  echo "Starting sketchybar"
   echo "$ brew services start sketchybar"
   brew services start sketchybar
-  echo "$ skhd --start-service"
-  skhd --start-service
-  echo "$ yabai --start-service"
-  yabai --start-service
-}
-
-sub_fix() {
-  echo '$ yabai --stop-service'
-  yabai --stop-service
-  echo '$ skhd --stop-service'
-  skhd --stop-service
-  echo 'Executing yabai scripting addition fix'
-  echo "$(whoami) ALL=(root) NOPASSWD: sha256:$(shasum -a 256 $(which yabai) | cut -d " " -f 1) $(which yabai) --load-sa" | sudo tee /private/etc/sudoers.d/yabai
-  dotfiles start
 }
 
 # =============================================================================
