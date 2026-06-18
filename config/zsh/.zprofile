@@ -12,7 +12,7 @@ export DOTFILES_DIR
 # =============================================================================
 
 # Source local zprofile FIRST (sets up Homebrew paths, etc.)
-# This must run before .alias so lsd and other Homebrew tools are in PATH
+# This must run before .alias so eza and other Homebrew tools are in PATH
 [ -f "$HOME/.zprofile.local" ] && . "$HOME/.zprofile.local"
 
 # =============================================================================
