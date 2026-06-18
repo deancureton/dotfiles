@@ -40,7 +40,7 @@ features:
 to install, run
 ```zsh
 xcode-select --install
-bash -c "`curl -fsSL https://raw.githubusercontent.com/deancureton/dotfiles/master/remote-install.zsh`"
+bash -c "`curl -fsSL https://raw.githubusercontent.com/deancureton/dotfiles/main/remote-install.zsh`"
 cd ~/.dotfiles
 make
 ```
