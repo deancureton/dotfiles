@@ -21,7 +21,7 @@ zsh-plugins: git
 	mkdir -p $(HOME)/.config/zsh/plugins
 	[[ -d $(HOME)/.config/zsh/plugins/fzf-tab ]] || git clone https://github.com/Aloxaf/fzf-tab $(HOME)/.config/zsh/plugins/fzf-tab
 
-packages: brew-packages cask-apps vscode-extensions
+packages: brew-packages cask-apps editor-extensions
 
 link: stow-mac
 	for FILE in $$(\ls -A $(DOTFILES_DIR)/config); do \
@@ -70,5 +70,5 @@ cask-apps: brew
 extra-cask-apps: brew
 	brew bundle --file=$(DOTFILES_DIR)/install/Extracaskfile || true
 
-vscode-extensions: brew
-	brew bundle --file=$(DOTFILES_DIR)/install/Codefile || true
+editor-extensions: cask-apps bin-permissions
+	$(DOTFILES_DIR)/bin/install-extensions || true

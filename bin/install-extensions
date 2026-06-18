@@ -1,0 +1,36 @@
+#!/bin/zsh
+
+# =============================================================================
+# Install editor extensions from install/Codefile into VSCode and Cursor
+# =============================================================================
+
+CODEFILE="${1:-${DOTFILES_DIR:-$HOME/.dotfiles}/install/Codefile}"
+
+if [[ ! -f "$CODEFILE" ]]; then
+  echo "Codefile not found: $CODEFILE" >&2
+  exit 1
+fi
+
+# Editors to target (only those actually installed are used)
+editors=()
+command -v code >/dev/null 2>&1 && editors+=("code")
+command -v cursor >/dev/null 2>&1 && editors+=("cursor")
+
+if (( ${#editors} == 0 )); then
+  echo "Neither 'code' nor 'cursor' CLI found on PATH; skipping extensions." >&2
+  exit 0
+fi
+
+echo "Installing extensions into: ${editors[*]}"
+
+while IFS= read -r ext; do
+  # Skip blank lines and comments
+  [[ -z "$ext" || "$ext" == \#* ]] && continue
+  for editor in $editors; do
+    if "$editor" --install-extension "$ext" --force >/dev/null 2>&1; then
+      echo "  ✓ $editor: $ext"
+    else
+      echo "  – $editor: $ext (unavailable, skipped)"
+    fi
+  done
+done < "$CODEFILE"

@@ -1,39 +1,43 @@
-vscode "activitywatch.aw-watcher-vscode"
-vscode "antfu.theme-vitesse"
-vscode "astro-build.astro-vscode"
-vscode "austin.code-gnu-global"
-vscode "be5invis.vscode-custom-css"
-vscode "bradlc.vscode-tailwindcss"
-vscode "brboer.vsc-conceal"
-vscode "catppuccin.catppuccin-vsc-icons"
-vscode "dbaeumer.vscode-eslint"
-vscode "devine-davies.make-hidden"
-vscode "draivin.hscopes"
-vscode "draivin.hsnips"
-vscode "dsznajder.es7-react-js-snippets"
-vscode "esbenp.prettier-vscode"
-vscode "james-yu.latex-workshop"
-vscode "leanprover.lean4"
-vscode "mathematic.vscode-latex"
-vscode "ms-python.debugpy"
-vscode "ms-python.python"
-vscode "ms-python.vscode-pylance"
-vscode "ms-python.vscode-python-envs"
-vscode "ms-vscode-remote.remote-ssh"
-vscode "ms-vscode-remote.remote-ssh-edit"
-vscode "ms-vscode.cmake-tools"
-vscode "ms-vscode.cpptools"
-vscode "ms-vscode.cpptools-extension-pack"
-vscode "ms-vscode.cpptools-themes"
-vscode "ms-vscode.makefile-tools"
-vscode "ms-vscode.remote-explorer"
-vscode "myriad-dreamin.tinymist"
-vscode "orangex4.latex-sympy-calculator"
-vscode "redhat.vscode-xml"
-vscode "supermaven.supermaven"
-vscode "tamasfe.even-better-toml"
-vscode "twxs.cmake"
-vscode "tyriar.lorem-ipsum"
-vscode "unifiedjs.vscode-mdx"
-vscode "wix.vscode-import-cost"
-vscode "yoavbls.pretty-ts-errors"
+# editor extensions, installed into both vscode and cursor by bin/install-extensions
+# note: a few are editor-specific and will just be skipped if they can't be found
+
+activitywatch.aw-watcher-vscode
+antfu.theme-vitesse
+anysphere.cursorpyright
+anysphere.remote-ssh
+astro-build.astro-vscode
+austin.code-gnu-global
+be5invis.vscode-custom-css
+bradlc.vscode-tailwindcss
+brboer.vsc-conceal
+catppuccin.catppuccin-vsc-icons
+dbaeumer.vscode-eslint
+denoland.vscode-deno
+devine-davies.make-hidden
+draivin.hscopes
+draivin.hsnips
+dsznajder.es7-react-js-snippets
+dtoplak.vscode-glsllint
+esbenp.prettier-vscode
+james-yu.latex-workshop
+leanprover.lean4
+mathematic.vscode-latex
+ms-python.debugpy
+ms-python.python
+ms-python.vscode-pylance
+ms-python.vscode-python-envs
+ms-vscode-remote.remote-ssh
+ms-vscode-remote.remote-ssh-edit
+ms-vscode.cpptools-extension-pack
+ms-vscode.makefile-tools
+ms-vscode.remote-explorer
+myriad-dreamin.tinymist
+orangex4.latex-sympy-calculator
+redhat.vscode-xml
+slevesque.shader
+tamasfe.even-better-toml
+twxs.cmake
+tyriar.lorem-ipsum
+unifiedjs.vscode-mdx
+wix.vscode-import-cost
+yoavbls.pretty-ts-errors
