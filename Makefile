@@ -67,8 +67,13 @@ brew-packages: brew
 cask-apps: brew
 	brew bundle --file=$(DOTFILES_DIR)/install/Caskfile || true
 
+extra-brew-packages: brew
+	brew bundle --file=$(DOTFILES_DIR)/install/Extrabrewfile || true
+
 extra-cask-apps: brew
 	brew bundle --file=$(DOTFILES_DIR)/install/Extracaskfile || true
+
+extras: extra-brew-packages extra-cask-apps
 
 editor-extensions: cask-apps bin-permissions
 	$(DOTFILES_DIR)/bin/install-extensions || true
