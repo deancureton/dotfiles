@@ -10,11 +10,11 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
 # =============================================================================
 
 # Lazy load NVM for faster shell startup
-# NVM only initializes when you actually use: node, npm, npx, or nvm
+# NVM only initializes when you actually use: node, npm, npx, pnpm, or nvm
 export NVM_DIR="$HOME/.nvm"
 
 _lazy_load_nvm() {
-  unset -f nvm node npm npx
+  unset -f nvm node npm npx pnpm
   [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
   [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
 }
@@ -37,6 +37,11 @@ npm() {
 npx() {
   _lazy_load_nvm
   npx "$@"
+}
+
+pnpm() {
+  _lazy_load_nvm
+  pnpm "$@"
 }
 
 # =============================================================================
