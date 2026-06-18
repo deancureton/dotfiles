@@ -65,10 +65,12 @@ sub_update() {
 }
 
 sub_dump() {
-  echo "Dumping current Homebrew packages to Brewfile..."
-  echo "$ brew bundle dump --file=${DOTFILES_DIR}/install/Brewfile --force"
-  brew bundle dump --file="${DOTFILES_DIR}/install/Brewfile" --force
+  echo "Dumping taps, formulae, and App Store apps to Brewfile..."
+  echo "$ brew bundle dump --taps --formulae --mas --file=${DOTFILES_DIR}/install/Brewfile --force"
+  brew bundle dump --taps --formulae --mas --file="${DOTFILES_DIR}/install/Brewfile" --force
   echo "Done! Brewfile updated at ${DOTFILES_DIR}/install/Brewfile"
+  echo "Note: dump writes ALL leaves to Brewfile — re-sort niche tools into Extrabrewfile by hand."
+  echo "(Casks and editor extensions are curated manually in Caskfile/Extracaskfile/Codefile.)"
 }
 
 sub_macos() {

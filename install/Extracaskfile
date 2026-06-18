@@ -1,20 +1,32 @@
+# optional / heavy apps, installed manually via `make extra-cask-apps`
+
+# music production / audio
 cask "ableton-live-suite@11"
 cask "audacity"
-cask "clion"
-cask "cold-turkey-blocker"
-cask "dolphin"
-cask "font-sf-mono"
-cask "font-sf-pro"
-cask "inkscape"
-cask "intellij-idea"
+cask "focusrite-control"
+cask "focusrite-control-2"
 cask "native-access"
-cask "notion"
-cask "obs"
-cask "pycharm"
 cask "rekordbox"
-cask "sf-symbols"
-cask "slack"
 cask "splice"
-cask "telegram"
-cask "tidal"
-cask "whatsapp"
+
+# ides
+cask "clion"
+cask "intellij-idea"
+cask "pycharm"
+
+# creative / media
+cask "inkscape"
+cask "obs"
+cask "rawtherapee"
+
+# games / emulators
+cask "ball"
+cask "dolphin"
+cask "epic-games"
+cask "minecraft"
+cask "steam"
+
+# other heavy
+cask "libreoffice"
+cask "miniconda"
+cask "sage"

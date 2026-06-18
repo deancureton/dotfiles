@@ -1,0 +1,76 @@
+# optional formulae, installed manually via `make extra-brew-packages`
+
+# taps
+tap "teamookla/speedtest"
+tap "webstonehq/tap"
+
+# terminal toys
+brew "chafa"
+brew "cmatrix"
+brew "cowsay"
+brew "fastfetch"
+brew "figlet"
+brew "fortune"
+brew "lolcat"
+
+# alternatives / redundant with essentials (lsd, btop)
+brew "eza"
+brew "htop"
+
+# editors / ai assistants
+brew "helix"
+brew "hermes-agent"
+brew "opencode"
+
+# languages / scientific / databases
+brew "postgresql@17"
+brew "python@3.10"
+brew "python@3.11"
+brew "python@3.12"
+brew "python-tk@3.13"
+brew "rustup"
+brew "scipy"
+
+# build tooling / libraries
+brew "automake"
+brew "glew"
+brew "glfw"
+brew "libsndfile"
+brew "make"
+brew "pkgconf"
+brew "portmidi"
+brew "py3cairo"
+
+# music / media
+brew "spicetify-cli"
+brew "spotify_player"
+
+# networking / remote
+brew "speedtest"
+brew "sshpass"
+brew "tailscale"
+
+# system / mac utilities
+brew "blueutil"
+brew "mactop"
+
+# misc cli utilities
+brew "bitwarden-cli"
+brew "exiftool"
+brew "git-secrets"
+brew "graphviz"
+brew "hub"
+brew "lowdown"
+brew "pngcheck"
+brew "sevenzip"
+brew "tmux"
+brew "tokei"
+brew "tuxedo"
+
+# app store
+mas "djay", id: 450527929
+mas "Flappy Golf 2", id: 1154174205
+mas "GarageBand", id: 682658836
+mas "iMovie", id: 408981434
+mas "Portal", id: 1436994560
+mas "QuickShade", id: 931571202
