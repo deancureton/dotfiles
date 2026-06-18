@@ -19,12 +19,13 @@ sub_help() {
   echo "   help               This help message"
   echo "   stow [folder]      Stow config folder"
   echo "   edit               Open dotfiles in editor ($EDITOR)"
-  echo "   clean              Clean up caches (brew, pip)"
-  echo "   update             Update packages and pkg managers (OS, brew, npm, gem, pip)"
+  echo "   clean              Clean up system + caches (mole, brew, pip, uv)"
+  echo "   update             Update packages and pkg managers (via topgrade)"
   echo "   dump               Dump current Homebrew packages to Brewfile"
   echo "   macos              Apply macOS system defaults"
   echo "   dock               Apply OS X Dock settings"
-  echo "   start              Start services"
+  echo "   start              Start services (sketchybar, rift)"
+  echo "   restart            Restart services (sketchybar, rift)"
 }
 
 sub_stow() {
@@ -47,6 +48,15 @@ sub_edit() {
 sub_clean() {
   echo "$ mo clean"
   mo clean
+
+  echo "$ brew cleanup --prune=all"
+  brew cleanup --prune=all
+
+  echo "$ pip3 cache purge"
+  pip3 cache purge
+
+  echo "$ uv cache clean"
+  uv cache clean
 }
 
 sub_update() {
@@ -74,6 +84,14 @@ sub_start() {
   brew services start sketchybar
   echo "$ brew services start rift"
   brew services start rift
+}
+
+sub_restart() {
+  echo "Restarting sketchybar, rift"
+  echo "$ brew services restart sketchybar"
+  brew services restart sketchybar
+  echo "$ brew services restart rift"
+  brew services restart rift
 }
 
 # =============================================================================
