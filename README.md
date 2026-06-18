@@ -5,6 +5,7 @@ my dotfiles repository
 features:
 - makefile to automatically set up system
 - installation of homebrew formulae, casks, and vscode extensions through [homebrew bundle](https://github.com/Homebrew/brew)
+- editor extensions managed from a single list (`install/Codefile`) and installed into both VSCode and Cursor
 - some automatic macos system settings configuration and dock setup
 - custom dotfiles command for maintenance
 - automatic symlinking of configuration files using [stow](https://www.gnu.org/software/stow/)
