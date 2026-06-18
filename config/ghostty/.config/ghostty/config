@@ -3,8 +3,8 @@ font-size = 16
 
 theme = Zenwritten Dark
 
-background-blur = macos-glass-regular
-background-opacity = 0.5
+background-blur = true
+background-opacity = 0.9
 
 window-padding-x = 10
 window-padding-y = 0
