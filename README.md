@@ -36,7 +36,7 @@ features:
         - [zsh-completions](https://github.com/zsh-users/zsh-completions?tab=readme-ov-file)
         - [zsh-syntax-highlighting](https://github.com/zsh-users/zsh-syntax-highlighting)
         - [zsh-autosuggestions](https://github.com/zsh-users/zsh-autosuggestions)
-        - [lsd](https://github.com/lsd-rs/lsd)
+        - [eza](https://github.com/eza-community/eza)
         - [zoxide](https://github.com/ajeetdsouza/zoxide)
 
 to install, run
