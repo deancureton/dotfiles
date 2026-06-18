@@ -1090,5 +1090,7 @@
     // Security & Updates
     // ============================================================================
     "security.workspace.trust.untrustedFiles": "open",
-    "update.showReleaseNotes": false
+    "update.showReleaseNotes": false,
+    "update.mode": "silentlyApplyOnQuit",
+    "window.autoDetectColorScheme": false
 }
