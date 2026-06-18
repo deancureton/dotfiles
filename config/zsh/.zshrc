@@ -94,7 +94,7 @@ zstyle ':completion:*' special-dirs true
 # fzf-tab Configuration
 # =============================================================================
 
-zstyle ':fzf-tab:complete:cd:*' fzf-preview 'lsd --color=always $realpath'
+zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza --icons --color=always $realpath'
 
 # =============================================================================
 # Zsh Plugins
