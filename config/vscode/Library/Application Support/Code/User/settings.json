@@ -35,7 +35,7 @@
     "editor.lightbulb.enabled": "off",
 
     // Editor - Behavior
-    "editor.hover.enabled": true,
+    "editor.hover.enabled": "on",
     "editor.hover.delay": 1500,
     "editor.quickSuggestions": {
         "strings": true
