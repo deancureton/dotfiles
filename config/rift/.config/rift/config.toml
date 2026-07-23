@@ -7,9 +7,13 @@
 # - animation_duration: seconds per animation (>= 0.0, typical 0.15–0.35)
 # - animation_fps: frames per second (0.0 = display refresh rate). 60–120 recommended.
 #   ease_in_circ, ease_out_circ, ease_in_out_circ
-animate = false
+# - animation_easing: motion curve. Accepts linear and ease_{in,out,in_out}_{sine,
+#   quad,cubic,quart,quint,expo,circ}. out_* decelerates to rest (smooth); circ/expo/
+#   quint snap hardest (jumpier). Undocumented in the template but honored by rift.
+animate = true
 animation_duration = 0.2
-animation_fps = 100.0
+animation_fps = 120.0
+animation_easing = "ease_out_quad"
 
 # Space activation behavior
 # - If true, spaces start inactive (rift does not manage windows there)
@@ -443,10 +447,10 @@ comb1 = "Alt + Shift"
 # "Alt + Shift + F" = { focus_display = "right" }
 
 # Move a window to a display (by index, UUID, or direction)
-# "Alt + Ctrl + Up" = { move_window_to_display = { selector = "up" } }
-# "Alt + Ctrl + Down" = { move_window_to_display = { selector = "down" } }
-# "Alt + Ctrl + Left" = { move_window_to_display = { selector = "left" } }
-# "Alt + Ctrl + Right" = { move_window_to_display = { selector = "right" } }
+"Alt + Ctrl + Up" = { move_window_to_display = { selector = "up" } }
+"Alt + Ctrl + Down" = { move_window_to_display = { selector = "down" } }
+"Alt + Ctrl + Left" = { move_window_to_display = { selector = "left" } }
+"Alt + Ctrl + Right" = { move_window_to_display = { selector = "right" } }
 # "Alt + Ctrl + A" = { move_window_to_display = { selector = 0 } }
 
 # if mission control is enabled
