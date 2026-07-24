@@ -746,17 +746,17 @@ endsnippet
 
 context math(context)
 snippet mod "mod" Ai
-\\pmod{1}$2
+\\pmod{$1}$2
 endsnippet
 
 context math(context)
 snippet pmod "pmod" Ai
-\\pmod{1}$2
+\\pmod{$1}$2
 endsnippet
 
 context math(context)
 snippet bmod "bmod" Ai
-\\bmod{1}$2
+\\bmod{$1}$2
 endsnippet
 
 context math(context)
