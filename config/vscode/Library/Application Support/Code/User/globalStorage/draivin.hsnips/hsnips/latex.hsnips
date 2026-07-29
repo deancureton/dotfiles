@@ -328,27 +328,27 @@ endsnippet
 
 context math(context)
 snippet `([^\\])(arcsin|arccos|arctan|arccot|arccsc|arcsec|sin|cos|tan|cot|csc|sec)` "Trigonometric function" Ai
-``rv = m[1] + '\\'  + m[2]``
+``rv = m[1]``\\``rv = m[2]``
 endsnippet
 
 context math(context)
 snippet `\\(arcsin|arccos|arctan|arccot|arccsc|arcsec|sin|cos|tan|cot|csc|sec)([A-Za-gi-z])` "Space after trigonometric functions" Ai
-``rv = '\\' + m[1] + ' ' + m[2]``
+\\``rv = m[1]`` ``rv = m[2]``
 endsnippet
 
 context math(context)
 snippet `\\(arcsinh|arccosh|arctanh|arccoth|arcsch|arcsech|sinh|cosh|tanh|coth|csch|sech)([A-Za-z])` "Space after hyperbolic trigonometric functions" Ai
-``rv = '\\' + m[1] + ' ' + m[2]``
+\\``rv = m[1]`` ``rv = m[2]``
 endsnippet
 
 context math(context)
 snippet `\\(neq|geq|leq|gg|ll|sim)([0-9]+)` "Inequality" Ai
-``rv = '\\' + m[1] + ' ' + m[2]``
+\\``rv = m[1]`` ``rv = m[2]``
 endsnippet
 
 context math(context)
 snippet `(CC|RR|QQ|ZZ|NN|FF|EE|PP)` "Common mathematical letter symbols" Ai
-``rv = '\\' + m[1]``
+\\``rv = m[1]``
 endsnippet
 
 context math(context)
@@ -378,7 +378,7 @@ endsnippet
 
 context math(context)
 snippet `([A-Z])#` "Boldface" Ai
-``rv = '\\mathbb{' + m[1] + '}'``
+\\mathbb{``rv = m[1]``}
 endsnippet
 
 context math(context)
@@ -426,6 +426,7 @@ snippet sq "square root" Ai
 \\sqrt{ $1 }$2
 endsnippet
 
+priority 2
 context math(context)
 snippet <-> "leftrightarrow" Ai
 \\leftrightarrow
@@ -481,11 +482,13 @@ snippet notin "not in" Ai
 \\notin
 endsnippet
 
+priority 5
 context math(context)
 snippet `\\subset\ eq` "subseteq" Ai
 \\subseteq
 endsnippet
 
+priority 5
 context math(context)
 snippet `\\supset\ eq` "supseteq" Ai
 \\supseteq
@@ -670,27 +673,27 @@ endsnippet
 
 context math(context)
 snippet `([A-Za-z])(\d)` "Auto letter subscript" Ai
-``rv = m[1] + '_{' + m[2] + '}'``
+``rv = m[1]``_{``rv = m[2]``}
 endsnippet
 
 context math(context)
 snippet `([A-Za-z])_(\d\d)` "Auto letter subscript" Ai
-``rv = m[1] + '_{' + m[2] + '}'``
+``rv = m[1]``_{``rv = m[2]``}
 endsnippet
 
 context math(context)
 snippet `\\hat{([A-Za-z])}(\d)` "Auto letter subscript" Ai
-``rv = '\\hat{' + m[1] + '}_{' + m[2] + '}'``
+\\hat{``rv = m[1]``}_{``rv = m[2]``}
 endsnippet
 
 context math(context)
 snippet `\\mathbf{([A-Za-z])}(\d)` "Auto letter subscript" Ai
-``rv = '\\mathbf{' + m[1] + '}_{' + m[2] + '}'``
+\\mathbf{``rv = m[1]``}_{``rv = m[2]``}
 endsnippet
 
 context math(context)
 snippet `\\vec{([A-Za-z])}(\d)` "Auto letter subscript" Ai
-``rv = '\\vec{' + m[1] + '}_{' + m[2] + '}'``
+\\vec{``rv = m[1]``}_{``rv = m[2]``}
 endsnippet
 
 context math(context)
@@ -982,7 +985,7 @@ endsnippet
 
 context math(context)
 snippet int "Integral" Ai
-\\int 
+\\int
 endsnippet
 
 context math(context)
@@ -1043,12 +1046,12 @@ endsnippet
 
 context math(context)
 snippet `:(i|j|k)` "Unit vector (i, j, k)" Ai
-``rv = '\\mathbf{' + m[1] + '}'``
+\\mathbf{``rv = m[1]``}
 endsnippet
 
 context math(context)
 snippet `:(x|y|z)` "Unit vector (x, y, z)" Ai
-``rv = '\\hat{\\mathbf{' + m[1] + '}}'``
+\\hat{\\mathbf{``rv = m[1]``}}
 endsnippet
 
 context math(context)
@@ -1128,23 +1131,23 @@ endsnippet
 
 context math(context)
 snippet `([^\\])(alpha|beta|gamma|Gamma|delta|Delta|epsilon|varepsilon|zeta|eta|theta|Theta|iota|kappa|lambda|Lambda|mu|nu|omicron|xi|Xi|pi|Pi|rho|sigma|Sigma|tau|upsilon|Upsilon|varphi|phi|Phi|chi|psi|Psi|omega|Omega|cdot|cdots|sum|prod|cap|cup|iff|ell|mid|subset|supset|notin|sim|hbar|infty|leftrightarrow|mapsto|setminus|bigcap|bigcup|land|lor|subseteq|supseteq|implies|impliedby|exists|forall|equiv|square|neq|geq|leq|gg|ll|simeq|approx|propto|oplus|otimes|times|star|perp|det|adj|exp|ln|log|partial|circ|deg|wedge|langle|rangle|cong|max|min|nabla|Gal|Aut|Hom|im|ker|Im|Re|dim|deg|wedge|langle|rangle|cong|codim|vdots|ddots|oint|iint|iiint|to|pm|mp)` "Add backslash before greek letters, symbols, and short symbols" Ai
-``rv = m[1] + '\\' + m[2]``
+``rv = m[1]``\\``rv = m[2]``
 endsnippet
 
 priority 1
 context math(context)
 snippet `\\(alpha|beta|gamma|Gamma|delta|Delta|epsilon|varepsilon|zeta|eta|theta|Theta|iota|kappa|lambda|Lambda|mu|nu|omicron|xi|Xi|pi|Pi|rho|sigma|Sigma|tau|upsilon|Upsilon|varphi|phi|Phi|chi|psi|Psi|omega|Omega|cdot|cdots|sum|prod|cap|cup|iff|ell|mid|subset|supset|notin|sim|hbar|infty|leftrightarrow|mapsto|setminus|bigcap|bigcup|land|lor|subseteq|supseteq|implies|impliedby|exists|forall|equiv|square|neq|geq|leq|gg|ll|simeq|approx|propto|oplus|otimes|times|star|perp|det|adj|exp|ln|log|partial|circ|deg|wedge|langle|rangle|cong|max|min|nabla|Gal|Aut|Hom|im|ker|Im|Re|dim|deg|wedge|langle|rangle|cong|codim|vdots|ddots|oint|iint|iiint|to|pm|mp)([A-Za-z])` "Insert space after greek letters and symbols" Ai
-``rv = '\\' + m[1] + ' ' + m[2]``
+\\``rv = m[1]`` ``rv = m[2]``
 endsnippet
 
 context math(context)
 snippet `\\(alpha|beta|gamma|Gamma|delta|Delta|epsilon|varepsilon|zeta|eta|theta|Theta|iota|kappa|lambda|Lambda|mu|nu|omicron|xi|Xi|pi|Pi|rho|sigma|Sigma|tau|upsilon|Upsilon|varphi|phi|Phi|chi|psi|Psi|omega|Omega|cdot|cdots|sum|prod|cap|cup|iff|ell|mid|subset|supset|notin|sim|hbar|infty|leftrightarrow|mapsto|setminus|bigcap|bigcup|land|lor|subseteq|supseteq|implies|impliedby|exists|forall|equiv|square|neq|geq|leq|gg|ll|simeq|approx|propto|oplus|otimes|times|star|perp|det|adj|exp|ln|log|partial|circ|deg|wedge|langle|rangle|cong|max|min|nabla|Gal|Aut|Hom|im|ker|Im|Re|dim|deg|wedge|langle|rangle|cong|codim|vdots|ddots|oint|iint|iiint) sr` "Superscript 2 after greek letters and symbols" Ai
-``rv = '\\' + m[1] + '^{2}'``
+\\``rv = m[1]``^{2}
 endsnippet
 
 context math(context)
 snippet `\\(alpha|beta|gamma|Gamma|delta|Delta|epsilon|varepsilon|zeta|eta|theta|Theta|iota|kappa|lambda|Lambda|mu|nu|omicron|xi|Xi|pi|Pi|rho|sigma|Sigma|tau|upsilon|Upsilon|varphi|phi|Phi|chi|psi|Psi|omega|Omega|cdot|cdots|sum|prod|cap|cup|iff|ell|mid|subset|supset|notin|sim|hbar|infty|leftrightarrow|mapsto|setminus|bigcap|bigcup|land|lor|subseteq|supseteq|implies|impliedby|exists|forall|equiv|square|neq|geq|leq|gg|ll|simeq|approx|propto|oplus|otimes|times|star|perp|det|adj|exp|ln|log|partial|circ|deg|wedge|langle|rangle|cong|max|min|nabla|Gal|Aut|Hom|im|ker|Im|Re|dim|deg|wedge|langle|rangle|cong|codim|vdots|ddots|oint|iint|iiint) cb` "Superscript 3 after greek letters and symbols" Ai
-``rv = '\\' + m[1] + '^{3}'``
+\\``rv = m[1]``^{3}
 endsnippet
 
 context math(context)
@@ -1155,31 +1158,31 @@ endsnippet
 priority 2
 context math(context)
 snippet `\\(alpha|beta|gamma|Gamma|delta|Delta|epsilon|varepsilon|zeta|eta|theta|Theta|iota|kappa|lambda|Lambda|mu|nu|omicron|xi|Xi|pi|Pi|rho|sigma|Sigma|tau|upsilon|Upsilon|varphi|phi|Phi|chi|psi|Psi|omega|Omega|cdot|cdots|sum|prod|cap|cup|iff|ell|mid|subset|supset|notin|sim|hbar|infty|leftrightarrow|mapsto|setminus|bigcap|bigcup|land|lor|subseteq|supseteq|implies|impliedby|exists|forall|equiv|square|neq|geq|leq|gg|ll|simeq|approx|propto|oplus|otimes|times|star|perp|det|adj|exp|ln|log|partial|circ|deg|wedge|langle|rangle|cong|max|min|nabla|Gal|Aut|Hom|im|ker|Im|Re|dim|deg|wedge|langle|rangle|cong|codim|vdots|ddots|oint|iint|iiint) (hat|bar|vec|tilde)` "Diacritic over greek letters and symbols" Ai
-``rv = '\\' + m[2] + '{\\' + m[1] + '}'``
+\\``rv = m[2]``{\\``rv = m[1]``}
 endsnippet
 
 context math(context)
 snippet `\\(alpha|beta|gamma|Gamma|delta|Delta|epsilon|varepsilon|zeta|eta|theta|Theta|iota|kappa|lambda|Lambda|mu|nu|omicron|xi|Xi|pi|Pi|rho|sigma|Sigma|tau|upsilon|Upsilon|varphi|phi|Phi|chi|psi|Psi|omega|Omega|cdot|cdots|sum|prod|cap|cup|iff|ell|mid|subset|supset|notin|sim|hbar|infty|leftrightarrow|mapsto|setminus|bigcap|bigcup|land|lor|subseteq|supseteq|implies|impliedby|exists|forall|equiv|square|neq|geq|leq|gg|ll|simeq|approx|propto|oplus|otimes|times|star|perp|det|adj|exp|ln|log|partial|circ|deg|wedge|langle|rangle|cong|max|min|nabla|Gal|Aut|Hom|im|ker|Im|Re|dim|deg|wedge|langle|rangle|cong|codim|vdots|ddots|oint|iint|iiint) dot` "Diacritic over greek letters and symbols" i
-``rv = '\\dot{' + m[1] + '}'``
+\\dot{\\``rv = m[1]``}
 endsnippet
 
 context math(context)
 snippet `\\(alpha|beta|gamma|Gamma|delta|Delta|epsilon|varepsilon|zeta|eta|theta|Theta|iota|kappa|lambda|Lambda|mu|nu|omicron|xi|Xi|pi|Pi|rho|sigma|Sigma|tau|upsilon|Upsilon|varphi|phi|Phi|chi|psi|Psi|omega|Omega|cdot|cdots|sum|prod|cap|cup|iff|ell|mid|subset|supset|notin|sim|hbar|infty|leftrightarrow|mapsto|setminus|bigcap|bigcup|land|lor|subseteq|supseteq|implies|impliedby|exists|forall|equiv|square|neq|geq|leq|gg|ll|simeq|approx|propto|oplus|otimes|times|star|perp|det|adj|exp|ln|log|partial|circ|deg|wedge|langle|rangle|cong|max|min|nabla|Gal|Aut|Hom|im|ker|Im|Re|dim|deg|wedge|langle|rangle|cong|codim|vdots|ddots|oint|iint|iiint) und` "Underline greek letters and symbols" Ai
-``rv = '\\underline{' + m[1] + '}'``
+\\underline{\\``rv = m[1]``}
 endsnippet
 
 context math(context)
 snippet `\\(alpha|beta|gamma|Gamma|delta|Delta|epsilon|varepsilon|zeta|eta|theta|Theta|iota|kappa|lambda|Lambda|mu|nu|omicron|xi|Xi|pi|Pi|rho|sigma|Sigma|tau|upsilon|Upsilon|varphi|phi|Phi|chi|psi|Psi|omega|Omega|cdot|cdots|sum|prod|cap|cup|iff|ell|mid|subset|supset|notin|sim|hbar|infty|leftrightarrow|mapsto|setminus|bigcap|bigcup|land|lor|subseteq|supseteq|implies|impliedby|exists|forall|equiv|square|neq|geq|leq|gg|ll|simeq|approx|propto|oplus|otimes|times|star|perp|det|adj|exp|ln|log|partial|circ|deg|wedge|langle|rangle|cong|max|min|nabla|Gal|Aut|Hom|im|ker|Im|Re|dim|deg|wedge|langle|rangle|cong|codim|vdots|ddots|oint|iint|iiint) ovr` "Overline greek letters and symbols" Ai
-``rv = '\\overline{' + m[1] + '}'``
+\\overline{\\``rv = m[1]``}
 endsnippet
 
 context math(context)
 snippet `\\(alpha|beta|gamma|Gamma|delta|Delta|epsilon|varepsilon|zeta|eta|theta|Theta|iota|kappa|lambda|Lambda|mu|nu|omicron|xi|Xi|pi|Pi|rho|sigma|Sigma|tau|upsilon|Upsilon|varphi|phi|Phi|chi|psi|Psi|omega|Omega),\.` "Bold greek letter (comma dot)" Ai
-``rv = '\\boldsymbol{' + m[1] + '}'``
+\\boldsymbol{\\``rv = m[1]``}
 endsnippet
 
 context math(context)
 snippet `\\(alpha|beta|gamma|Gamma|delta|Delta|epsilon|varepsilon|zeta|eta|theta|Theta|iota|kappa|lambda|Lambda|mu|nu|omicron|xi|Xi|pi|Pi|rho|sigma|Sigma|tau|upsilon|Upsilon|varphi|phi|Phi|chi|psi|Psi|omega|Omega)\.,` "Bold greek letter (dot comma)" Ai
-``rv = '\\boldsymbol{' + m[1] + '}'``
+\\boldsymbol{\\``rv = m[1]``}
 endsnippet
 
