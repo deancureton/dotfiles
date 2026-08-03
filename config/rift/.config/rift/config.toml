@@ -145,7 +145,7 @@ default_orientation = "perpendicular"
 #   Use the display's UUID as the key (for example, from system profiler or via rift CLI).
 
 [settings.layout.gaps.outer]
-top = 0
+top = 40
 left = 0
 bottom = 0
 right = 0
@@ -154,17 +154,17 @@ right = 0
 horizontal = 0
 vertical = 0
 
-# Example per-display overrides:
-# Replace the quoted key with your display's UUID. Only specify values you want to override.
-# [settings.layout.gaps.per_display."11111111-2222-3333-4444-555555555555".outer]
-# top = 20
-# left = 20
-# bottom = 20
-# right = 20
-#
-# [settings.layout.gaps.per_display."11111111-2222-3333-4444-555555555555".inner]
-# horizontal = 8
-# vertical = 8
+# Per-display overrides, keyed by UUID.
+# The built-in display already excludes the notch strip from its usable frame, which
+# leaves room for sketchybar, so it opts out of the default top gap.
+
+# Built-in retina display
+[settings.layout.gaps.per_display."37D8832A-2D66-02CA-B9F7-8F30A301B230".outer]
+top = 0
+left = 0
+bottom = 0
+right = 0
+
 [settings.ui.menu_bar]
 # enable menu bar workspace indicators
 enabled = false
