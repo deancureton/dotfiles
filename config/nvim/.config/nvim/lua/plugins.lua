@@ -71,7 +71,14 @@ vim.pack.add({
 
 local ok, luasnip = pcall(require, 'luasnip')
 if ok then
-  luasnip.config.setup({})
+  luasnip.config.setup({
+    enable_autosnippets = true,
+    store_selection_keys = '<Tab>',
+  })
+  require('luasnip.loaders.from_lua').load({
+    paths = { vim.fn.stdpath('config') .. '/luasnippets' },
+  })
+  luasnip.filetype_extend('plaintex', { 'tex' })
 end
 
 -- nvim-cmp (autocompletion)
@@ -108,6 +115,25 @@ if ok then
           require('luasnip').jump(-1)
         end
       end, { 'i', 's' }),
+      ['<Tab>'] = cmp.mapping(function(fallback)
+        if require('luasnip').expand_or_locally_jumpable() then
+          require('luasnip').expand_or_jump()
+        elseif cmp.visible() then
+          cmp.select_next_item()
+        else
+          fallback()
+        end
+      end, { 'i', 's' }),
+      ['<S-Tab>'] = cmp.mapping(function(fallback)
+        if require('luasnip').locally_jumpable(-1) then
+          require('luasnip').jump(-1)
+        elseif cmp.visible() then
+          cmp.select_prev_item()
+        else
+          fallback()
+        end
+      end, { 'i', 's' }),
+      ['<CR>'] = cmp.mapping.confirm({ select = false }),
     }),
     sources = {
       { name = 'nvim_lsp' },

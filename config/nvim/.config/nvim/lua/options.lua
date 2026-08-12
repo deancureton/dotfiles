@@ -50,3 +50,6 @@ vim.opt.inccommand = 'split'
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
+-- Always detect .tex files as latex (ft=tex), never plaintex
+vim.g.tex_flavor = 'latex'
+
