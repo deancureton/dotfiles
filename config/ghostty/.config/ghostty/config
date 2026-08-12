@@ -16,7 +16,7 @@ macos-icon-frame = beige
 macos-icon-ghost-color = #FFFFFF
 macos-icon-screen-color = #222222,#444444
 
-adjust-cell-height = 20%
+adjust-cell-height = -8%
 
 keybind = global:cmd+opt+t=toggle_quick_terminal
 keybind = cmd+q=close_all_windows
