@@ -21,11 +21,11 @@
       "src": "https://github.com/nvim-lualine/lualine.nvim"
     },
     "neo-tree.nvim": {
-      "rev": "6679b9395526b52ddb2b137fcd5255dab71c5a58",
+      "rev": "3352e998cb8343a4b8d82eca50c74aa17bc61f5e",
       "src": "https://github.com/nvim-neo-tree/neo-tree.nvim"
     },
     "nui.nvim": {
-      "rev": "de740991c12411b663994b2860f1a4fd0937c130",
+      "rev": "10fc361835c856ba4233ef5ea135b919bf3dce97",
       "src": "https://github.com/MunifTanjim/nui.nvim"
     },
     "nvim-cmp": {
@@ -33,15 +33,15 @@
       "src": "https://github.com/hrsh7th/nvim-cmp"
     },
     "nvim-lspconfig": {
-      "rev": "4267d26e60323a45e18f8e7a63a964cc8f53ca4e",
+      "rev": "16286347bdba1333c7d124d9de9fe6630731b2b2",
       "src": "https://github.com/neovim/nvim-lspconfig"
     },
     "nvim-treesitter": {
-      "rev": "c9f9ed6c1892f629ea399f4ee7905f2686fa13f2",
+      "rev": "19071296d3d643b48615ee574a20e8a03ac40872",
       "src": "https://github.com/nvim-treesitter/nvim-treesitter"
     },
     "nvim-web-devicons": {
-      "rev": "2ae6958df7ced50baac5035cec0c15799eedfbf7",
+      "rev": "5f032a85be210cd1c6ac98861eb3b187ff3bd5eb",
       "src": "https://github.com/nvim-tree/nvim-web-devicons"
     },
     "onedark.nvim": {
@@ -53,7 +53,7 @@
       "src": "https://github.com/nvim-lua/plenary.nvim"
     },
     "telescope.nvim": {
-      "rev": "427b576c16792edad01a92b89721d923c19ad60f",
+      "rev": "40aedd8a68c78a656a10a8d62d80c54af59420fb",
       "src": "https://github.com/nvim-telescope/telescope.nvim"
     },
     "typst-preview.nvim": {
