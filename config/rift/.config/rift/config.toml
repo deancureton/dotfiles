@@ -62,7 +62,10 @@ auto_focus_blacklist = []
 # ]
 
 run_on_start = [
-	"rift-cli subscribe cli --event '*' --command sh --args -c --args 'sketchybar --trigger rift_update'",
+	"rift-cli subscribe cli --event workspace_changed --command sh --args -c --args 'sketchybar --trigger rift_update'",
+	"rift-cli subscribe cli --event windows_changed --command sh --args -c --args 'sketchybar --trigger rift_update'",
+	"rift-cli subscribe cli --event focused_window_changed --command sh --args -c --args 'sketchybar --trigger rift_update'",
+	"rift-cli subscribe cli --event stacks_changed --command sh --args -c --args 'sketchybar --trigger rift_update'",
 ]
 
 # Hot Reloading
@@ -202,7 +205,7 @@ fade_duration_ms = 180.0
 # Trackpad gestures
 [settings.gestures]
 # Enable horizontal swipes to switch virtual workspaces
-enabled = false
+enabled = true
 # Invert horizontal direction (swap next/prev)
 invert_horizontal_swipe = false
 # Maximum vertical travel allowed for the horizontal swipe to register.
