@@ -67,6 +67,7 @@ defaults write com.apple.dock show-recents -bool false
 
 # Menu Bar
 defaults write NSGlobalDomain _HIHideMenuBar -bool true
+osascript -e 'tell application "System Events" to tell dock preferences to set autohide menu bar to true' 2>/dev/null
 
 # Keyboard
 defaults write NSGlobalDomain KeyRepeat -int 1
