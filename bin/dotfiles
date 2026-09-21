@@ -84,16 +84,16 @@ sub_start() {
   echo "Starting sketchybar, rift"
   echo "$ brew services start sketchybar"
   brew services start sketchybar
-  echo "$ brew services start rift"
-  brew services start rift
+  echo "$ rift service start"
+  rift service start
 }
 
 sub_restart() {
   echo "Restarting sketchybar, rift"
   echo "$ brew services restart sketchybar"
   brew services restart sketchybar
-  echo "$ brew services restart rift"
-  brew services restart rift
+  echo "$ rift service restart"
+  rift service restart
 }
 
 # =============================================================================
