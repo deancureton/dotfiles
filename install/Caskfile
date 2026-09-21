@@ -11,6 +11,7 @@ cask "font-jetbrains-mono-nerd-font"
 cask "font-new-computer-modern"
 cask "font-sf-mono"
 cask "font-sf-pro"
+cask "font-sketchybar-app-font"
 cask "font-symbols-only-nerd-font"
 
 # apps
