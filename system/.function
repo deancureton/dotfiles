@@ -27,6 +27,6 @@ mk() {
 
 # Open directory or file in editor
 dev() {
-  ${EDITOR:-cursor} ${1:-.}
+  ${EDITOR:-codium} ${1:-.}
   exit
 }

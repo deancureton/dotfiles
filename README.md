@@ -57,7 +57,7 @@ Usage: dotfiles <command>
 Commands:
    help               This help message
    stow [folder]      Stow config folder
-   edit               Open dotfiles in editor (cursor)
+   edit               Open dotfiles in editor (codium)
    clean              Clean up system + caches (mole, brew, pip, uv)
    update             Update packages and pkg managers (via topgrade)
    dump               Dump current Homebrew packages to Brewfile

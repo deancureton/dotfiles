@@ -24,7 +24,7 @@ export DYLD_LIBRARY_PATH=/opt/homebrew/opt/flac/lib:/opt/homebrew/opt/libsndfile
 export PATH=$PATH:$HOME/.local/share/bob/nvim-bin
 
 # Editor Configuration
-export EDITOR="${EDITOR:-cursor}"
+export EDITOR="${EDITOR:-codium}"
 export VISUAL="${VISUAL:-$EDITOR}"
 
 # Source local env file if it exists
