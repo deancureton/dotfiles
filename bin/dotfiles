@@ -113,8 +113,10 @@ sub_restart() {
   echo "Restarting sketchybar, rift"
   echo "$ brew services restart sketchybar"
   brew services restart sketchybar
-  echo "$ rift service restart"
-  rift service restart
+  echo "$ rift service stop"
+  rift service stop
+  echo "$ rift service start"
+  rift service start
 }
 
 # =============================================================================
