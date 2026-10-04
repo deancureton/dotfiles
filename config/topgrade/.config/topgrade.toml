@@ -1,2 +1,5 @@
 [misc]
-# no config needed!
+disable = ["spicetify"]
+
+[git]
+pull_predefined = false
