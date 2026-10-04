@@ -69,12 +69,12 @@ set wasRunning to application "Terminal" is running
 tell application "Terminal"
   activate
   if wasRunning then
-    do script "$cmd"
+    do script "dotfiles update --terminal"
   else
     repeat until (exists window 1)
       delay 0.1
     end repeat
-    do script "$cmd" in window 1
+    do script "dotfiles update --terminal" in window 1
   end if
 end tell
 APPLESCRIPT
@@ -82,7 +82,22 @@ APPLESCRIPT
   fi
 
   echo "$ $cmd"
-  eval $cmd
+  eval $cmd || return
+
+  [[ "$SUB_COMMAND_NAME" == "--terminal" ]] && close_terminal_window
+}
+
+close_terminal_window() {
+  local tty_name=$(tty)
+  /usr/bin/perl -MPOSIX -e 'fork and exit; setsid; exec @ARGV' osascript >/dev/null 2>&1 <<APPLESCRIPT &!
+delay 1
+tell application "Terminal"
+  repeat with w in (get windows)
+    if tty of selected tab of w is "$tty_name" then close w
+  end repeat
+  if (count windows) is 0 then quit
+end tell
+APPLESCRIPT
 }
 
 sub_dump() {
