@@ -6,7 +6,7 @@ features:
 - makefile to automatically set up system
 - installation of homebrew formulae, casks, and App Store apps through [homebrew bundle](https://github.com/Homebrew/brew)
     - essentials install by default; niche/optional packages live in `Extrabrewfile`/`Extracaskfile` (`make extras`)
-- editor extensions managed from a single list (`install/Codefile`) and installed into both VSCode and Cursor
+- editor extensions managed from a single list (`install/Codefile`) and installed into VSCode, VSCodium, and Cursor
 - some automatic macos system settings configuration and dock setup
 - custom dotfiles command for maintenance
 - automatic symlinking of configuration files using [stow](https://www.gnu.org/software/stow/)
@@ -29,7 +29,7 @@ features:
     - [sketchybar](https://github.com/FelixKratz/SketchyBar), based on feliz kratz's dotfiles configuration
     - [starship](https://starship.rs)
     - [topgrade](https://github.com/topgrade-rs/topgrade), used in the dotfiles command
-    - vscode, including extensive latex support with [latex-workshop](https://github.com/James-Yu/LaTeX-Workshop)/[hypersnips](https://github.com/draivin/hsnips), and lots of other extensions
+    - vscode (mirrored for vscodium), including extensive latex support with [latex-workshop](https://github.com/James-Yu/LaTeX-Workshop)/[hypersnips](https://github.com/draivin/hsnips), and lots of other extensions
         - theme: [vitesse dark soft](https://github.com/antfu/vscode-theme-vitesse)
     - zsh (optimized for fast startup: ~80ms)
         - [fzf-tab](https://github.com/Aloxaf/fzf-tab)

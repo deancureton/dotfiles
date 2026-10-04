@@ -1,7 +1,7 @@
 #!/bin/zsh
 
 # =============================================================================
-# Install editor extensions from install/Codefile into VSCode and Cursor
+# Install editor extensions from install/Codefile into VSCode, VSCodium and Cursor
 # =============================================================================
 
 CODEFILE="${1:-${DOTFILES_DIR:-$HOME/.dotfiles}/install/Codefile}"
@@ -14,10 +14,11 @@ fi
 # Editors to target (only those actually installed are used)
 editors=()
 command -v code >/dev/null 2>&1 && editors+=("code")
+command -v codium >/dev/null 2>&1 && editors+=("codium")
 command -v cursor >/dev/null 2>&1 && editors+=("cursor")
 
 if (( ${#editors} == 0 )); then
-  echo "Neither 'code' nor 'cursor' CLI found on PATH; skipping extensions." >&2
+  echo "None of 'code', 'codium' or 'cursor' CLIs found on PATH; skipping extensions." >&2
   exit 0
 fi
 

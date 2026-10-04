@@ -1,0 +1,1204 @@
+global
+function math(context) {
+    return context.scopes.findLastIndex(s => s.startsWith("meta.math") || s.startsWith("meta.embedded.math")) > context.scopes.findLastIndex(s => s.startsWith("comment") || s.startsWith("meta.text.normal.tex"));
+}
+function notmath(context) {
+    return !math(context) && !context.scopes.some(s => s.startsWith("markup.fenced_code") || s.startsWith("markup.raw") || s.startsWith("markup.inline.raw"));
+}
+endglobal
+
+priority 2
+context math(context)
+snippet `\\(alpha|beta|gamma|Gamma|delta|Delta|epsilon|varepsilon|zeta|eta|theta|Theta|iota|kappa|lambda|Lambda|mu|nu|omicron|xi|Xi|pi|Pi|rho|sigma|Sigma|tau|upsilon|Upsilon|varphi|phi|Phi|chi|psi|Psi|omega|Omega|cdot|cdots|sum|prod|cap|cup|iff|ell|mid|subset|supset|notin|sim|hbar|infty|leftrightarrow|mapsto|setminus|bigcap|bigcup|land|lor|subseteq|supseteq|implies|impliedby|exists|forall|equiv|square|neq|geq|leq|gg|ll|simeq|approx|propto|oplus|otimes|times|star|perp|det|adj|exp|ln|log|partial|circ|deg|wedge|langle|rangle|cong|max|min|nabla|Gal|Aut|Hom|im|ker|Im|Re|dim|codim|vdots|ddots|oint|iint|iiint) (hat|bar|vec|tilde)` "Diacritic over greek letters and symbols" Ai
+\\``rv = m[2]``{\\``rv = m[1]``}
+endsnippet
+
+priority 1
+context math(context)
+snippet `\\(alpha|beta|gamma|Gamma|delta|Delta|epsilon|varepsilon|zeta|eta|theta|Theta|iota|kappa|lambda|Lambda|mu|nu|omicron|xi|Xi|pi|Pi|rho|sigma|Sigma|tau|upsilon|Upsilon|varphi|phi|Phi|chi|psi|Psi|omega|Omega|cdot|cdots|sum|prod|cap|cup|iff|ell|mid|subset|supset|notin|sim|hbar|infty|leftrightarrow|mapsto|setminus|bigcap|bigcup|land|lor|subseteq|supseteq|implies|impliedby|exists|forall|equiv|square|neq|geq|leq|gg|ll|simeq|approx|propto|oplus|otimes|times|star|perp|det|adj|exp|ln|log|partial|circ|deg|wedge|langle|rangle|cong|max|min|nabla|Gal|Aut|Hom|im|ker|Im|Re|dim|codim|vdots|ddots|oint|iint|iiint|to|pm|mp)([A-Za-z])` "Insert space after greek letters and symbols" Ai
+\\``rv = m[1]`` ``rv = m[2]``
+endsnippet
+
+context math(context)
+snippet `([^\\])(alpha|beta|gamma|Gamma|delta|Delta|epsilon|varepsilon|zeta|eta|theta|Theta|iota|kappa|lambda|Lambda|mu|nu|omicron|xi|Xi|pi|Pi|rho|sigma|Sigma|tau|upsilon|Upsilon|varphi|phi|Phi|chi|psi|Psi|omega|Omega|cdot|cdots|sum|prod|cap|cup|iff|ell|mid|subset|supset|notin|sim|hbar|infty|leftrightarrow|mapsto|setminus|bigcap|bigcup|land|lor|subseteq|supseteq|implies|impliedby|exists|forall|equiv|square|neq|geq|leq|gg|ll|simeq|approx|propto|oplus|otimes|times|star|perp|det|adj|exp|ln|log|partial|circ|deg|wedge|langle|rangle|cong|max|min|nabla|Gal|Aut|Hom|im|ker|Im|Re|dim|codim|vdots|ddots|oint|iint|iiint|to|pm|mp)` "Add backslash before greek letters, symbols, and short symbols" Ai
+``rv = m[1]``\\``rv = m[2]``
+endsnippet
+
+context math(context)
+snippet `\\(alpha|beta|gamma|Gamma|delta|Delta|epsilon|varepsilon|zeta|eta|theta|Theta|iota|kappa|lambda|Lambda|mu|nu|omicron|xi|Xi|pi|Pi|rho|sigma|Sigma|tau|upsilon|Upsilon|varphi|phi|Phi|chi|psi|Psi|omega|Omega|cdot|cdots|sum|prod|cap|cup|iff|ell|mid|subset|supset|notin|sim|hbar|infty|leftrightarrow|mapsto|setminus|bigcap|bigcup|land|lor|subseteq|supseteq|implies|impliedby|exists|forall|equiv|square|neq|geq|leq|gg|ll|simeq|approx|propto|oplus|otimes|times|star|perp|det|adj|exp|ln|log|partial|circ|deg|wedge|langle|rangle|cong|max|min|nabla|Gal|Aut|Hom|im|ker|Im|Re|dim|codim|vdots|ddots|oint|iint|iiint) dot` "Diacritic over greek letters and symbols" i
+\\dot{\\``rv = m[1]``}
+endsnippet
+
+context math(context)
+snippet `\\(alpha|beta|gamma|Gamma|delta|Delta|epsilon|varepsilon|zeta|eta|theta|Theta|iota|kappa|lambda|Lambda|mu|nu|omicron|xi|Xi|pi|Pi|rho|sigma|Sigma|tau|upsilon|Upsilon|varphi|phi|Phi|chi|psi|Psi|omega|Omega|cdot|cdots|sum|prod|cap|cup|iff|ell|mid|subset|supset|notin|sim|hbar|infty|leftrightarrow|mapsto|setminus|bigcap|bigcup|land|lor|subseteq|supseteq|implies|impliedby|exists|forall|equiv|square|neq|geq|leq|gg|ll|simeq|approx|propto|oplus|otimes|times|star|perp|det|adj|exp|ln|log|partial|circ|deg|wedge|langle|rangle|cong|max|min|nabla|Gal|Aut|Hom|im|ker|Im|Re|dim|codim|vdots|ddots|oint|iint|iiint) und` "Underline greek letters and symbols" Ai
+\\underline{\\``rv = m[1]``}
+endsnippet
+
+context math(context)
+snippet `\\(alpha|beta|gamma|Gamma|delta|Delta|epsilon|varepsilon|zeta|eta|theta|Theta|iota|kappa|lambda|Lambda|mu|nu|omicron|xi|Xi|pi|Pi|rho|sigma|Sigma|tau|upsilon|Upsilon|varphi|phi|Phi|chi|psi|Psi|omega|Omega|cdot|cdots|sum|prod|cap|cup|iff|ell|mid|subset|supset|notin|sim|hbar|infty|leftrightarrow|mapsto|setminus|bigcap|bigcup|land|lor|subseteq|supseteq|implies|impliedby|exists|forall|equiv|square|neq|geq|leq|gg|ll|simeq|approx|propto|oplus|otimes|times|star|perp|det|adj|exp|ln|log|partial|circ|deg|wedge|langle|rangle|cong|max|min|nabla|Gal|Aut|Hom|im|ker|Im|Re|dim|codim|vdots|ddots|oint|iint|iiint) ovr` "Overline greek letters and symbols" Ai
+\\overline{\\``rv = m[1]``}
+endsnippet
+
+context math(context)
+snippet `\\(alpha|beta|gamma|Gamma|delta|Delta|epsilon|varepsilon|zeta|eta|theta|Theta|iota|kappa|lambda|Lambda|mu|nu|omicron|xi|Xi|pi|Pi|rho|sigma|Sigma|tau|upsilon|Upsilon|varphi|phi|Phi|chi|psi|Psi|omega|Omega|cdot|cdots|sum|prod|cap|cup|iff|ell|mid|subset|supset|notin|sim|hbar|infty|leftrightarrow|mapsto|setminus|bigcap|bigcup|land|lor|subseteq|supseteq|implies|impliedby|exists|forall|equiv|square|neq|geq|leq|gg|ll|simeq|approx|propto|oplus|otimes|times|star|perp|det|adj|exp|ln|log|partial|circ|deg|wedge|langle|rangle|cong|max|min|nabla|Gal|Aut|Hom|im|ker|Im|Re|dim|codim|vdots|ddots|oint|iint|iiint) sr` "Superscript 2 after greek letters and symbols" Ai
+\\``rv = m[1]``^{2}
+endsnippet
+
+context math(context)
+snippet `\\(alpha|beta|gamma|Gamma|delta|Delta|epsilon|varepsilon|zeta|eta|theta|Theta|iota|kappa|lambda|Lambda|mu|nu|omicron|xi|Xi|pi|Pi|rho|sigma|Sigma|tau|upsilon|Upsilon|varphi|phi|Phi|chi|psi|Psi|omega|Omega|cdot|cdots|sum|prod|cap|cup|iff|ell|mid|subset|supset|notin|sim|hbar|infty|leftrightarrow|mapsto|setminus|bigcap|bigcup|land|lor|subseteq|supseteq|implies|impliedby|exists|forall|equiv|square|neq|geq|leq|gg|ll|simeq|approx|propto|oplus|otimes|times|star|perp|det|adj|exp|ln|log|partial|circ|deg|wedge|langle|rangle|cong|max|min|nabla|Gal|Aut|Hom|im|ker|Im|Re|dim|codim|vdots|ddots|oint|iint|iiint) cb` "Superscript 3 after greek letters and symbols" Ai
+\\``rv = m[1]``^{3}
+endsnippet
+
+context math(context)
+snippet `\\(alpha|beta|gamma|Gamma|delta|Delta|epsilon|varepsilon|zeta|eta|theta|Theta|iota|kappa|lambda|Lambda|mu|nu|omicron|xi|Xi|pi|Pi|rho|sigma|Sigma|tau|upsilon|Upsilon|varphi|phi|Phi|chi|psi|Psi|omega|Omega|cdot|cdots|sum|prod|cap|cup|iff|ell|mid|subset|supset|notin|sim|hbar|infty|leftrightarrow|mapsto|setminus|bigcap|bigcup|land|lor|subseteq|supseteq|implies|impliedby|exists|forall|equiv|square|neq|geq|leq|gg|ll|simeq|approx|propto|oplus|otimes|times|star|perp|det|adj|exp|ln|log|partial|circ|deg|wedge|langle|rangle|cong|max|min|nabla|Gal|Aut|Hom|im|ker|Im|Re|dim|codim|vdots|ddots|oint|iint|iiint) rd` "Superscript arbitrary after greek letters and symbols" Ai
+\\``rv = m[1]``^{$1}$2
+endsnippet
+
+context math(context)
+snippet `\\(cdot|cdots|sum|prod|cap|cup|iff|ell|mid|subset|supset|notin|sim|hbar|infty|leftrightarrow|mapsto|setminus|bigcap|bigcup|land|lor|subseteq|supseteq|implies|impliedby|exists|forall|equiv|square|neq|geq|leq|gg|ll|simeq|approx|propto|oplus|otimes|times|star|perp|det|adj|exp|ln|log|partial|circ|deg|wedge|langle|rangle|cong|max|min|nabla|Gal|Aut|Hom|im|ker|Im|Re|dim|codim|vdots|ddots|oint|iint|iiint|to|pm|mp)([0-9])` "Space between symbol and number" Ai
+\\``rv = m[1]`` ``rv = m[2]``
+endsnippet
+
+context math(context)
+snippet `\\(alpha|beta|gamma|Gamma|delta|Delta|epsilon|varepsilon|zeta|eta|theta|Theta|iota|kappa|lambda|Lambda|mu|nu|omicron|xi|Xi|pi|Pi|rho|sigma|Sigma|tau|upsilon|Upsilon|varphi|phi|Phi|chi|psi|Psi|omega|Omega),\.` "Bold greek letter (comma dot)" Ai
+\\boldsymbol{\\``rv = m[1]``}
+endsnippet
+
+context math(context)
+snippet `\\(alpha|beta|gamma|Gamma|delta|Delta|epsilon|varepsilon|zeta|eta|theta|Theta|iota|kappa|lambda|Lambda|mu|nu|omicron|xi|Xi|pi|Pi|rho|sigma|Sigma|tau|upsilon|Upsilon|varphi|phi|Phi|chi|psi|Psi|omega|Omega)\.,` "Bold greek letter (dot comma)" Ai
+\\boldsymbol{\\``rv = m[1]``}
+endsnippet
+
+context math(context)
+snippet `\\(arcsinh|arccosh|arctanh|arccoth|arcsch|arcsech|sinh|cosh|tanh|coth|csch|sech)([A-Za-z])` "Space after hyperbolic trigonometric functions" Ai
+\\``rv = m[1]`` ``rv = m[2]``
+endsnippet
+
+context math(context)
+snippet `\\(arcsin|arccos|arctan|arccot|arccsc|arcsec|sin|cos|tan|cot|csc|sec)([A-Za-gi-z])` "Space after trigonometric functions" Ai
+\\``rv = m[1]`` ``rv = m[2]``
+endsnippet
+
+context math(context)
+snippet `([^\\])(arcsin|arccos|arctan|arccot|arccsc|arcsec|sin|cos|tan|cot|csc|sec)` "Trigonometric function" Ai
+``rv = m[1]``\\``rv = m[2]``
+endsnippet
+
+context math(context)
+snippet `((\d+)|(\d*)(\\)?([A-Za-z]+)((\^|_)(\{\d+\}|\d))*)/` "Fraction (no parentheses)" Ai
+\\frac{``rv = m[1]``}{$1}$0
+endsnippet
+
+priority 2
+context math(context)
+snippet `([a-zA-Z])(bar|hat|ddot|vec|tilde)` "diacritic" Ai
+\\``rv = m[2]``{``rv = m[1]``}
+endsnippet
+
+context math(context)
+snippet `\\(neq|geq|leq|gg|ll|sim)([0-9]+)` "Inequality" Ai
+\\``rv = m[1]`` ``rv = m[2]``
+endsnippet
+
+context math(context)
+snippet `\b(d|D)(\\?\w+)[dD](\w{1}|\\\w+) ` "Derivatives" Ai
+``
+if (m[1] == 'd') 
+  rv = '\\\\frac{\\\\partial ' + m[2] + '}{\\\\partial ' + m[3] + '}';
+else 
+  rv = '\\\\frac{\\\\mathrm{d}' + m[2] + '}{\\\\mathrm{d}' + m[3] + '}';
+``
+
+endsnippet
+
+context math(context)
+snippet `pa([A-Za-z])([A-Za-z])([A-Za-z])` "Second partial derivative" i
+\\frac{ \\partial^{2} ``rv = m[1]`` }{ \\partial ``rv = m[2]``^{2} } 
+endsnippet
+
+priority 2000
+context math(context)
+snippet `(b|p)mat([1-9]{1}) ([1-9]{1})` "Matrix environment (bmatrix or pmatrix)" Ai
+\\begin{``rv = m[1]``matrix}``
+let order = 1;
+let nrow = m[2];
+let ncol = m[3];
+rv = `\\n`;
+for (var i=0; i<nrow; i++){
+	rv += '	';
+	for(var j = 0;j <ncol-1;j++){
+		rv += `${snip.tabstop(order)} & `;
+		order ++;
+	}
+	rv += ` ${snip.tabstop(order)} \\\\\\\\`+ `\\\\`+ `\\n`;
+	order ++;
+}
+``\\end{``rv = m[1]``matrix}$0
+
+endsnippet
+
+context notmath(context)
+snippet `table([1-9]{1}) ([1-9]{1})` "Table environment" Aib
+\\begin{table}[H]
+	\\centering
+	\\begin{tabular}{``let len = m[2]; let results = ""; for(var i=0; i<len-1; i++){ results += "c|"} results += "c"; rv = results;``}
+	    \\toprule
+			``let order = 1; nrow = m[1]; ncol = m[2]; for (var i=0; i<nrow-1; i++){ for(var j = 0;j <ncol-1;j++){ rv += `${snip.tabstop(order+3)} & `; order ++;}	rv += ` ${snip.tabstop(order+3)} \\\\\\\\`+ `\\\\`+ `\\n`; order ++; if(i == 0){ rv += `		\\\\midrule` + `\\n`; } rv += `			`; }	for(var j = 0;j <ncol-1;j++){ rv += `${snip.tabstop(order+3)} & `; order ++;} rv += ` ${snip.tabstop(order+3)} \\\\\\\\` + `\\\\`;``
+    	\\bottomrule
+	\\end{tabular}
+	\\caption{${2:caption}}
+	\\label{tab:${3:label}}
+\\end{table}
+
+endsnippet
+
+context math(context)
+snippet `(CC|RR|QQ|ZZ|NN|FF|EE|PP)` "Common mathematical letter symbols" Ai
+\\``rv = m[1]``
+endsnippet
+
+context math(context)
+snippet `ary([1-9]{1}) ([1-9]{1})` "Array environment" Aib
+\\begin{array}{``let len = m[2]; let results = ""; for(var i=0; i<len; i++){ results += "c"} rv = results;``}
+``let order = 1; let nrow = m[1]; let ncol = m[2]; for (var i=0; i<nrow-1; i++){ for(var j = 0;j <ncol-1;j++){ rv += `${snip.tabstop(order)} & `; order ++;} rv += ` ${snip.tabstop(order)} \\\\\\\\`+ `\\\\`+ `\\n` + `	`; order ++;} for(var j = 0;j <ncol-1;j++){ rv += `${snip.tabstop(order)} & `; order ++;} rv += ` ${snip.tabstop(order)} \\\\\\\\`+ `\\\\`;``
+\\end{array}
+
+endsnippet
+
+context math(context)
+snippet `\\mathbf{([A-Za-z])}(\d)` "Auto letter subscript" Ai
+\\mathbf{``rv = m[1]``}_{``rv = m[2]``}
+endsnippet
+
+priority 2
+context math(context)
+snippet `pa([A-Za-z])([A-Za-z])2` "Second partial derivative" Ai
+\\frac{ \\partial^{2} ``rv = m[1]`` }{ \\partial ``rv = m[2]``^{2} } 
+endsnippet
+
+context math(context)
+snippet `de([A-Za-z])([A-Za-z])2` "Second derivative" Ai
+\\frac{ d^{2}``rv = m[1]`` }{ d``rv = m[2]``^{2} } 
+endsnippet
+
+context math(context)
+snippet `pa([A-Za-z])([A-Za-z])` "Partial derivative" i
+\\frac{ \\partial ``rv = m[1]`` }{ \\partial ``rv = m[2]`` } 
+endsnippet
+
+context math(context)
+snippet `de([A-Za-z])([A-Za-z])` "Derivative" i
+\\frac{ d``rv = m[1]`` }{ d``rv = m[2]`` } 
+endsnippet
+
+context math(context)
+snippet `\\hat{([A-Za-z])}(\d)` "Auto letter subscript" Ai
+\\hat{``rv = m[1]``}_{``rv = m[2]``}
+endsnippet
+
+context math(context)
+snippet `\\vec{([A-Za-z])}(\d)` "Auto letter subscript" Ai
+\\vec{``rv = m[1]``}_{``rv = m[2]``}
+endsnippet
+
+context math(context)
+snippet `([a-zA-Z]+)([0-9]+) ` "Underset" Ai
+``if ( m[2].length == 1 ) { a = '_'; b = ' '; } else { a = '_{'; b = '} '; } if (m[1] == "pmat" || m[1] == "bmat" || m[1] == "ary") { rv = m[1] + m[2] + ' ' } else { rv = m[1] + a + m[2] + b }``
+endsnippet
+
+context math(context)
+snippet `(bar|hat|vec|tilde)` "diacritic" Ai
+\\``rv = m[1]``{$1}$2
+endsnippet
+
+context math(context)
+snippet `\\bra{(.+)}([^ ]+)>` "Convert bra into braket" Ai
+\\braket{ ``rv = m[1]`` | $1 
+endsnippet
+
+priority 1
+context math(context)
+snippet `\b([a-zA-Z])frak\b` "Fraktur" Ai
+\\mathfrak{``rv = m[1]``}
+endsnippet
+
+context math(context)
+snippet `([A-Za-z])_(\d\d)` "Auto letter subscript" Ai
+``rv = m[1]``_{``rv = m[2]``}
+endsnippet
+
+context math(context)
+snippet `\b([a-zA-Z])cal\b` "Caligraphic" Ai
+\\mathcal{``rv = m[1]``}
+endsnippet
+
+context math(context)
+snippet `([a-zA-Z0-9])td` "Exponentiation" i
+``rv = m[1] + '^{' + snip.tabstop(1) + '}'``
+endsnippet
+
+context math(context)
+snippet `\\bra{([^|]+)\|` "Convert bra into braket" Ai
+\\braket{ ``rv = m[1]`` | $1 
+endsnippet
+
+context math(context)
+snippet `([A-Za-z])(\d)` "Auto letter subscript" Ai
+``rv = m[1]``_{``rv = m[2]``}
+endsnippet
+
+context math(context)
+snippet `([a-zA-Z]),\.` "Boldface" Ai
+\\mathbf{``rv = m[1]``}
+endsnippet
+
+context math(context)
+snippet `([a-zA-Z])\.,` "Boldface" Ai
+\\mathbf{``rv = m[1]``}
+endsnippet
+
+context math(context)
+snippet `([a-zA-Z])dot` "dot" i
+\\dot{``rv = m[1]``}
+endsnippet
+
+context math(context)
+snippet `([a-zA-Z])und` "underline" Ai
+\\underline{``rv = m[1]``}
+endsnippet
+
+context math(context)
+snippet `([a-zA-Z])ovr` "overline" Ai
+\\overline{``rv = m[1]``}
+endsnippet
+
+context math(context)
+snippet \mathbb{1}I "III" Ai
+\\hat{\\mathbb{1}}
+endsnippet
+
+context math(context)
+snippet `\\pi\ tchfork` "pitchfork" Ai
+\\pitchfork
+endsnippet
+
+context math(context)
+snippet `(msun|solm)` "solar mass" Ai
+M_{\\odot}
+endsnippet
+
+context math(context)
+snippet `vec([1-9])` "Column vector" Ai
+\\begin{pmatrix}
+``msg = snip.tabstop(1); for (i = 1; i < parseInt(m[1],10); i++) { msg += ' \\\\\\\\\\\\ \\n' + snip.tabstop(count + 1); count++; } rv = msg;``
+\\end{pmatrix}$0
+endsnippet
+
+priority 5
+context math(context)
+snippet `\\subset\ eq` "subseteq" Ai
+\\subseteq
+endsnippet
+
+priority 5
+context math(context)
+snippet `\\supset\ eq` "supseteq" Ai
+\\supseteq
+endsnippet
+
+context math(context)
+snippet `(nabl|del)` "nabla" Ai
+\\nabla
+endsnippet
+
+priority 2
+context math(context)
+snippet `par([0-9])` "Higher order partial derivative" Ai
+\\frac{ \\partial^{``rv = m[1]``} ${1:y} }{ \\partial ${2:x}^{``rv = m[1]``} } $3
+endsnippet
+
+context math(context)
+snippet `([^\\])pm` "plus or minus" i
+``rv = m[1]``\\pm
+endsnippet
+
+context math(context)
+snippet `([^\\])mp` "minus or plus" i
+``rv = m[1]``\\mp
+endsnippet
+
+context math(context)
+snippet `([A-Z])#` "Boldface" Ai
+\\mathbb{``rv = m[1]``}
+endsnippet
+
+context math(context)
+snippet `e\\xi\ sts` "exists" Ai
+\\exists
+endsnippet
+
+context math(context)
+snippet `bu\\ll\ et` "bullet" Ai
+\\bullet
+endsnippet
+
+context math(context)
+snippet `ot\\im\ es` "otimes" Ai
+\\otimes
+endsnippet
+
+context math(context)
+snippet `\\cdot\ ss` "cdots" Ai
+\\cdots
+endsnippet
+
+context math(context)
+snippet `:(i|j|k)` "Unit vector (i, j, k)" Ai
+\\mathbf{``rv = m[1]``}
+endsnippet
+
+context math(context)
+snippet `:(x|y|z)` "Unit vector (x, y, z)" Ai
+\\hat{\\mathbf{``rv = m[1]``}}
+endsnippet
+
+context math(context)
+snippet \ldots. "ellipsis with period" Ai
+\\cdots
+endsnippet
+
+context math(context)
+snippet `^.*\)/` "Fraction with parentheses" Ai
+``let str = m[0]; str = str.slice(0, -1); let lastIndex = str.length - 1; let depth = 0; let i = str.length - 1; while (true) { if (str[i] == ')') depth += 1; if (str[i] == '(') depth -= 1; if (depth == 0) break; i -= 1; } let results = str.slice(0, i) + "\\\\frac{" + str.slice(i+1, -1) + "}"; rv = results;``{$1}$0
+endsnippet
+
+context math(context)
+snippet notin "not in" Ai
+\\notin
+endsnippet
+
+context math(context)
+snippet \sim~ "approx" Ai
+\\approx
+endsnippet
+
+context math(context)
+snippet trace "trace" Ai
+\\tr
+endsnippet
+
+context math(context)
+snippet floor "floor" Ai
+\\lfloor $1 \\rfloor $2
+endsnippet
+
+context math(context)
+snippet oname "Operator name" Ai
+\\operatorname{$1}$2
+endsnippet
+
+context math(context)
+snippet eset "empty set" Ai
+\\varnothing
+endsnippet
+
+context math(context)
+snippet prop "proportional to" Ai
+\\propto
+endsnippet
+
+context math(context)
+snippet para "parallel" Ai
+\\parallel
+endsnippet
+
+context math(context)
+snippet linf "liminf" Ai
+\\liminf_{ ${1:n} \\to ${2:\\infty} } $3
+endsnippet
+
+context math(context)
+snippet lsup "limsup" Ai
+\\limsup_{ ${1:n} \\to ${2:\\infty} } $3
+endsnippet
+
+context math(context)
+snippet invs "inverse" Ai
+^{-1}
+endsnippet
+
+context math(context)
+snippet `\bee` "exponential" Ai
+e^{$1}$2
+endsnippet
+
+context math(context)
+snippet conj "conjugate" Ai
+^{*}
+endsnippet
+
+context math(context)
+snippet norm "norm" Ai
+\\lvert $1 \\rvert $2
+endsnippet
+
+context math(context)
+snippet Norm "Norm" Ai
+\\lVert $1 \\rVert $2
+endsnippet
+
+context math(context)
+snippet ceil "ceil" Ai
+\\lceil $1 \\rceil $2
+endsnippet
+
+context math(context)
+snippet pmod "pmod" Ai
+\\pmod{$1}$2
+endsnippet
+
+context math(context)
+snippet bmod "bmod" Ai
+\\bmod{$1}$2
+endsnippet
+
+context math(context)
+snippet text "Text" Ai
+\\text{$1}$2
+endsnippet
+
+context math(context)
+snippet mcal "Caligraphic" Ai
+\\mathcal{$1}$2
+endsnippet
+
+context math(context)
+snippet frak "Fraktur" Ai
+\\mathfrak{$1}$2
+endsnippet
+
+context math(context)
+snippet parn "N-th order partial derivative" Ai
+\\frac{ \\partial^{${1:n}} ${2:y} }{ \\partial ${3:x}^{${1:n}} } $4
+endsnippet
+
+priority 2
+context math(context)
+snippet pax2 "Second partial derivative wrt x" Ai
+\\frac{ \\partial^2 }{ \\partial x^2 } $1
+endsnippet
+
+priority 2
+context math(context)
+snippet pay2 "Second partial derivative wrt y" Ai
+\\frac{ \\partial^2 }{ \\partial y^2 } $1
+endsnippet
+
+priority 2
+context math(context)
+snippet paz2 "Second partial derivative wrt z" Ai
+\\frac{ \\partial^2 }{ \\partial z^2 } $1
+endsnippet
+
+priority 2
+context math(context)
+snippet pat2 "Second partial derivative wrt t" Ai
+\\frac{ \\partial^2 }{ \\partial t^2 } $1
+endsnippet
+
+context math(context)
+snippet oinf "Integral from 0 to infinity" Ai
+\\int_{0}^{\\infty} $1 \\, d${2:x} $3
+endsnippet
+
+context math(context)
+snippet infi "Integral from negative infinity to infinity" Ai
+\\int_{-\\infty}^{\\infty} $1 \\, d${2:x} $3
+endsnippet
+
+context math(context)
+snippet dint "Integral from 0 to infinity" Ai
+\\int_{${1:0}}^{${2:\\infty}} $3 \\, d${4:x} $5
+endsnippet
+
+priority 2
+context math(context)
+snippet \xii "x_i alternate" Ai
+x_{i}
+endsnippet
+
+context math(context)
+snippet outp "output" Ai
+\\ket{${1:\\psi}} \\bra{${1:\\psi}} $2
+endsnippet
+
+context math(context)
+snippet hel4 "helium" Ai
+{}^{4}_{2}He
+endsnippet
+
+context math(context)
+snippet hel3 "helium" Ai
+{}^{3}_{2}He
+endsnippet
+
+snippet box "Box" Ai
+``rv = '┌' + '─'.repeat(t[0].length + 2) + '┐'``
+│ $1 │
+``rv = '└' + '─'.repeat(t[0].length + 2) + '┘'``
+endsnippet
+
+context math(context)
+snippet ome "omega" Ai
+\\omega
+endsnippet
+
+context math(context)
+snippet ooo "infinity" Ai
+\\infty
+endsnippet
+
+priority 2
+context math(context)
+snippet <-> "leftrightarrow" Ai
+\\leftrightarrow
+endsnippet
+
+context math(context)
+snippet \\\ "setminus" Ai
+\\setminus
+endsnippet
+
+context math(context)
+snippet and "intersection" Ai
+\\cap
+endsnippet
+
+context math(context)
+snippet orr "union" Ai
+\\cup
+endsnippet
+
+context math(context)
+snippet inn "in" Ai
+\\in
+endsnippet
+
+context math(context)
+snippet set "set" Ai
+\\{ $1 \\}$2
+endsnippet
+
+context math(context)
+snippet === "equivalent" Ai
+\\equiv
+endsnippet
+
+priority 2
+context math(context)
+snippet lim "limit" Ai
+\\lim_{ ${1:n} \\to ${2:\\infty} } $3
+endsnippet
+
+context math(context)
+snippet sts "subscript" Ai
+_\\text{$1}
+endsnippet
+
+context math(context)
+snippet lr| "Left and right vertical bars" Ai
+\\left| $1 \\right|$2
+endsnippet
+
+context math(context)
+snippet lra "Left and right angle brackets" Ai
+\\left< $1 \\right>$2
+endsnippet
+
+context math(context)
+snippet avg "Average" Ai
+\\langle $1 \\rangle $2
+endsnippet
+
+context math(context)
+snippet mod "mod" Ai
+\\pmod{$1}$2
+endsnippet
+
+context math(context)
+snippet dot "dot" i
+\\dot{$1}$2
+endsnippet
+
+context math(context)
+snippet und "underline" Ai
+\\underline{$1}$2
+endsnippet
+
+context math(context)
+snippet ovr "overline" Ai
+\\overline{$1}$2
+endsnippet
+
+context math(context)
+snippet par "Partial derivative" i
+\\frac{ \\partial ${1:y} }{ \\partial ${2:x} } $3
+endsnippet
+
+priority 2
+context math(context)
+snippet pa2 "Second partial derivative" Ai
+\\frac{ \\partial^{2} ${1:y} }{ \\partial ${2:x}^{2} } $3
+endsnippet
+
+priority 2
+context math(context)
+snippet pa3 "Third partial derivative" Ai
+\\frac{ \\partial^{3} ${1:y} }{ \\partial ${2:x}^{3} } $3
+endsnippet
+
+context math(context)
+snippet pax "Partial derivative wrt x" i
+\\frac{ \\partial }{ \\partial x } $1
+endsnippet
+
+context math(context)
+snippet pay "Partial derivative wrt y" i
+\\frac{ \\partial }{ \\partial y } $1
+endsnippet
+
+context math(context)
+snippet paz "Partial derivative wrt z" i
+\\frac{ \\partial }{ \\partial z } $1
+endsnippet
+
+context math(context)
+snippet pat "Partial derivative wrt t" i
+\\frac{ \\partial }{ \\partial t } $1
+endsnippet
+
+context math(context)
+snippet ddx "Derivative wrt x" Ai
+\\frac{d}{dx}
+endsnippet
+
+context math(context)
+snippet ddy "Derivative wrt y" Ai
+\\frac{d}{dy}
+endsnippet
+
+context math(context)
+snippet ddt "Derivative wrt t" Ai
+\\frac{d}{dt}
+endsnippet
+
+priority 2
+context math(context)
+snippet de2 "Second derivative" Ai
+\\frac{ d^{2} ${1:y} }{ d ${2:x}^{2} } $3
+endsnippet
+
+priority 2
+context math(context)
+snippet de3 "Third derivative" Ai
+\\frac{ d^{3} ${1:y} }{ d ${2:x}^{3} } $3
+endsnippet
+
+context math(context)
+snippet int "Integral" Ai
+\\int
+endsnippet
+
+context math(context)
+snippet xnn "x_n" Ai
+x_{n}
+endsnippet
+
+context math(context)
+snippet xp1 "x_{n+1}" Ai
+x_{n+1}
+endsnippet
+
+context math(context)
+snippet ynn "y_n" Ai
+y_{n}
+endsnippet
+
+context math(context)
+snippet kbt "k_B T" Ai
+k_{B} T
+endsnippet
+
+context math(context)
+snippet hba "hbar" Ai
+\\hbar
+endsnippet
+
+context math(context)
+snippet dag "dagger" Ai
+^{\\dagger}
+endsnippet
+
+context math(context)
+snippet bra "bra" Ai
+\\bra{$1} $2
+endsnippet
+
+context math(context)
+snippet ket "ket" Ai
+\\ket{$1} $2
+endsnippet
+
+context math(context)
+snippet brk "braket" Ai
+\\braket{ $1 | $2 } $3
+endsnippet
+
+context math(context)
+snippet cee "chemical formula" Ai
+\\ce{ $1 }
+endsnippet
+
+context math(context)
+snippet iso "isotope" Ai
+{}^{${1:4}}_{${2:2}}${3:He}
+endsnippet
+
+context notmath(context)
+snippet mk "Inline math mode" Ai
+$$1$
+endsnippet
+
+context notmath(context)
+snippet dm "Display math mode" Ai
+\\[
+$1
+\\]
+endsnippet
+
+context math(context)
+snippet @a "alpha" Ai
+\\alpha
+endsnippet
+
+context math(context)
+snippet @A "Alpha" Ai
+\\alpha
+endsnippet
+
+context math(context)
+snippet @b "beta" Ai
+\\beta
+endsnippet
+
+context math(context)
+snippet @B "Beta" Ai
+\\beta
+endsnippet
+
+context math(context)
+snippet @g "gamma" Ai
+\\gamma
+endsnippet
+
+context math(context)
+snippet @G "Gamma" Ai
+\\Gamma
+endsnippet
+
+context math(context)
+snippet @d "delta" Ai
+\\delta
+endsnippet
+
+context math(context)
+snippet @D "Delta" Ai
+\\Delta
+endsnippet
+
+context math(context)
+snippet @e "epsilon" Ai
+\\epsilon
+endsnippet
+
+context math(context)
+snippet @E "Epsilon" Ai
+\\epsilon
+endsnippet
+
+context math(context)
+snippet :e "varepsilon" Ai
+\\varepsilon
+endsnippet
+
+context math(context)
+snippet :E "Varepsilon" Ai
+\\varepsilon
+endsnippet
+
+context math(context)
+snippet @z "zeta" Ai
+\\zeta
+endsnippet
+
+context math(context)
+snippet @Z "Zeta" Ai
+\\zeta
+endsnippet
+
+context math(context)
+snippet @h "eta" Ai
+\\eta
+endsnippet
+
+context math(context)
+snippet @t "theta" Ai
+\\theta
+endsnippet
+
+context math(context)
+snippet @T "Theta" Ai
+\\Theta
+endsnippet
+
+context math(context)
+snippet @i "iota" Ai
+\\iota
+endsnippet
+
+context math(context)
+snippet @k "kappa" Ai
+\\kappa
+endsnippet
+
+context math(context)
+snippet @K "Kappa" Ai
+\\kappa
+endsnippet
+
+context math(context)
+snippet @l "lambda" Ai
+\\lambda
+endsnippet
+
+context math(context)
+snippet @L "Lambda" Ai
+\\Lambda
+endsnippet
+
+context math(context)
+snippet @m "mu" Ai
+\\mu
+endsnippet
+
+context math(context)
+snippet @M "Mu" Ai
+\\mu
+endsnippet
+
+context math(context)
+snippet @n "nu" Ai
+\\nu
+endsnippet
+
+context math(context)
+snippet @x "xi" Ai
+\\xi
+endsnippet
+
+context math(context)
+snippet @X "Xi" Ai
+\\Xi
+endsnippet
+
+context math(context)
+snippet @p "pi" Ai
+\\pi
+endsnippet
+
+context math(context)
+snippet @P "Pi" Ai
+\\Pi
+endsnippet
+
+context math(context)
+snippet @r "rho" Ai
+\\rho
+endsnippet
+
+context math(context)
+snippet @R "Rho" Ai
+\\rho
+endsnippet
+
+context math(context)
+snippet @s "sigma" Ai
+\\sigma
+endsnippet
+
+context math(context)
+snippet @S "Sigma" Ai
+\\Sigma
+endsnippet
+
+context math(context)
+snippet @u "tau" Ai
+\\tau
+endsnippet
+
+context math(context)
+snippet @y "upsilon" Ai
+\\upsilon
+endsnippet
+
+context math(context)
+snippet @Y "Upsilon" Ai
+\\Upsilon
+endsnippet
+
+context math(context)
+snippet @f "phi" Ai
+\\phi
+endsnippet
+
+context math(context)
+snippet @F "Phi" Ai
+\\phi
+endsnippet
+
+context math(context)
+snippet :f "varphi" Ai
+\\varphi
+endsnippet
+
+context math(context)
+snippet :F "Varphi" Ai
+\\varphi
+endsnippet
+
+context math(context)
+snippet @v "psi" Ai
+\\psi
+endsnippet
+
+context math(context)
+snippet @V "Psi" Ai
+\\Psi
+endsnippet
+
+context math(context)
+snippet @c "chi" Ai
+\\chi
+endsnippet
+
+context math(context)
+snippet @C "Chi" Ai
+\\chi
+endsnippet
+
+context math(context)
+snippet @o "omega" Ai
+\\omega
+endsnippet
+
+context math(context)
+snippet @O "Omega" Ai
+\\Omega
+endsnippet
+
+context math(context)
+snippet II "II" Ai
+\\mathbb{1}
+endsnippet
+
+context math(context)
+snippet Fp "F_p" Ai
+\\FF_p
+endsnippet
+
+context math(context)
+snippet Fq "F_q" Ai
+\\FF_q
+endsnippet
+
+context math(context)
+snippet Rn "R^n" Ai
+\\RR^n
+endsnippet
+
+context math(context)
+snippet .. "ellipsis" Ai
+\\ldots
+endsnippet
+
+context math(context)
+snippet +- "plus or minus" Ai
+\\pm
+endsnippet
+
+context math(context)
+snippet -+ "minus or plus" Ai
+\\mp
+endsnippet
+
+context math(context)
+snippet xx "times" Ai
+\\times
+endsnippet
+
+context math(context)
+snippet sq "square root" Ai
+\\sqrt{ $1 }$2
+endsnippet
+
+context math(context)
+snippet -> "to" Ai
+\\to
+endsnippet
+
+context math(context)
+snippet !> "maps to" Ai
+\\mapsto
+endsnippet
+
+context math(context)
+snippet => "implies" Ai
+\\implies
+endsnippet
+
+context math(context)
+snippet =< "impliedby" Ai
+\\impliedby
+endsnippet
+
+context math(context)
+snippet || "mid" Ai
+\\mid
+endsnippet
+
+context math(context)
+snippet Sq "square" Ai
+\\square
+endsnippet
+
+context math(context)
+snippet != "not equal" Ai
+\\neq
+endsnippet
+
+context math(context)
+snippet >= "greater than or equal to" Ai
+\\geq
+endsnippet
+
+context math(context)
+snippet <= "less than or equal to" Ai
+\\leq
+endsnippet
+
+context math(context)
+snippet >> "greater than" Ai
+\\gg
+endsnippet
+
+context math(context)
+snippet << "less than" Ai
+\\ll
+endsnippet
+
+context math(context)
+snippet ~~ "similar to" Ai
+\\sim
+endsnippet
+
+context math(context)
+snippet // "fraction" Ai
+\\frac{$1}{$2}$3
+endsnippet
+
+context math(context)
+snippet ** "dot" Ai
+\\cdot
+endsnippet
+
+context math(context)
+snippet o+ "oplus" Ai
+\\oplus
+endsnippet
+
+priority -1
+context math(context)
+snippet ox "otimes" Ai
+\\otimes
+endsnippet
+
+context math(context)
+snippet sr "square" Ai
+^{2}
+endsnippet
+
+context math(context)
+snippet cb "cube" Ai
+^{3}
+endsnippet
+
+context math(context)
+snippet rd "superscript" Ai
+^{$1}$2
+endsnippet
+
+context math(context)
+snippet rm "Roman" Ai
+\\mathrm{$1}$2
+endsnippet
+
+context math(context)
+snippet bf "Boldface" Ai
+\\mathbf{$1}$2
+endsnippet
+
+context math(context)
+snippet bb "Blackboard bold" Ai
+\\mathbb{$1}$2
+endsnippet
+
+context math(context)
+snippet sf "Sans-serif" Ai
+\\mathsf{$1}$2
+endsnippet
+
+context math(context)
+snippet pa "Partial derivative symbol" i
+\\partial
+endsnippet
+
+context math(context)
+snippet fx "Function" Ai
+f(x)
+endsnippet
+
+context math(context)
+snippet ff "Function" Ai
+f($1)
+endsnippet
+
+context math(context)
+snippet ii "_i" Ai
+_{i}
+endsnippet
+
+context math(context)
+snippet jj "_j" Ai
+_{j}
+endsnippet
+
+context math(context)
+snippet pu "physical units" Ai
+\\pu{ $1 }
+endsnippet
+
+context math(context)
+snippet _ "subscript" Ai
+_{$1}$2
+endsnippet
+

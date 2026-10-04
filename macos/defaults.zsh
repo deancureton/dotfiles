@@ -16,7 +16,7 @@ defaults write org.herf.Flux lateColorTemp -int 1200
 defaults write org.herf.Flux nightColorTemp -int 2700
 
 # Rocket
-defaults write net.matthewpalmer.Rocket "deactivated-apps" -array Slack Xcode Terminal "Sublime Text" "Sublime Text 2" Discord Obsidian Code Ghostty CLion "IntelliJ IDEA" "PyCharm"
+defaults write net.matthewpalmer.Rocket "deactivated-apps" -array Slack Xcode Terminal "Sublime Text" "Sublime Text 2" Discord Obsidian Code VSCodium Ghostty CLion "IntelliJ IDEA" "PyCharm"
 defaults write net.matthewpalmer.Rocket "launch-at-login" -bool true
 
 # Stats

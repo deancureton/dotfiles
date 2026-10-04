@@ -1,0 +1,460 @@
+{
+    "New Document": {
+        "prefix": "newdoc",
+        "body": [
+            "\\documentclass{article}",
+            "\\usepackage[utf8]{inputenc}",
+            "\\usepackage{amsmath}",
+            "\\usepackage{amsfonts}",
+            "\\usepackage{amssymb}",
+            "\\usepackage{amsthm}",
+            "\\usepackage{thmtools}",
+            "\\usepackage{graphicx}",
+            "\\usepackage{tikz}",
+            "\\usepackage{hyperref}",
+            "\\usepackage{listings}",
+            "\\usepackage{xcolor}",
+            "",
+            "\\title{$1}",
+            "\\author{Dean Cureton}",
+            "\\date{\\today}",
+            "",
+            "\\begin{document}",
+            "",
+            "\\maketitle",
+            "",
+            "$0",
+            "",
+            "\\end{document}",
+        ],
+        "description": "regular boilerplate"
+    },
+    "New Sexy Document": {
+        "prefix": "newsexy",
+        "body": [
+            "\\documentclass[11pt]{scrartcl}",
+            "\\usepackage[utf8]{inputenc}",
+            "\\usepackage[sexy]{evan}",
+            "",
+            "\\begin{document}",
+            "",
+            "\\title{$1}",
+            "\\subtitle{$2}",
+            "\\author{Dean Cureton}",
+            "\\date{\\today}",
+            "",
+            "\\maketitle",
+            "",
+            "$0",
+            "",
+            "\\end{document}",
+        ],
+        "description": "evan.sty plugin"
+    },
+    "New Problem Set": {
+        "prefix": "newpset",
+        "body": [
+            "\\documentclass[11pt]{article}",
+            "\\usepackage[utf8]{inputenc}",
+            "\\usepackage[pset]{classnotes}",
+            "",
+            "\\title{$1}",
+            "\\author{Dean Cureton}",
+            "\\date{\\today}",
+            "",
+            "\\begin{document}",
+            "",
+            "\\maketitle",
+            "",
+            "$0",
+            "",
+            "\\end{document}",
+        ],
+        "description": "evan.sty plugin"
+    },
+    "Align*": {
+        "prefix": "align*",
+        "body": [
+            "\\begin{align*}",
+            "\t$0",
+            "\\end{align*}"
+        ]
+    },
+    "fraction": {
+        "prefix": "f",
+        "body": [
+            "\\frac{$1}{$2} $0"
+        ]
+    },
+    "bold": {
+        "prefix": "bold",
+        "body": [
+            "\\textbf{${1:${TM_SELECTED_TEXT}}} $0"
+        ]
+    },
+    "italic": {
+        "prefix": "italic",
+        "body": [
+            "\\textit{${1:${TM_SELECTED_TEXT}}} $0"
+        ]
+    },
+    "underbrace": {
+        "prefix": "underbrace",
+        "body": [
+            "\\underbrace{${1:${TM_SELECTED_TEXT}}}_{$2} $0"
+        ]
+    },
+    "overbrace": {
+        "prefix": "overbrace",
+        "body": [
+            "\\overbrace{${1:${TM_SELECTED_TEXT}}}_{$2} $0"
+        ]
+    },
+    "underset": {
+        "prefix": "underset",
+        "body": [
+            "\\underset{$1}{${2:${TM_SELECTED_TEXT}}} $0"
+        ]
+    },
+    "overset": {
+        "prefix": "overset",
+        "body": [
+            "\\overset{$1}{${2:${TM_SELECTED_TEXT}}} $0"
+        ]
+    },
+    "itemize": {
+        "prefix": "itemize",
+        "body": [
+            "\\begin{itemize}",
+            "\t\\item $1",
+            "\\end{itemize}",
+            "$0"
+        ]
+    },
+    "enumerate": {
+        "prefix": "enum",
+        "body": [
+            "\\begin{enumerate}",
+            "\t\\item $1",
+            "\\end{enumerate}",
+            "$0"
+        ]
+    },
+    "Environment": {
+        "prefix": "beg",
+        "body": [
+            "\\begin{${1:name}}",
+            "\t$0",
+            "\\end{${1:name}}"
+        ]
+    },
+    "Text": {
+        "prefix": "txt",
+        "body": [
+            "\\text{$0}"
+        ]
+    },
+    "Image": {
+        "prefix": "img",
+        "body": [
+            "\\begin{figure}[H]",
+            "\t\\centering",
+            "\t\\includegraphics[width=0.5\\textwidth]{${1:${TM_SELECTED_TEXT}}}",
+            "\t\\caption{${2:caption}\\label{fig:${3:sample}}}",
+            "\\end{figure}",
+            "$0"
+        ]
+    },
+    "Table": {
+        "prefix": "tab",
+        "body": [
+            "\\begin{table}[H]",
+            "\t\\centering",
+            "\t\\begin{tabular}{${1:ccc}}",
+            "\t\t\\toprule",
+            "\t\ta & b & c \\\\\\ \\midrule",
+            "\t\t1 & 2 & 3 \\\\\\",
+            "\t\t\\bottomrule",
+            "\t\\end{tabular}",
+            "\t\\caption{${2:caption}\\label{tab:${3:sample}}}",
+            "\\end{table}",
+            "$0"
+        ]
+    },
+    "pmatrix": {
+        "prefix": "pmat",
+        "body": [
+            "\\begin{pmatrix}",
+            "$1",
+            "\\end{pmatrix}$0"
+        ]
+    },
+    "bmatrix": {
+        "prefix": "bmat",
+        "body": [
+            "\\begin{bmatrix}",
+            "$1",
+            "\\end{bmatrix}$0"
+        ]
+    },
+    "Bmatrix": {
+        "prefix": "Bmat",
+        "body": [
+            "\\begin{Bmatrix}",
+            "$1",
+            "\\end{Bmatrix}$0"
+        ]
+    },
+    "vmatrix": {
+        "prefix": "vmat",
+        "body": [
+            "\\begin{vmatrix}",
+            "$1",
+            "\\end{vmatrix}$0"
+        ]
+    },
+    "Vmatrix": {
+        "prefix": "Vmat",
+        "body": [
+            "\\begin{Vmatrix}",
+            "$1",
+            "\\end{Vmatrix}$0"
+        ]
+    },
+    "matrix": {
+        "prefix": "matrix",
+        "body": [
+            "\\begin{matrix}",
+            "$1",
+            "\\end{matrix}$0"
+        ]
+    },
+    "case": {
+        "prefix": "case",
+        "body": [
+            "\\begin{cases}",
+            "$1",
+            "\\end{cases}$0"
+        ]
+    },
+    "array": {
+        "prefix": "array",
+        "body": [
+            "\\begin{array}",
+            "$1",
+            "\\end{array}$0"
+        ]
+    },
+    "Integral": {
+        "prefix": "int",
+        "body": [
+            "\\int_{${1:0}}^{${2:\\infty}} $0"
+        ]
+    },
+    "Sum Full": {
+        "prefix": "sumi",
+        "body": [
+            "\\sum_{${1:i}=${2:0}}^{${3:\\infty}} $0"
+        ]
+    },
+    "undersetinline": {
+        "prefix": "_",
+        "body": [
+            "_{$1}$0"
+        ]
+    },
+    "parenthesis1": {
+        "prefix": "(",
+        "body": [
+            "\\left($1\\right"
+        ]
+    },
+    "parenthesis2": {
+        "prefix": "[",
+        "body": [
+            "\\left[$1\\right"
+        ]
+    },
+    "parenthesis3": {
+        "prefix": "{",
+        "body": [
+            "\\left{$1\\right"
+        ]
+    },
+    "parenthesis4": {
+        "prefix": "|",
+        "body": [
+            "\\left|$1\\right|"
+        ]
+    },
+    "average": {
+        "prefix": "avg",
+        "body": [
+            "\\langle $1 \\rangle$0"
+        ]
+    },
+    "Sum": {
+        "prefix": "sum",
+        "body": [
+            "\\sum_{${1:i=0}}^{${2:\\infty}} $0"
+        ]
+    },
+    "hbar": {
+        "prefix": "hb",
+        "body": [
+            "\\hbar"
+        ]
+    },
+    "section": {
+        "prefix": "sec",
+        "body": [
+            "\\section{$1}",
+            "$0"
+        ]
+    },
+    "subsection": {
+        "prefix": "ssec",
+        "body": [
+            "\\subsection{$1}",
+            "$0"
+        ]
+    },
+    "operatorname": {
+        "prefix": "op",
+        "body": [
+            "\\operatorname{$1} $0",
+        ]
+    },
+    "mathrm": {
+        "prefix": "rm",
+        "body": [
+            "\\mathrm{$1} $0"
+        ]
+    },
+    "thm": {
+        "prefix": "thm",
+        "body": [
+            "\\begin{theorem}",
+            "$1",
+            "\\end{theorem}",
+            "$0"
+        ]
+    },
+    "pf": {
+        "prefix": "pf",
+        "body": [
+            "\\begin{proof}",
+            "$1",
+            "\\end{proof}",
+            "$0"
+        ]
+    },
+    "prop": {
+        "prefix": "prop",
+        "body": [
+            "\\begin{proposition}",
+            "$1",
+            "\\end{proposition}",
+            "$0"
+        ]
+    },
+    "prob": {
+        "prefix": "prob",
+        "body": [
+            "\\begin{problem}\\label{prob:$1}",
+            "$2",
+            "\\end{problem}",
+            "$0"
+        ]
+    },
+    "ans": {
+        "prefix": "ans",
+        "body": [
+            "\\begin{answer}",
+            "$1",
+            "\\end{answer}",
+            "$0"
+        ]
+    },
+    "soln": {
+        "prefix": "soln",
+        "body": [
+            "\\begin{soln}",
+            "$1",
+            "\\end{soln}",
+            "$0"
+        ]
+    },
+    "def": {
+        "prefix": "def",
+        "body": [
+            "\\begin{definition}",
+            "$1",
+            "\\end{definition}",
+            "$0"
+        ]
+    },
+    "ex": {
+        "prefix": "ex",
+        "body": [
+            "\\begin{example}",
+            "$1",
+            "\\end{example}",
+            "$0"
+        ]
+    },
+    "remark": {
+        "prefix": "rem",
+        "body": [
+            "\\begin{remark}",
+            "$1",
+            "\\end{remark}",
+            "$0"
+        ]
+    },
+    "cor": {
+        "prefix": "cor",
+        "body": [
+            "\\begin{corollary}",
+            "$1",
+            "\\end{corollary}",
+            "$0"
+        ]
+    },
+    "conj": {
+        "prefix": "conj",
+        "body": [
+            "\\begin{conjecture}",
+            "$1",
+            "\\end{conjecture}",
+            "$0"
+        ]
+    },
+    "ques": {
+        "prefix": "ques",
+        "body": [
+            "\\begin{ques}",
+            "$1",
+            "\\end{ques}",
+            "$0"
+        ]
+    },
+    "lem": {
+        "prefix": "lem",
+        "body": [
+            "\\begin{lemma}",
+            "$1",
+            "\\end{lemma}",
+            "$0"
+        ]
+    },
+    "claim": {
+        "prefix": "claim",
+        "body": [
+            "\\begin{claim}",
+            "$1",
+            "\\end{claim}",
+            "$0"
+        ]
+    }
+}

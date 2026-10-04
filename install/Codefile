@@ -1,4 +1,4 @@
-# editor extensions, installed into both vscode and cursor by bin/install-extensions
+# editor extensions, installed into vscode, vscodium and cursor by bin/install-extensions
 # note: a few are editor-specific and will just be skipped if they can't be found
 
 activitywatch.aw-watcher-vscode
