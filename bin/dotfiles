@@ -20,7 +20,7 @@ sub_help() {
   echo "   stow [folder]      Stow config folder"
   echo "   edit               Open dotfiles in editor ($EDITOR)"
   echo "   clean              Clean up system + caches (mole, brew, pip, uv)"
-  echo "   update             Update packages and pkg managers (via topgrade)"
+  echo "   update [--here]    Update packages and pkg managers (via topgrade; opens Terminal.app from Ghostty)"
   echo "   dump               Dump current Homebrew packages to Brewfile"
   echo "   macos              Apply macOS system defaults"
   echo "   dock               Apply OS X Dock settings"
@@ -37,7 +37,7 @@ sub_dock() {
 }
 
 sub_edit() {
-  local editor="${EDITOR:-cursor}"
+  local editor="${EDITOR:-codium}"
   if [ $SUB_COMMAND_NAME ]; then
     zsh -c "$SUB_COMMAND_NAME $DOTFILES_DIR"
   else
@@ -60,8 +60,29 @@ sub_clean() {
 }
 
 sub_update() {
-  echo "$ topgrade"
-  topgrade
+  local cmd="topgrade --yes brew_formula brew_cask"
+  
+  if [[ "$TERM_PROGRAM" == "ghostty" && "$SUB_COMMAND_NAME" != "--here" ]]; then
+    echo "Running topgrade in Terminal.app (use 'dotfiles update --here' to run in this window)"
+    osascript <<APPLESCRIPT
+set wasRunning to application "Terminal" is running
+tell application "Terminal"
+  activate
+  if wasRunning then
+    do script "$cmd"
+  else
+    repeat until (exists window 1)
+      delay 0.1
+    end repeat
+    do script "$cmd" in window 1
+  end if
+end tell
+APPLESCRIPT
+    return
+  fi
+
+  echo "$ $cmd"
+  eval $cmd
 }
 
 sub_dump() {
