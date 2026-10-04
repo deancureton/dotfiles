@@ -92,6 +92,11 @@ defaults write com.apple.SoftwareUpdate AutomaticCheckEnabled -bool true
 # Security
 defaults write com.apple.LaunchServices LSQuarantine -bool false
 
+# Touch ID for sudo
+if [[ ! -f /etc/pam.d/sudo_local ]]; then
+  sed 's/^#auth/auth/' /etc/pam.d/sudo_local.template | sudo tee /etc/pam.d/sudo_local >/dev/null
+fi
+
 # =============================================================================
 # Apply Changes
 # =============================================================================
