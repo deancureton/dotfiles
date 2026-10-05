@@ -9,11 +9,6 @@ cask "native-access"
 cask "rekordbox"
 cask "splice"
 
-# ides
-cask "clion"
-cask "intellij-idea"
-cask "pycharm"
-
 # creative / media
 cask "inkscape"
 cask "obs"
@@ -27,6 +22,4 @@ cask "minecraft"
 cask "steam"
 
 # other heavy
-cask "libreoffice"
-cask "miniconda"
 cask "sage"

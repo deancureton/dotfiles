@@ -15,15 +15,10 @@ brew "lolcat"
 
 # editors / ai assistants
 brew "helix"
-brew "hermes-agent"
 brew "opencode"
 
 # languages / scientific / databases
 brew "postgresql@17"
-brew "python@3.10"
-brew "python@3.11"
-brew "python@3.12"
-brew "python-tk@3.13"
 brew "rustup"
 brew "scipy"
 
