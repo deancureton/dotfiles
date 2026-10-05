@@ -5,6 +5,7 @@
 	user = deancureton
 [core]
 	editor = nvim
+	pager = delta
 [init]
 	defaultBranch = main
 [pull]
@@ -12,10 +13,12 @@
 [push]
 	default = simple
 	followTags = true
+	autoSetupRemote = true
 [fetch]
 	prune = true
 [diff]
 	colorMoved = zebra
+	algorithm = histogram
 [alias]
 	# Common shortcuts
 	st = status
@@ -40,3 +43,22 @@
 	# Undo
 	undo = reset --soft HEAD~1
 	amend = commit --amend --no-edit
+[credential "https://github.com"]
+	helper = 
+	helper = !/opt/homebrew/bin/gh auth git-credential
+[credential "https://gist.github.com"]
+	helper = 
+	helper = !/opt/homebrew/bin/gh auth git-credential
+[interactive]
+	diffFilter = delta --color-only
+[delta]
+	navigate = true
+	line-numbers = true
+[merge]
+	conflictStyle = zdiff3
+[rerere]
+	enabled = true
+[rebase]
+	autoStash = true
+[branch]
+	sort = -committerdate
