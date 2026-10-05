@@ -17,9 +17,6 @@ fi
 # Environment Variables
 # =============================================================================
 
-# Library paths
-export DYLD_LIBRARY_PATH=/opt/homebrew/opt/flac/lib:/opt/homebrew/opt/libsndfile/lib:$DYLD_LIBRARY_PATH
-
 # PATH additions
 export PATH=$PATH:$HOME/.local/share/bob/nvim-bin
 
@@ -68,9 +65,9 @@ setopt interactive_comments # Allow comments in interactive shell
 # History Configuration
 # =============================================================================
 
-HISTSIZE=10000
+HISTSIZE=100000
 HISTFILE=~/.zsh_history
-SAVEHIST=10000
+SAVEHIST=100000
 setopt appendhistory
 setopt sharehistory
 setopt hist_ignore_space
