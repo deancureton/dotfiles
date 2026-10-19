@@ -54,9 +54,5 @@
   },
   "tui": "fullscreen",
   "agentPushNotifEnabled": true,
-  "attribution": {
-    "commit": false,
-    "pr": false,
-    "sessionUrl": false
-  }
+  "attribution": false
 }
