@@ -10,6 +10,7 @@
 - Python is uv-only: use `uv` for environments, packages, scripts, and tools. Never use pip or the system Python directly.
 - Prefer `rg` over `grep` and `fd` over `find`. Both skip hidden and gitignored files by default; to include them use `rg --hidden --no-ignore` or `fd -H -I`. `rg` already recurses, so never pass `-r`: in `rg` it means `--replace`.
 - Never start a dev server. I run it myself; ask me for its output if you need it.
+- Use Pacific time (America/Los_Angeles, i.e. PST or PDT depending on the date), never UTC, whenever you show, compute, or write timestamps. Only use UTC if I ask or the format requires it.
 
 ## Git
 - Don't commit or push unless I ask. Permission to commit is not permission to push.
