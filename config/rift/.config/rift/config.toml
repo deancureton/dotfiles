@@ -231,6 +231,7 @@ haptic_pattern = "level_change"
 drag_swap_fraction = 0.3
 
 [virtual_workspaces]
+mode = "per_display"
 # Virtual workspaces
 # - enabled: if false, rift behaves like a simple tiling WM with a single space
 # - default_workspace_count: number of workspaces to create on startup (1–32)
