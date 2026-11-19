@@ -1,3 +1,4 @@
 .DS_Store
 config/sketchybar/.config/sketchybar/helpers/**/bin/
 !config/agents/.claude/
+config/karabiner/.config/karabiner/automatic_backups/
