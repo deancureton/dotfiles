@@ -23,7 +23,6 @@ defaults write net.matthewpalmer.Rocket "launch-at-login" -bool true
 defaults write eu.exelban.Stats runAtLoginInitialized -bool true
 defaults write eu.exelban.Stats setupProcess -bool true
 defaults write eu.exelban.Stats update-interval -string "At start"
-defaults write eu.exelban.Stats version -string "2.11.21"
 defaults write eu.exelban.Stats "Battery_state" -bool true
 defaults write eu.exelban.Stats "Battery_battery_color" -bool true
 defaults write eu.exelban.Stats "Battery_oneView" -bool true
@@ -72,6 +71,8 @@ osascript -e 'tell application "System Events" to tell dock preferences to set a
 # Keyboard
 defaults write NSGlobalDomain KeyRepeat -int 1
 defaults write NSGlobalDomain InitialKeyRepeat -int 15
+defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
+defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
 
 # Mouse/Trackpad
 defaults write com.apple.AppleMultitouchTrackpad Clicking -bool true
@@ -101,6 +102,8 @@ fi
 # Apply Changes
 # =============================================================================
 
-for app in "Dock" "Finder" "SystemUIServer"; do
+/System/Library/PrivateFrameworks/SystemAdministration.framework/Resources/activateSettings -u 2>/dev/null
+
+for app in "Dock" "Finder" "SystemUIServer" "ControlCenter"; do
   killall "${app}" &>/dev/null
 done
