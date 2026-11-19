@@ -1,0 +1,23 @@
+snippets = "~/Developer/snipsmith/snippets.yaml"
+
+[obsidian]
+snippets = [
+    "~/Documents/Obsidian Everything/obsidian_snippets.js",
+]
+variables = [
+    "~/Documents/Obsidian Everything/obsidian_variables.json",
+]
+
+[vscode]
+snippets = [
+    "~/Library/Application Support/Code/User/globalStorage/draivin.hsnips/hsnips/latex.hsnips",
+    "~/Library/Application Support/Code/User/globalStorage/draivin.hsnips/hsnips/markdown.hsnips",
+    "~/Library/Application Support/Cursor/User/globalStorage/draivin.hsnips/hsnips/latex.hsnips",
+    "~/Library/Application Support/Cursor/User/globalStorage/draivin.hsnips/hsnips/markdown.hsnips",
+]
+
+[neovim]
+snippets = [
+    "~/.dotfiles/config/nvim/.config/nvim/luasnippets/tex.lua",
+    "~/.dotfiles/config/nvim/.config/nvim/luasnippets/markdown.lua",
+]

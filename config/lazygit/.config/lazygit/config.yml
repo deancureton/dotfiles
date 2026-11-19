@@ -1,0 +1,5 @@
+git:
+  diffRenderers:
+    - command: delta --dark --paging=never
+    - command: delta --dark --paging=never --side-by-side
+      name: delta side-by-side
