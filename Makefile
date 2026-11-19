@@ -54,6 +54,7 @@ unlink: stow-mac
 
 brew:
 	is-executable brew || NONINTERACTIVE=1 /bin/bash -c "$$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+	brew analytics off
 
 git: brew
 	brew install git

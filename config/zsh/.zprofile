@@ -8,6 +8,8 @@ DOTFILES_DIR="$HOME/.dotfiles"
 PATH="$DOTFILES_DIR/bin:$PATH"
 export DOTFILES_DIR
 
+export HOMEBREW_NO_ENV_HINTS=1
+
 # =============================================================================
 # Local Machine-Specific Configuration
 # =============================================================================

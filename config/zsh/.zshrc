@@ -82,16 +82,20 @@ setopt hist_verify
 # Completion Configuration
 # =============================================================================
 
-zstyle ':completion:*' menu select
+zstyle ':completion:*' menu no
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|=*' 'l:|=* r:|=*'
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 zstyle ':completion:*' special-dirs true
+zstyle ':completion:*:descriptions' format '[%d]'
+zstyle ':completion:*:git-checkout:*' sort false
 
 # =============================================================================
 # fzf-tab Configuration
 # =============================================================================
 
-zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza --icons --color=always $realpath'
+zstyle ':fzf-tab:complete:(cd|z|__zoxide_z):*' fzf-preview 'eza --icons --color=always $realpath'
+zstyle ':fzf-tab:*' switch-group 'ctrl-h' 'ctrl-l'
+zstyle ':fzf-tab:*' continuous-trigger '/'
 
 # =============================================================================
 # Zsh Plugins
@@ -121,6 +125,9 @@ fi
 # fzf key bindings and fuzzy completion
 # Note: fzf --zsh can be slow, but bindings are needed for Ctrl+R
 if command -v fzf >/dev/null 2>&1; then
+  export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
+  export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+  export FZF_ALT_C_COMMAND='fd --type d --hidden --follow --exclude .git'
   # Use faster method if available, otherwise fall back
   if [ -f "$BREW_PREFIX/opt/fzf/shell/key-bindings.zsh" ]; then
     source "$BREW_PREFIX/opt/fzf/shell/key-bindings.zsh"
@@ -158,3 +165,6 @@ y() {
   fi
   rm -f -- "$tmp"
 }
+
+# Machine-local settings and secrets (untracked)
+[ -f "$HOME/.zshrc.local" ] && . "$HOME/.zshrc.local"
