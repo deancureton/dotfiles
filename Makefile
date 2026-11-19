@@ -6,7 +6,7 @@ SHELL := env PATH=$(PATH) /bin/zsh
 export XDG_CONFIG_HOME=$(HOME)/.config
 export DOTFILES_DIR
 
-all: sudo core zsh-plugins packages link bin-permissions setup-passwordless-sudo macos-defaults
+all: sudo core zsh-plugins packages link git-hooks bin-permissions setup-passwordless-sudo macos-defaults
 
 core: brew git node
 
@@ -30,6 +30,9 @@ link: stow-mac
 
 bin-permissions:
 	chmod +x $(DOTFILES_DIR)/bin/*
+
+git-hooks: git
+	git -C $(DOTFILES_DIR) config core.hooksPath .githooks
 
 setup-passwordless-sudo: brew-packages
 	@echo "Setting up passwordless sudo for update commands..."

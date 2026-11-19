@@ -1,0 +1,6 @@
+#!/bin/sh
+if ! command -v gitleaks >/dev/null 2>&1; then
+  echo "pre-commit: gitleaks not installed, skipping secret scan" >&2
+  exit 0
+fi
+exec gitleaks git --pre-commit --staged --redact --no-banner --log-level warn -v
