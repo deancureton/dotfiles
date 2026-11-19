@@ -6,7 +6,7 @@ SHELL := env PATH=$(PATH) /bin/zsh
 export XDG_CONFIG_HOME=$(HOME)/.config
 export DOTFILES_DIR
 
-all: sudo core zsh-plugins packages link git-hooks bin-permissions setup-passwordless-sudo macos-defaults
+all: sudo core git-identity zsh-plugins packages link git-hooks bin-permissions setup-passwordless-sudo macos-defaults
 
 core: brew git node
 
@@ -33,6 +33,16 @@ bin-permissions:
 
 git-hooks: git
 	git -C $(DOTFILES_DIR) config core.hooksPath .githooks
+
+# Per-machine git identity (~/.gitconfig.local) and SSH signing key, kept out of the repo
+git-identity: git
+	@[[ -f $(HOME)/.gitconfig.local ]] || { \
+		read "name?git user.name: "; read "email?git user.email: "; \
+		git config --file $(HOME)/.gitconfig.local user.name "$$name"; \
+		git config --file $(HOME)/.gitconfig.local user.email "$$email"; }
+	@mkdir -p -m 700 $(HOME)/.ssh
+	@[[ -f $(HOME)/.ssh/id_ed25519.pub ]] || ssh-keygen -t ed25519 -f $(HOME)/.ssh/id_ed25519 -C "$$(git config --file $(HOME)/.gitconfig.local user.email)"
+	@echo "$$(git config --file $(HOME)/.gitconfig.local user.email) namespaces=\"git\" $$(cut -d' ' -f1,2 $(HOME)/.ssh/id_ed25519.pub)" > $(HOME)/.ssh/allowed_signers
 
 setup-passwordless-sudo: brew-packages
 	@echo "Setting up passwordless sudo for update commands..."

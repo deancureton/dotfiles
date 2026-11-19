@@ -50,6 +50,12 @@ make
 
 tip: sign in to the app store first so the `mas` apps install (otherwise they're skipped); run `make extras` afterwards for the optional packages in `Extrabrewfile`/`Extracaskfile`
 
+git signs every commit with `~/.ssh/id_ed25519`. `make` asks for your git name and email (saved to `~/.gitconfig.local`, outside the repo), creates the key if it's missing, and writes `~/.ssh/allowed_signers`; rerun that step alone with `make git-identity`. then register the key with github so commits show as verified:
+```zsh
+gh auth refresh -h github.com -s admin:ssh_signing_key
+gh ssh-key add ~/.ssh/id_ed25519.pub --type signing --title "$(scutil --get ComputerName)"
+```
+
 after running, you have access to the `dotfiles` command:
 ```
 $ dotfiles
