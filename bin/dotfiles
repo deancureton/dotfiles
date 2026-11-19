@@ -4,6 +4,8 @@
 # Dotfiles Management Script
 # =============================================================================
 
+: ${DOTFILES_DIR:=${0:A:h:h}}
+
 BIN_NAME=$(basename "$0")
 COMMAND_NAME=$1
 SUB_COMMAND_NAME=$2
@@ -21,7 +23,8 @@ sub_help() {
   echo "   edit               Open dotfiles in editor ($EDITOR)"
   echo "   clean              Clean up system + caches (mole, brew, pip, uv)"
   echo "   update [--here]    Update packages and pkg managers (via topgrade; opens Terminal.app from Ghostty)"
-  echo "   dump               Dump current Homebrew packages to Brewfile"
+  echo "   status             Show uncommitted changes, broken links, untracked configs, package and settings drift"
+  echo "   packages           Review undeclared/missing packages and apps Homebrew could adopt"
   echo "   macos              Apply macOS system defaults"
   echo "   dock               Apply OS X Dock settings"
   echo "   start              Start services (sketchybar, rift)"
@@ -100,13 +103,257 @@ end tell
 APPLESCRIPT
 }
 
-sub_dump() {
-  echo "Dumping taps, formulae, and App Store apps to Brewfile..."
-  echo "$ brew bundle dump --taps --formulae --mas --file=${DOTFILES_DIR}/install/Brewfile --force"
-  brew bundle dump --taps --formulae --mas --file="${DOTFILES_DIR}/install/Brewfile" --force
-  echo "Done! Brewfile updated at ${DOTFILES_DIR}/install/Brewfile"
-  echo "Note: dump writes ALL leaves to Brewfile — re-sort niche tools into Extrabrewfile by hand."
-  echo "(Casks and editor extensions are curated manually in Caskfile/Extracaskfile/Codefile.)"
+# =============================================================================
+# Packages
+# =============================================================================
+
+PKG_FILES=(Brewfile Extrabrewfile Caskfile Extracaskfile)
+
+# ~/.config entries that are app state or secrets, not config worth tracking
+UNTRACKED_OK=(.DS_Store .wrangler cagent configstore cursor fish gcloud gh github-copilot helix homebrew mole neon ngrok
+  raycast StardewValley swiftpm TagStudio tinymist topgrade.d uv yarn zsh)
+
+# DECLARED[kind:name]=file, INSTALLED[kind:name]=full name, LEAVES[kind:name]=1
+load_packages() {
+  setopt local_options extended_glob
+  typeset -gA DECLARED INSTALLED LEAVES
+  DECLARED=() INSTALLED=() LEAVES=()
+  local f line id name
+  for f in $PKG_FILES; do
+    for line in ${(f)"$(<$DOTFILES_DIR/install/$f)"}; do
+      case $line in
+        brew\ \"*) name=${${line#brew \"}%%\"*}; DECLARED[brew:${name:t}]=$f ;;
+        cask\ \"*) name=${${line#cask \"}%%\"*}; DECLARED[cask:${name:t}]=$f ;;
+        mas\ \"*) id=${${line##*id: }%% *}; DECLARED[mas:$id]=$f ;;
+      esac
+    done
+  done
+  for name in ${(f)"$(brew list --formula --full-name -1)"}; do INSTALLED[brew:${name:t}]=$name; done
+  for name in ${(f)"$(brew leaves --installed-on-request)"}; do LEAVES[brew:${name:t}]=1; done
+  for name in ${(f)"$(brew list --cask -1)"}; do INSTALLED[cask:$name]=$name; LEAVES[cask:$name]=1; done
+  if command -v mas >/dev/null; then
+    for line in ${(f)"$(mas list 2>/dev/null)"}; do
+      line=${line##[[:space:]]#}
+      id=${line%% *}
+      [[ $id == <-> ]] || continue
+      name=${${${line#$id}##[[:space:]]#}%%[[:space:]]#\(*}
+      INSTALLED[mas:$id]=$name LEAVES[mas:$id]=1
+    done
+  fi
+}
+
+undeclared_packages() { local k; for k in ${(ko)LEAVES}; do [[ -z ${DECLARED[$k]} ]] && print -r -- $k; done }
+missing_packages() { local k; for k in ${(ko)DECLARED}; do [[ -z ${INSTALLED[$k]} ]] && print -r -- $k; done }
+
+pkg_label() { [[ $1 == mas:* ]] && print -r -- "mas ${INSTALLED[$1]:-${1#mas:}}" || print -r -- "${1%%:*} ${1#*:}" }
+
+# insert_line FILE KIND LINE: keep entries of KIND alphabetical
+insert_line() {
+  local f=$DOTFILES_DIR/install/$1
+  awk -v kind="$2" -v l="$3" '
+    function key(s) { split(s, a, "\""); return tolower(a[2]) }
+    { L[NR] = $0 }
+    index($0, kind " \"") == 1 { if (!at && key($0) > key(l)) at = NR; last = NR }
+    END { if (!at) at = last ? last + 1 : (kind == "tap" ? 1 : NR + 1)
+          for (i = 1; i <= NR + 1; i++) { if (i == at) print l; if (i <= NR) print L[i] } }
+  ' $f > $f.tmp && mv $f.tmp $f
+}
+
+# add_entry KEY essential|extra
+add_entry() {
+  local kind=${1%%:*} name=${1#*:} tier=$2 file line tap
+  case $kind:$tier in
+    brew:essential|mas:essential) file=Brewfile ;;
+    brew:extra|mas:extra) file=Extrabrewfile ;;
+    cask:essential) file=Caskfile ;;
+    cask:extra) file=Extracaskfile ;;
+  esac
+  case $kind in
+    brew) line="brew \"$name\""; [[ ${INSTALLED[$1]} == */*/* ]] && tap=${INSTALLED[$1]%/*} ;;
+    cask) line="cask \"$name\""
+          tap=$(brew info --cask --json=v2 $name 2>/dev/null | jq -r '.casks[0].tap // empty')
+          [[ $tap == homebrew/cask ]] && tap= ;;
+    mas) line="mas \"${INSTALLED[$1]}\", id: $name" ;;
+  esac
+  if [[ -n $tap ]] && ! rg -qxF "tap \"$tap\"" $DOTFILES_DIR/install/$file; then
+    insert_line $file tap "tap \"$tap\""
+  fi
+  insert_line $file $kind $line
+  echo "  added to $file"
+}
+
+drop_entry() {
+  local kind=${1%%:*} name=${1#*:} f=$DOTFILES_DIR/install/${DECLARED[$1]}
+  if [[ $kind == mas ]]; then
+    awk -v id="$name" '!($0 ~ "^mas " && $0 ~ "id: " id "($|[^0-9])")' $f > $f.tmp
+  else
+    awk -v kind="$kind" -v name="$name" '{ split($0, a, "\""); n = a[2]; sub(/.*\//, "", n) }
+      !(index($0, kind " \"") == 1 && n == name)' $f > $f.tmp
+  fi
+  mv $f.tmp $f
+  echo "  removed from ${DECLARED[$1]}"
+}
+
+ask() { local key; read -k1 "key?$1 "; echo; REPLY=${(L)key} }
+
+app_token() { print -r -- ${${(L)1%.app}// /-} }
+
+# Apps in /Applications not installed by a cask or the App Store (needs load_packages)
+unmanaged_apps() {
+  local -A owned
+  local a
+  for a in ${(f)"$(brew info --cask --installed --json=v2 |
+    jq -r '.casks[].artifacts[] | objects | .app? // empty | .[] | if type == "string" then . else .target? // empty end')"}; do
+    owned[${a:t}]=1
+  done
+  for a in /Applications/*.app(N); do
+    [[ -n ${owned[${a:t}]} || -n ${INSTALLED[cask:$(app_token ${a:t})]} ||
+       -d $a/Contents/_MASReceipt || ${a:t} == Safari.app ]] || print -r -- ${a:t}
+  done
+}
+
+sub_packages() {
+  echo "Loading package lists..."
+  load_packages
+  local k
+  for k in ${(f)"$(undeclared_packages)"}; do
+    [[ -n $k ]] || continue
+    ask "$(pkg_label $k) is installed but not declared: [e]ssential, e[x]tra, [u]ninstall, [s]kip, [q]uit?"
+    case $REPLY in
+      e) add_entry $k essential ;;
+      x) add_entry $k extra ;;
+      u) ask "Uninstall $(pkg_label $k)? [y/N]"; [[ $REPLY == y ]] || continue
+         case $k in
+           brew:*) brew uninstall ${INSTALLED[$k]} ;;
+           cask:*) brew uninstall --cask ${k#cask:} ;;
+           mas:*) sudo mas uninstall ${k#mas:} ;;
+         esac ;;
+      q) return ;;
+    esac
+  done
+  for k in ${(f)"$(missing_packages)"}; do
+    [[ -n $k ]] || continue
+    ask "$(pkg_label $k) is in ${DECLARED[$k]} but not installed: [i]nstall, [d]rop from ${DECLARED[$k]}, [s]kip, [q]uit?"
+    case $REPLY in
+      i) case $k in
+           brew:*) brew install ${k#brew:} ;;
+           cask:*) brew install --cask ${k#cask:} ;;
+           mas:*) mas install ${k#mas:} ;;
+         esac ;;
+      d) drop_entry $k ;;
+      q) return ;;
+    esac
+  done
+  echo "Checking /Applications for apps Homebrew could manage..."
+  local app token line
+  local -a apps=(${(f)"$(unmanaged_apps)"}) all=(${(f)"$(brew casks 2>/dev/null)"}) tokens
+  local -A adoptable
+  for app in $apps; do
+    token=$(app_token $app)
+    (( ${all[(Ie)$token]} )) && tokens+=($token)
+  done
+  if (( $#tokens )); then
+    for line in ${(f)"$(brew info --cask --json=v2 $tokens 2>/dev/null |
+        jq -r '.casks[] | .token as $t | .artifacts[] | objects | .app? // empty | .[] | strings | "\(.)\t\($t)"')"}; do
+      adoptable[${line%%$'\t'*}]=${line#*$'\t'}
+    done
+  fi
+  for app in $apps; do
+    token=${adoptable[$app]}
+    [[ -n $token ]] || continue
+    ask "$app matches cask $token: adopt as [e]ssential, e[x]tra, [s]kip, [q]uit?"
+    case $REPLY in
+      e|x) brew install --cask --adopt $token && INSTALLED[cask:$token]=$token &&
+             add_entry cask:$token ${${REPLY:/e/essential}:/x/extra} ;;
+      q) return ;;
+    esac
+  done
+  local -a matched=(${(k)adoptable})
+  local -a other=(${apps:|matched})
+  (( $#other )) && echo "Not managed by Homebrew or the App Store: ${(j:, :)other}"
+  echo "Done."
+}
+
+# =============================================================================
+# Status
+# =============================================================================
+
+section() {
+  echo "${1}:"
+  shift
+  if (( $# )); then printf '  %s\n' "$@"; else echo "  ok"; fi
+  echo
+}
+
+link_problems() {
+  local pkg file target
+  local -A dirs
+  for pkg in $DOTFILES_DIR/config/*(/); do
+    for file in ${(f)"$(cd $pkg && fd -H -t f -E .DS_Store .)"}; do
+      [[ -n $file ]] || continue
+      target=$HOME/$file
+      dirs[${target:h}]=1
+      [[ $target -ef $pkg/$file ]] && continue
+      if [[ ! -e $target ]]; then
+        print -r -- "not linked: ~/$file (${pkg:t})"
+      elif cmp -s $target $pkg/$file; then
+        print -r -- "real file, same as repo: ~/$file (${pkg:t})"
+      else
+        print -r -- "real file, differs from repo: ~/$file (${pkg:t})"
+      fi
+    done
+  done
+  local d l
+  for d in ${(k)dirs} $HOME; do
+    for l in $d/*(ND-@); do
+      [[ $(readlink $l) == *.dotfiles* ]] && print -r -- "broken link: ${l/#$HOME/~}"
+    done
+  done | sort -u
+}
+
+untracked_configs() {
+  local -a tracked=($DOTFILES_DIR/config/*/.config/*(ND:t))
+  local e
+  for e in $HOME/.config/*(ND^/) $HOME/.config/*(ND/F); do
+    (( ${tracked[(Ie)${e:t}]} || ${UNTRACKED_OK[(Ie)${e:t}]} )) || print -r -- "~/.config/${e:t}"
+  done
+}
+
+# `defaults write` lines in macos/defaults*.zsh whose live value differs
+defaults_drift() {
+  local line domain key type want have
+  local -a w host
+  for line in ${(f)"$(rg -N --no-filename '^\s*defaults (-currentHost )?write ' $DOTFILES_DIR/macos/defaults*.zsh)"}; do
+    w=(${(Q)${(z)line}})
+    host=()
+    [[ $w[2] == -currentHost ]] && { host=(-currentHost); w[2]=() }
+    domain=$w[3] key=$w[4] type=$w[5] want=$w[6]
+    [[ $want == *'$'* ]] && continue
+    case $type in
+      -bool) [[ $want == (true|TRUE|yes|YES|1) ]] && want=1 || want=0 ;;
+      -int|-integer|-float|-string) ;;
+      *) continue ;;
+    esac
+    have=$(defaults $host read $domain $key 2>/dev/null) || have="(unset)"
+    if [[ $type == -float && $have =~ ^-?[0-9.]+$ && $want =~ ^-?[0-9.]+$ ]]; then
+      (( have == want )) && continue
+    fi
+    [[ $have == "$want" ]] || print -r -- "$domain $key: $have (defaults.zsh: $want)"
+  done
+}
+
+sub_status() {
+  section "Uncommitted changes" ${(f)"$(git -C $DOTFILES_DIR status --short)"}
+  section "Links" ${(f)"$(link_problems)"}
+  section "Untracked ~/.config entries" ${(f)"$(untracked_configs)"}
+  load_packages
+  local -a undeclared=(${(f)"$(undeclared_packages)"}) missing=(${(f)"$(missing_packages)"}) labels
+  local k
+  for k in $undeclared; do labels+=("installed, not declared: $(pkg_label $k)"); done
+  for k in $missing; do labels+=("declared in ${DECLARED[$k]}, not installed: $(pkg_label $k)"); done
+  section "Packages" $labels
+  (( $#labels )) && { echo "  (run 'dotfiles packages' to sort these out)"; echo; }
+  section "macOS settings that differ from defaults.zsh" ${(f)"$(defaults_drift)"}
 }
 
 sub_macos() {
@@ -144,11 +391,13 @@ case $COMMAND_NAME in
     ;;
   *)
     shift
-    sub_${COMMAND_NAME} $@
-    if [ $? = 127 ]; then
+    sub_${COMMAND_NAME} "$@"
+    rc=$?
+    if [ $rc = 127 ]; then
       echo "'$COMMAND_NAME' is not a known command or has errors." >&2
       sub_help
       exit 1
     fi
+    exit $rc
     ;;
 esac

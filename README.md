@@ -10,6 +10,7 @@ features:
 - some automatic macos system settings configuration and dock setup
 - custom dotfiles command for maintenance
 - automatic symlinking of configuration files using [stow](https://www.gnu.org/software/stow/)
+- commits are signed with your ssh key, and a gitleaks pre-commit hook blocks secrets
 - configurations for:
     - git
     - [ghostty](https://ghostty.org/), modern terminal emulator with Zenwritten Dark theme
@@ -59,8 +60,9 @@ Commands:
    stow [folder]      Stow config folder
    edit               Open dotfiles in editor (codium)
    clean              Clean up system + caches (mole, brew, pip, uv)
-   update             Update packages and pkg managers (via topgrade)
-   dump               Dump current Homebrew packages to Brewfile
+   update [--here]    Update packages and pkg managers (via topgrade; opens Terminal.app from Ghostty)
+   status             Show uncommitted changes, broken links, untracked configs, package and settings drift
+   packages           Review undeclared/missing packages and apps Homebrew could adopt
    macos              Apply macOS system defaults
    dock               Apply OS X Dock settings
    start              Start services (sketchybar, rift)
@@ -70,6 +72,7 @@ Commands:
 things i used/was inspired by:
 - https://github.com/webpro/dotfiles
 - https://github.com/FelixKratz/dotfiles
+- https://github.com/amichaelyu/dotfiles
 - https://github.com/Einlar/latex_snippets
 - https://github.com/antfu/vscode-settings
 - https://github.com/alextricity25/nvim_weekly_plugin_configs
