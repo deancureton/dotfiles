@@ -1,6 +1,15 @@
 [user]
 	name = Dean Cureton
 	email = 89793485+deancureton@users.noreply.github.com
+	signingkey = ~/.ssh/id_ed25519.pub
+[gpg]
+	format = ssh
+[gpg "ssh"]
+	allowedSignersFile = ~/.config/git/allowed_signers
+[commit]
+	gpgsign = true
+[tag]
+	gpgsign = true
 [github]
 	user = deancureton
 [core]
