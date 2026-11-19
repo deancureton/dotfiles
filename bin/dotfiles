@@ -111,7 +111,7 @@ PKG_FILES=(Brewfile Extrabrewfile Caskfile Extracaskfile)
 
 # ~/.config entries that are app state or secrets, not config worth tracking
 UNTRACKED_OK=(.DS_Store .wrangler cagent configstore cursor fish gcloud gh github-copilot helix homebrew mole neon ngrok
-  raycast StardewValley swiftpm TagStudio tinymist topgrade.d uv yarn zsh)
+  raycast spotify-player StardewValley swiftpm TagStudio tinymist topgrade.d uv yarn zed zsh)
 
 # DECLARED[kind:name]=file, INSTALLED[kind:name]=full name, LEAVES[kind:name]=1
 load_packages() {
@@ -130,7 +130,10 @@ load_packages() {
   done
   for name in ${(f)"$(brew list --formula --full-name -1)"}; do INSTALLED[brew:${name:t}]=$name; done
   for name in ${(f)"$(brew leaves --installed-on-request)"}; do LEAVES[brew:${name:t}]=1; done
-  for name in ${(f)"$(brew list --cask -1)"}; do INSTALLED[cask:$name]=$name; LEAVES[cask:$name]=1; done
+  for name in ${(f)"$(brew list --cask -1)"}; do
+    [[ -L ${HOMEBREW_PREFIX:-/opt/homebrew}/Caskroom/$name ]] && continue  # old name of a renamed cask
+    INSTALLED[cask:$name]=$name LEAVES[cask:$name]=1
+  done
   if command -v mas >/dev/null; then
     for line in ${(f)"$(mas list 2>/dev/null)"}; do
       line=${line##[[:space:]]#}
@@ -147,15 +150,24 @@ missing_packages() { local k; for k in ${(ko)DECLARED}; do [[ -z ${INSTALLED[$k]
 
 pkg_label() { [[ $1 == mas:* ]] && print -r -- "mas ${INSTALLED[$1]:-${1#mas:}}" || print -r -- "${1%%:*} ${1#*:}" }
 
-# insert_line FILE KIND LINE: keep entries of KIND alphabetical
+# insert_line FILE KIND LINE: add LINE alphabetically to the blank-line-separated section of
+# KIND entries whose names share the longest prefix with it (ties go to the later section)
 insert_line() {
   local f=$DOTFILES_DIR/install/$1
   awk -v kind="$2" -v l="$3" '
     function key(s) { split(s, a, "\""); return tolower(a[2]) }
+    function common(a, b,   i) { for (i = 1; i <= length(a) && substr(a, i, 1) == substr(b, i, 1); i++); return i - 1 }
+    BEGIN { k = key(l); sec = 0 }
     { L[NR] = $0 }
-    index($0, kind " \"") == 1 { if (!at && key($0) > key(l)) at = NR; last = NR }
-    END { if (!at) at = last ? last + 1 : (kind == "tap" ? 1 : NR + 1)
-          for (i = 1; i <= NR + 1; i++) { if (i == at) print l; if (i <= NR) print L[i] } }
+    /^[[:space:]]*$/ { sec++ }
+    index($0, kind " \"") == 1 { n++; E[n] = NR; S[n] = sec; K[n] = key($0) }
+    END {
+      best = -1
+      for (i = 1; i <= n; i++) { c = common(k, K[i]); if (c >= best) { best = c; bs = S[i] } }
+      for (i = 1; i <= n; i++) if (S[i] == bs) { if (!at && K[i] > k) at = E[i]; last = E[i] }
+      if (!at) at = n ? last + 1 : (kind == "tap" ? 1 : NR + 1)
+      for (i = 1; i <= NR + 1; i++) { if (i == at) print l; if (i <= NR) print L[i] }
+    }
   ' $f > $f.tmp && mv $f.tmp $f
 }
 
