@@ -59,22 +59,25 @@ brew:
 git: brew
 	brew install git
 
+trust-taps: brew
+	brew trust --tap $$(sed -n 's/^tap "\(.*\)"$$/\1/p' $(DOTFILES_DIR)/install/*file)
+
 node: brew
 	@[[ -s "$(HOME)/.nvm/nvm.sh" ]] || curl -fsSL https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.5/install.sh | PROFILE=/dev/null bash
 	@export NVM_DIR="$(HOME)/.nvm"; \
 		. "$(HOME)/.nvm/nvm.sh"; \
 		nvm install --lts
 
-brew-packages: brew
+brew-packages: trust-taps
 	brew bundle --file=$(DOTFILES_DIR)/install/Brewfile || true
 
-cask-apps: brew
+cask-apps: trust-taps
 	brew bundle --file=$(DOTFILES_DIR)/install/Caskfile || true
 
-extra-brew-packages: brew
+extra-brew-packages: trust-taps
 	brew bundle --file=$(DOTFILES_DIR)/install/Extrabrewfile || true
 
-extra-cask-apps: brew
+extra-cask-apps: trust-taps
 	brew bundle --file=$(DOTFILES_DIR)/install/Extracaskfile || true
 
 extras: extra-brew-packages extra-cask-apps
