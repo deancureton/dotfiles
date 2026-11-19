@@ -8,7 +8,8 @@ local media_cover = sbar.add("item", {
 	background = {
 		image = {
 			string = "media.artwork",
-			scale = 0.85,
+			scale = 0.8,
+			corner_radius = 5,
 		},
 		color = colors.transparent,
 	},
@@ -31,9 +32,9 @@ local media_artist = sbar.add("item", {
 	icon = { drawing = false },
 	label = {
 		width = 0,
-		font = { size = 9 },
-		color = colors.with_alpha(colors.white, 0.6),
-		max_chars = 18,
+		font = { size = 10 },
+		color = colors.text_secondary,
+		max_chars = 20,
 		y_offset = 6,
 	},
 })
@@ -45,31 +46,25 @@ local media_title = sbar.add("item", {
 	padding_right = 0,
 	icon = { drawing = false },
 	label = {
-		font = { size = 11 },
+		font = { size = 12, style = "Semibold" },
 		width = 0,
-		max_chars = 25,
+		max_chars = 28,
 		y_offset = -5,
 	},
 })
 
-sbar.add("item", {
-	position = "popup." .. media_cover.name,
-	icon = { string = icons.media.back },
-	label = { drawing = false },
-	click_script = "nowplaying-cli previous",
-})
-sbar.add("item", {
-	position = "popup." .. media_cover.name,
-	icon = { string = icons.media.play_pause },
-	label = { drawing = false },
-	click_script = "nowplaying-cli togglePlayPause",
-})
-sbar.add("item", {
-	position = "popup." .. media_cover.name,
-	icon = { string = icons.media.forward },
-	label = { drawing = false },
-	click_script = "nowplaying-cli next",
-})
+for _, control in ipairs({
+	{ icon = icons.media.back, cmd = "previous" },
+	{ icon = icons.media.play_pause, cmd = "togglePlayPause" },
+	{ icon = icons.media.forward, cmd = "next" },
+}) do
+	sbar.add("item", {
+		position = "popup." .. media_cover.name,
+		icon = { string = control.icon, padding_left = 8, padding_right = 8 },
+		label = { drawing = false },
+		click_script = "nowplaying-cli " .. control.cmd,
+	})
+end
 
 local interrupt = 0
 local function animate_detail(detail)

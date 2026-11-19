@@ -1,20 +1,20 @@
 local colors = require("colors")
+local settings = require("settings")
 
--- Equivalent to the --bar domain
+-- A native Liquid Glass window is drawn behind the bar; the bar itself only adds a faint overlay.
 sbar.bar({
-	height = 40,
-	color = colors.bar.bg,
-	border_color = colors.bar.border,
+	height = settings.bar_height,
+	color = colors.bar.overlay,
 	border_width = 0,
-	blur_radius = 30,
+	blur_radius = 0,
 	position = "top",
 	sticky = true,
-	padding_right = 0,
-	padding_left = 0,
-	y_offset = 0,
-	margin = 0,
-	corner_radius = 0,
-	notch_width = 0,
+	padding_left = 8,
+	padding_right = 8,
 	display = "all",
 	shadow = false,
 })
+
+sbar.exec(
+	"killall sketchybar-glass >/dev/null 2>&1; $CONFIG_DIR/helpers/glass/bin/sketchybar-glass " .. settings.bar_height
+)

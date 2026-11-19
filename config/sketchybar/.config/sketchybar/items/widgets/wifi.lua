@@ -1,233 +1,130 @@
 local icons = require("icons")
 local colors = require("colors")
-local settings = require("settings")
 
--- Execute the event provider binary which provides the event "network_update"
--- for the network interface "en0", which is fired every 2.0 seconds.
+-- Event provider: fires "network_update" for en0 every 2 seconds
 sbar.exec(
 	"killall network_load >/dev/null; $CONFIG_DIR/helpers/event_providers/network_load/bin/network_load en0 network_update 2.0"
 )
 
-local popup_width = 250
+local popup_width = 260
 
-local wifi_up = sbar.add("item", "widgets.wifi1", {
+local wifi = sbar.add("item", "widgets.wifi", {
 	position = "right",
-	padding_left = -5,
-	width = 0,
 	icon = {
-		padding_right = 0,
-		font = {
-			style = settings.font.style_map["Bold"],
-			size = 9.0,
-		},
-		string = icons.wifi.upload,
+		string = icons.wifi.connected,
+		padding_left = 10,
+		padding_right = 10,
+		font = { size = 14.0 },
 	},
-	label = {
-		font = {
-			family = settings.font.numbers,
-			style = settings.font.style_map["Bold"],
-			size = 9.0,
-		},
-		color = colors.red,
-		string = "??? Bps",
-	},
-	y_offset = 4,
-})
-
-local wifi_down = sbar.add("item", "widgets.wifi2", {
-	position = "right",
-	padding_left = -5,
-	icon = {
-		padding_right = 0,
-		font = {
-			style = settings.font.style_map["Bold"],
-			size = 9.0,
-		},
-		string = icons.wifi.download,
-	},
-	label = {
-		font = {
-			family = settings.font.numbers,
-			style = settings.font.style_map["Bold"],
-			size = 9.0,
-		},
-		color = colors.blue,
-		string = "??? Bps",
-	},
-	y_offset = -4,
-})
-
-local wifi = sbar.add("item", "widgets.wifi.padding", {
-	position = "right",
 	label = { drawing = false },
-})
-
--- Background around the wifi items
-local wifi_bracket = sbar.add("bracket", "widgets.wifi.bracket", { wifi.name, wifi_up.name, wifi_down.name }, {
-	background = {
-		color = colors.transparent,
-		border_color = colors.grey_dark,
-		border_width = 1,
-		height = 28,
-		corner_radius = 7,
-	},
-	popup = { align = "center", height = 30 },
+	padding_left = 0,
+	padding_right = 0,
+	updates = true,
+	popup = { align = "center" },
 })
 
 local ssid = sbar.add("item", {
-	position = "popup." .. wifi_bracket.name,
+	position = "popup." .. wifi.name,
 	icon = {
-		font = {
-			style = settings.font.style_map["Bold"],
-		},
+		font = { style = "Semibold" },
 		string = icons.wifi.router,
 	},
 	width = popup_width,
 	align = "center",
 	label = {
-		font = {
-			size = 15,
-			style = settings.font.style_map["Bold"],
-		},
-		max_chars = 18,
+		font = { size = 14, style = "Semibold" },
+		max_chars = 20,
 		string = "????????????",
 	},
 	background = {
-		height = 2,
-		color = colors.grey,
+		height = 1,
+		corner_radius = 0,
+		color = colors.glass.border,
 		y_offset = -15,
 	},
 })
 
-local hostname = sbar.add("item", {
-	position = "popup." .. wifi_bracket.name,
-	icon = {
-		align = "left",
-		string = "Hostname:",
-		width = popup_width / 2,
-	},
-	label = {
-		max_chars = 20,
-		string = "????????????",
-		width = popup_width / 2,
-		align = "right",
-	},
-})
-
-local ip = sbar.add("item", {
-	position = "popup." .. wifi_bracket.name,
-	icon = {
-		align = "left",
-		string = "IP:",
-		width = popup_width / 2,
-	},
-	label = {
-		string = "???.???.???.???",
-		width = popup_width / 2,
-		align = "right",
-	},
-})
-
-local mask = sbar.add("item", {
-	position = "popup." .. wifi_bracket.name,
-	icon = {
-		align = "left",
-		string = "Subnet mask:",
-		width = popup_width / 2,
-	},
-	label = {
-		string = "???.???.???.???",
-		width = popup_width / 2,
-		align = "right",
-	},
-})
-
-local router = sbar.add("item", {
-	position = "popup." .. wifi_bracket.name,
-	icon = {
-		align = "left",
-		string = "Router:",
-		width = popup_width / 2,
-	},
-	label = {
-		string = "???.???.???.???",
-		width = popup_width / 2,
-		align = "right",
-	},
-})
-
-sbar.add("item", { position = "right", width = settings.group_paddings })
-
-wifi_up:subscribe("network_update", function(env)
-	local up_color = (env.upload == "000 Bps") and colors.grey or colors.red
-	local down_color = (env.download == "000 Bps") and colors.grey or colors.blue
-	wifi_up:set({
-		icon = { color = up_color },
+local function popup_row(key, value)
+	return sbar.add("item", {
+		position = "popup." .. wifi.name,
+		icon = {
+			align = "left",
+			string = key,
+			color = colors.text_secondary,
+			width = popup_width / 2,
+		},
 		label = {
-			string = env.upload,
-			color = up_color,
+			string = value,
+			max_chars = 20,
+			width = popup_width / 2,
+			align = "right",
 		},
 	})
-	wifi_down:set({
-		icon = { color = down_color },
-		label = {
-			string = env.download,
-			color = down_color,
-		},
-	})
+end
+
+local speed = popup_row("Speed", "↑ 0 B/s  ↓ 0 B/s")
+local hostname = popup_row("Hostname", "????????????")
+local ip = popup_row("IP", "???.???.???.???")
+local mask = popup_row("Subnet mask", "???.???.???.???")
+local router = popup_row("Router", "???.???.???.???")
+
+wifi:subscribe("network_update", function(env)
+	speed:set({ label = "↑ " .. env.upload .. "  ↓ " .. env.download })
 end)
 
 wifi:subscribe({ "wifi_change", "system_woke" }, function(env)
-	sbar.exec("ipconfig getifaddr en0", function(ip)
-		local connected = not (ip == "")
+	sbar.exec("ipconfig getifaddr en0", function(result)
+		local connected = result ~= ""
 		wifi:set({
 			icon = {
 				string = connected and icons.wifi.connected or icons.wifi.disconnected,
-				color = connected and colors.white or colors.red,
+				color = connected and colors.text or colors.text_tertiary,
 			},
 		})
 	end)
 end)
 
 local function hide_details()
-	wifi_bracket:set({ popup = { drawing = false } })
+	wifi:set({ popup = { drawing = false } })
+end
+
+local function trim(result)
+	return (tostring(result):gsub("%s+$", ""))
 end
 
 local function toggle_details()
-	local should_draw = wifi_bracket:query().popup.drawing == "off"
-	if should_draw then
-		wifi_bracket:set({ popup = { drawing = true } })
-		sbar.exec("networksetup -getcomputername", function(result)
-			hostname:set({ label = result })
-		end)
-		sbar.exec("ipconfig getifaddr en0", function(result)
-			ip:set({ label = result })
-		end)
-		sbar.exec("ipconfig getsummary en0 | awk -F ' SSID : '  '/ SSID : / {print $2}'", function(result)
-			ssid:set({ label = result })
-		end)
-		sbar.exec("networksetup -getinfo Wi-Fi | awk -F 'Subnet mask: ' '/^Subnet mask: / {print $2}'", function(result)
-			mask:set({ label = result })
-		end)
-		sbar.exec("networksetup -getinfo Wi-Fi | awk -F 'Router: ' '/^Router: / {print $2}'", function(result)
-			router:set({ label = result })
-		end)
-	else
+	local should_draw = wifi:query().popup.drawing == "off"
+	if not should_draw then
 		hide_details()
+		return
 	end
+	wifi:set({ popup = { drawing = true } })
+	sbar.exec("networksetup -getcomputername", function(result)
+		hostname:set({ label = trim(result) })
+	end)
+	sbar.exec("ipconfig getifaddr en0", function(result)
+		ip:set({ label = trim(result) })
+	end)
+	sbar.exec("ipconfig getsummary en0 | awk -F ' SSID : '  '/ SSID : / {print $2}'", function(result)
+		ssid:set({ label = trim(result) })
+	end)
+	sbar.exec("networksetup -getinfo Wi-Fi | awk -F 'Subnet mask: ' '/^Subnet mask: / {print $2}'", function(result)
+		mask:set({ label = trim(result) })
+	end)
+	sbar.exec("networksetup -getinfo Wi-Fi | awk -F 'Router: ' '/^Router: / {print $2}'", function(result)
+		router:set({ label = trim(result) })
+	end)
 end
 
-wifi_up:subscribe("mouse.clicked", toggle_details)
-wifi_down:subscribe("mouse.clicked", toggle_details)
 wifi:subscribe("mouse.clicked", toggle_details)
 wifi:subscribe("mouse.exited.global", hide_details)
 
 local function copy_label_to_clipboard(env)
-	local label = sbar.query(env.NAME).label.value
-	sbar.exec('echo "' .. label .. '" | pbcopy')
+	local label = sbar.query(env.NAME).label
+	sbar.exec("printf %s '" .. label.value:gsub("'", "'\\''") .. "' | pbcopy")
 	sbar.set(env.NAME, { label = { string = icons.clipboard, align = "center" } })
 	sbar.delay(1, function()
-		sbar.set(env.NAME, { label = { string = label, align = "right" } })
+		sbar.set(env.NAME, { label = { string = label.value, align = label.align } })
 	end)
 end
 

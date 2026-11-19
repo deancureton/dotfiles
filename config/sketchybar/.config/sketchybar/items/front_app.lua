@@ -1,9 +1,13 @@
 local colors = require("colors")
-local settings = require("settings")
 
 local front_app = sbar.add("item", "front_app", {
 	display = "active",
 	icon = { drawing = false },
+	label = {
+		font = { style = "Semibold", size = 13.0 },
+		color = colors.text,
+		padding_left = 10,
+	},
 	updates = true,
 })
 

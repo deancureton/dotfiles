@@ -2,41 +2,47 @@ local icons = require("icons")
 local colors = require("colors")
 local settings = require("settings")
 
--- Execute the event provider binary which provides the event "cpu_update" for
--- the cpu load data, which is fired every 2.0 seconds.
+-- Event provider: fires "cpu_update" every 2 seconds
 sbar.exec("killall cpu_load >/dev/null; $CONFIG_DIR/helpers/event_providers/cpu_load/bin/cpu_load cpu_update 2.0")
 
-local cpu = sbar.add("graph", "widgets.cpu", 42, {
+local cpu_value = sbar.add("item", "widgets.cpu.value", {
 	position = "right",
-	graph = { color = colors.blue },
+	icon = { drawing = false },
+	label = {
+		string = "??%",
+		color = colors.text_secondary,
+		padding_left = 2,
+		padding_right = 10,
+		font = {
+			family = settings.font.numbers,
+			style = "Regular",
+			size = 12.0,
+		},
+	},
+	padding_left = 0,
+	padding_right = 0,
+})
+
+local cpu = sbar.add("graph", "widgets.cpu", 30, {
+	position = "right",
+	graph = { color = colors.blue, fill_color = colors.with_alpha(colors.blue, 0.4), line_width = 1.5 },
 	background = {
-		height = 22,
-		color = { alpha = 0 },
-		border_color = { alpha = 0 },
+		height = 16,
+		color = colors.transparent,
 		drawing = true,
 	},
 	icon = {
-        string = icons.cpu,
-        padding_left = 4,
-        padding_right = 8,
+		string = icons.cpu,
+		padding_left = 10,
+		padding_right = 4,
 		font = {
-			style = settings.font.style_map["Regular"],
+			style = "Regular",
 			size = 14.0,
 		},
-    },
-	label = {
-		string = "??%",
-		font = {
-			family = settings.font.numbers,
-			style = settings.font.style_map["Bold"],
-			size = 9.0,
-		},
-		align = "right",
-		padding_right = 0,
-		width = 0,
-		y_offset = 4,
 	},
-	padding_right = settings.paddings + 6,
+	label = { drawing = false },
+	padding_left = 0,
+	padding_right = 0,
 })
 
 cpu:subscribe("cpu_update", function(env)
@@ -44,37 +50,21 @@ cpu:subscribe("cpu_update", function(env)
 	cpu:push({ load / 100.0 })
 
 	local color = colors.blue
-	if load > 30 then
-		if load < 60 then
-			color = colors.yellow
-		elseif load < 80 then
-			color = colors.orange
-		else
-			color = colors.red
-		end
+	if load >= 80 then
+		color = colors.red
+	elseif load >= 60 then
+		color = colors.orange
+	elseif load >= 30 then
+		color = colors.yellow
 	end
 
-	cpu:set({
-		graph = { color = color },
-		label = env.total_load .. "%",
-	})
+	cpu:set({ graph = { color = color, fill_color = colors.with_alpha(color, 0.4) } })
+	cpu_value:set({ label = env.total_load .. "%" })
 end)
 
-cpu:subscribe("mouse.clicked", function(env)
+local function open_activity_monitor()
 	sbar.exec("open -a 'Activity Monitor'")
-end)
+end
 
-sbar.add("bracket", "widgets.cpu.bracket", { cpu.name }, {
-	background = {
-		color = colors.transparent,
-		border_color = colors.grey_dark,
-		border_width = 1,
-		height = 28,
-		corner_radius = 7,
-	},
-})
-
-sbar.add("item", "widgets.cpu.padding", {
-	position = "right",
-	width = settings.group_paddings,
-})
+cpu:subscribe("mouse.clicked", open_activity_monitor)
+cpu_value:subscribe("mouse.clicked", open_activity_monitor)
